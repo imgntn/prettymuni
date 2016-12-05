@@ -32,7 +32,6 @@ te_Mapper.prototype = {
                 _t.zoomed()
             })
 
-
         _t.svg = d3.select(".map-container").append("svg")
             .attr("preserveAspectRatio", "xMinYMin meet")
             .attr("viewBox", "0 0 " + width + " " + height)
