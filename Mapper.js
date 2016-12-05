@@ -1,23 +1,27 @@
 function te_Mapper() {
     this.setupDrawingSpace();
+    this.setupControls();
     this.loadAllBaseMaps();
 
 }
 
 te_Mapper.prototype = {
-    refreshRate: 15,
-    baseProjectionTranslation: {},
-    baseProjectionScale: 250000,
+    refreshRate: 10,
+    refreshInterval: null,
+    baseProjectionScale: 350000,
     baseMapNames: [
         'neighborhoods',
-        'streets',
+        //'streets',
+        'streets_minified',
+        //'streets_reduced_precision',
         'freeways',
         'arteries',
     ],
     baseMapGeoJSON: [],
     baseMapGroups: [],
     vehicleGroups: {},
-    zoomTransform:null,
+    zoomTransform: null,
+    routes: [],
     setupDrawingSpace: function() {
         var _t = this;
         var width = window.innerWidth,
@@ -30,20 +34,23 @@ te_Mapper.prototype = {
             })
 
 
-        _t.svg = d3.select("body").append("svg")
-            .attr("width", width)
-            .attr("height", height)
+        _t.svg = d3.select(".map-container").append("svg")
+            // .attr("width", width)
+            // .attr("height", height)
+             //responsive SVG needs these 2 attributes and no width and height attr
+   .attr("preserveAspectRatio", "xMinYMin meet")
+   .attr("viewBox","0 0 " + width + " " + height)
+   //class to make it responsive
+   .classed("svg-content-responsive", true)
             .call(_t.zoom)
 
 
-        _t.baseProjectionTranslation.width = width / 2;
-        _t.baseProjectionTranslation.height = height / 2;
 
         _t.projection = d3.geoMercator()
             .scale(_t.baseProjectionScale)
             .rotate([0, 0])
             .center([-122.433701, 37.767683])
-            .translate([_t.baseProjectionTranslation.width, _t.baseProjectionTranslation.height])
+            .translate([width / 2, height / 2])
 
     },
 
@@ -69,17 +76,47 @@ te_Mapper.prototype = {
         _t.baseMapNames.forEach(function(mapName) {
             _t.loadBaseMap(mapName);
         })
+
+
+
     },
 
-    loadBaseMap: function(mapName) {
+    loadBaseMapPromise: function(mapName) {
         var _t = this;
         var mapName = mapName || _t.baseMapNames[2];
+
+        var p = new Promise(function(resolve, reject) {
+
+            // do a thing, possibly async, then…
+            d3.json("assets/sfmaps/" + mapName + ".json", function(error, geojson) {
+                if (error) {
+                    //Mapper.js:82 SyntaxError: Unexpected end of JSON input(…)
+                    // happens when a basemap fails to load.  need promises!
+
+                    reject(error)
+                    console.error(error);
+                    return
+                }
+                geojson.name = mapName;
+                _t.baseMapGeoJSON.push(geojson);
+                resolve();
+            });
+
+        });
+
+        return p
+    },
+    loadBaseMap: function(mapName) {
+        var _t = this;
+
 
         // do a thing, possibly async, then…
         d3.json("assets/sfmaps/" + mapName + ".json", function(error, geojson) {
             if (error) {
-                reject(Error("Failed to load base map."));
+                //Mapper.js:82 SyntaxError: Unexpected end of JSON input(…)
+                // happens when a basemap fails to load.  need promises!
                 console.error(error);
+                return
             }
             geojson.name = mapName;
             _t.baseMapGeoJSON.push(geojson);
@@ -91,12 +128,18 @@ te_Mapper.prototype = {
         });
     },
 
+
     drawBaseMaps: function() {
         var _t = this;
         _t.baseMapNames.forEach(function(mapName) {
             var geoJSON = _t.getBaseMapGeoJSONByName(mapName);
             _t.addBaseMapLayer(geoJSON, mapName);
         })
+        _t.drawAllRoutes();
+
+        _t.refreshInterval = setInterval(function() {
+            _t.drawAllRoutes();
+        }, _t.refreshRate * 1000)
     },
 
     getBaseMapGeoJSONByName: function(mapName) {
@@ -121,7 +164,7 @@ te_Mapper.prototype = {
             .attr("d", geoPath)
             .on('click', _t.clickGeoJSON)
 
-        console.log('end of basemap drawing',  geojson.name)
+        console.log('end of basemap drawing', geojson.name)
 
         this.baseMapGroups.push(svgGroup);
 
@@ -145,7 +188,7 @@ te_Mapper.prototype = {
         console.log('vehicle clicked', val['@attributes'])
 
     },
-    
+
     fetchRouteList: function() {
         var _t = this;
         var routeListURL = 'http://webservices.nextbus.com/service/publicXMLFeed?command=routeList&a=sf-muni';
@@ -165,7 +208,7 @@ te_Mapper.prototype = {
                             reject(parsedRouteList.body.Error)
                         } else {
                             resolve(parsedRouteList);
-
+                            _t.routes = parsedRouteList.body.route;
                         }
                     }
                 }
@@ -211,7 +254,7 @@ te_Mapper.prototype = {
 
     fetchVehicleLocations: function(tag, epochTime) {
         var _t = this;
-        var tag = tag || '5';
+        var tag = tag;
         tag = tag.toUpperCase();
         var epochTime = epochTime || 0;
         var vehicleLocationsURL = 'http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni&r=' + tag + '&t=' + epochTime;;
@@ -230,6 +273,8 @@ te_Mapper.prototype = {
                     if (xhr.status === OK) {
                         var parsedVehicleLocations = xmlToJson(xhr.responseXML);
                         if (parsedVehicleLocations.hasOwnProperty('body') && parsedVehicleLocations.body.hasOwnProperty('Error')) {
+                            console.log('error in fetch vehicles')
+
                             reject(parsedVehicleLocations.body.Error)
                         } else {
                             resolve(parsedVehicleLocations);
@@ -242,7 +287,6 @@ te_Mapper.prototype = {
         return p
 
     },
-
 
     drawAllRoutes: function() {
         var _t = this;
@@ -262,21 +306,23 @@ te_Mapper.prototype = {
         var _t = this;
         var tag = tag || '5';
         tag = tag.toUpperCase();
-        _t.fetchVehicleLocations(tag).then(function(locations) {
-            if (!locations.body.hasOwnProperty('vehicle')) {
-                console.log('no vehicles for route')
-                return;
-            }
-            _t.drawVehicles(locations.body.vehicle, tag)
-        }).catch(function(err) {
-            console.error('Error drawing vehicles for route', err);
-        });
+        _t.fetchVehicleLocations(tag)
+            .then(function(locations) {
+                if (!locations.body.hasOwnProperty('vehicle')) {
+                    //console.log('no vehicles for route')
+                    return;
+                }
+                _t.drawVehicles(locations.body.vehicle, tag)
+            })
+            .catch(function(err) {
+                console.error('Error drawing vehicles for route', err);
+            });
     },
 
     drawVehicles: function(vehicles, tag) {
         var _t = this;
         if (!vehicles) {
-            console.log('no vehicles to draw')
+            //console.log('no vehicles to draw')
             return;
         }
         var _t = this;
@@ -297,36 +343,15 @@ te_Mapper.prototype = {
             vehicles = temp;
         }
 
-        var vehicleDots = svgGroup.selectAll("circle").data(vehicles)
+   
+        var dotGroups = svgGroup.selectAll(".dot-group").data(vehicles, function(d) {
+            return d['@attributes'].id;
+        })
 
+        
+        dotGroups.exit().remove();
 
-        vehicleDots.exit()
-            .transition().attr("r", "0")
-            .duration(500)
-            .remove()
-
-        vehicleDots.enter()
-            .append("circle")
-            .attr("transform", function(d) {
-                return "translate(" + _t.projection([
-                    d['@attributes'].lon,
-                    d['@attributes'].lat
-                ]) + ")";
-            })
-            .call(_t.zoom.transform, _t.zoomTransform)
-            .attr("r", "6")
-            .attr("fill", getRandomHexColor())
-            .attr("stroke", getRandomHexColor())
-            .transition().attr("r", "10").duration(1000)
-            .transition().attr("r", "6").duration(1000)
-
-        svgGroup.selectAll('circle')
-            .on('click', _t.clickVehicle)
-            .on('mouseover', _t.mouseoverVehicle)
-            //.on('mouseout', _t.mouseoutVehicle)
-
-        //this updates the position of existing dots
-        vehicleDots
+        dotGroups
             .transition()
             .attr("transform", function(d) {
                 return "translate(" + _t.projection([
@@ -334,10 +359,95 @@ te_Mapper.prototype = {
                     d['@attributes'].lat
                 ]) + ")";
             })
-            .duration(500)
+            .duration(_t.refreshRate * 1000/2)
+
+        var dotGroup = dotGroups.enter()
+        .append("g")
+        .attr('class','dot-group')
+        .attr("transform", function(d) {
+                return "translate(" + _t.projection([
+                    d['@attributes'].lon,
+                    d['@attributes'].lat
+                ]) + ")";
+            })
+
+        dotGroup.append("circle")
+            .call(_t.zoom.transform, _t.zoomTransform)
+            .attr("r", "6")
+            .attr("fill", getRandomHexColor())
+            .attr("stroke", getRandomHexColor())
+            .transition().attr("r", "12").duration(1000)
+            .transition().attr("r", "8").duration(1000)
+
+        dotGroup.append("text")
+            .attr("stroke", "#fff")
+            .attr('text-anchor', "middle")
+            .attr('dy', '0.35em')
+            .style("font-size", "8")
+            .style('stroke-width', '1px')
+            .style('paint-order', 'stroke')
+            .attr("dx", 0)
+            .text(function(d) {
+                return d['@attributes'].routeTag
+            })
+            .transition().style("font-size", "12").duration(1000)
+            .transition().style("font-size", "8").duration(1000)
+
+        svgGroup.selectAll('.dot-group')
+            .on('click', _t.clickVehicle)
+            .on('mouseover', _t.mouseoverVehicle)
+            //.on('mouseout', _t.mouseoutVehicle)
 
     },
 
+    setupControls: function() {
+        var _t = this;
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // code…
+            _t.fetchRouteList()
+                .then(function(data) {
+                    _t.updateControlOptions();
+                })
+                .catch(function(err) {
+                    console.error('Error drawing all routes', err);
+                });
+
+        });
+    },
+
+    createControlOption: function(text, value) {
+        var el = document.createElement('option');
+        el.innerText = text;
+        el.setAttribute('value', value);
+        return el
+    },
+
+    updateControlOptions: function() {
+        var _t = this;
+        _t.routeSelector = document.getElementsByClassName('route-selector')[0];
+        _t.clearControlOptions();
+        var firstOption = _t.createControlOption('See Specific Routes', "");
+        firstOption.setAttribute('disabled', true);
+        firstOption.setAttribute('selected', true)
+        _t.routeSelector.appendChild(firstOption);
+        _t.routes.forEach(function(route) {
+            var control = _t.createControlOption(route['@attributes'].title, route['@attributes'].tag)
+            _t.routeSelector.appendChild(control);
+        });
+        $('.route-selector').material_select();
+        $(".route-selector").on('change', function() {
+            console.log($(this).val());
+        });
+
+    },
+
+    clearControlOptions: function() {
+        var _t = this;
+        while (_t.routeSelector.hasChildNodes()) {
+            _t.routeSelector.removeChild(_t.routeSelector.lastChild);
+        }
+    },
 
 }
 
