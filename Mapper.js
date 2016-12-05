@@ -70,32 +70,6 @@ te_Mapper.prototype = {
         })
     },
 
-    loadBaseMapPromise: function(mapName) {
-        var _t = this;
-        var mapName = mapName || _t.baseMapNames[2];
-
-        var p = new Promise(function(resolve, reject) {
-
-            // do a thing, possibly async, then…
-            d3.json("assets/sfmaps/" + mapName + ".json", function(error, geojson) {
-                if (error) {
-                    //Mapper.js:82 SyntaxError: Unexpected end of JSON input(…)
-                    // happens when a basemap fails to load.  need promises!
-
-                    reject(error)
-                    console.error(error);
-                    return
-                }
-                geojson.name = mapName;
-                _t.baseMapGeoJSON.push(geojson);
-                resolve();
-            });
-
-        });
-
-        return p
-    },
-
     loadBaseMap: function(mapName) {
         var _t = this;
 
@@ -124,14 +98,18 @@ te_Mapper.prototype = {
         _t.baseMapNames.forEach(function(mapName) {
             var geoJSON = _t.getBaseMapGeoJSONByName(mapName);
             _t.addBaseMapLayer(geoJSON, mapName);
-        })
+        });
+        _t.drawAllRoutesAtInterval();
+    },
+    drawAllRoutesAtInterval: function() {
+        console.log('should draw all routes')
+        var _t = this;
         _t.drawAllRoutes();
 
         _t.refreshInterval = setInterval(function() {
             _t.drawAllRoutes();
         }, _t.refreshRate * 1000)
     },
-
     getBaseMapGeoJSONByName: function(mapName) {
         return this.baseMapGeoJSON.filter(function(obj) {
             return obj.name == mapName;
@@ -279,6 +257,7 @@ te_Mapper.prototype = {
     },
 
     drawAllRoutes: function() {
+        console.log('in draw all routes')
         var _t = this;
         _t.fetchRouteList()
             .then(function(data) {
@@ -308,7 +287,11 @@ te_Mapper.prototype = {
                 console.error('Error drawing vehicles for route', err);
             });
     },
-
+    filterPredictableVehicles: function(vehicles) {
+        return vehicles.filter(function(obj) {
+            return obj['@attributes'].predictable === "true";
+        });
+    },
     drawVehicles: function(vehicles, tag) {
         var _t = this;
         if (!vehicles) {
@@ -322,7 +305,11 @@ te_Mapper.prototype = {
         if (_t.vehicleGroups.hasOwnProperty(tag)) {
             svgGroup = d3.select('#route_' + tag)
         } else {
-            svgGroup = _t.svg.append("g").attr('id', "route_" + tag);
+            svgGroup = _t.svg.append("g").attr('id', "route_" + tag)
+            .on("mouseover", function() {
+                var sel = d3.select(this);
+                sel.moveToFront();
+            })
         }
         _t.vehicleGroups[tag] = svgGroup;
 
@@ -333,7 +320,12 @@ te_Mapper.prototype = {
             vehicles = temp;
         }
 
-        var dotGroups = svgGroup.selectAll(".dot-group").data(vehicles, function(d) {
+        var predictableVehicles = _t.filterPredictableVehicles(vehicles);
+        var dotGroups = svgGroup.selectAll(".dot-group").data(predictableVehicles, function(d) {
+            return d['@attributes'].id;
+        })
+
+        var headingDots = svgGroup.selectAll(".heading-dot").data(predictableVehicles, function(d) {
             return d['@attributes'].id;
         })
 
@@ -347,7 +339,13 @@ te_Mapper.prototype = {
                     d['@attributes'].lat
                 ]) + ")";
             })
-            .duration(_t.refreshRate * 1000 / 2)
+            .duration(_t.refreshRate * 1000)
+
+        //the headings change fairly frequently so we update them as well. would be nicer if they went around the arc.
+        headingDots
+            .transition()
+            .attr("transform", _t.translateHeadingDot)
+            .duration(_t.refreshRate * 1000)
 
         var dotGroup = dotGroups.enter()
             .append("g")
@@ -363,7 +361,8 @@ te_Mapper.prototype = {
             .call(_t.zoom.transform, _t.zoomTransform)
             .attr("r", "6")
             .attr("fill", getRandomHexColor())
-            .attr("stroke", getRandomHexColor())
+            .attr("stroke", "black")
+            .style('stroke-width', '1px')
             .transition().attr("r", "12").duration(1000)
             .transition().attr("r", "8").duration(1000)
 
@@ -381,11 +380,32 @@ te_Mapper.prototype = {
             .transition().style("font-size", "12").duration(1000)
             .transition().style("font-size", "8").duration(1000)
 
+        //create a heading dot
+        dotGroup.append("circle").attr('class', 'heading-dot')
+            .call(_t.zoom.transform, _t.zoomTransform)
+            .attr("r", "0.45")
+            .attr("fill", "white")
+            //.attr("stroke", getRandomHexColor())
+            .attr("transform", _t.translateHeadingDot)
+            .transition().attr("r", "1.5").duration(1000)
+            .transition().attr("r", "0.45").duration(1000)
+
         svgGroup.selectAll('.dot-group')
             .on('click', _t.clickVehicle)
-            .on('mouseover', _t.mouseoverVehicle)
+            //.on('mouseover', _t.mouseoverVehicle)
+            .on("mouseover", function() {
+                var sel = d3.select(this);
+                sel.moveToFront();
+            })
             //.on('mouseout', _t.mouseoutVehicle)
 
+    },
+    translateHeadingDot: function(d) {
+        var heading = d['@attributes'].heading;
+        var radianHeading = Math.radians(heading);
+        var y = 8 * -Math.cos(radianHeading) + 0
+        var x = 8 * Math.sin(radianHeading) + 0
+        return "translate(" + x + "," + y + ")";
     },
 
     setupControls: function() {
@@ -411,6 +431,13 @@ te_Mapper.prototype = {
         return el
     },
 
+    clearControlOptions: function() {
+        var _t = this;
+        while (_t.routeSelector.hasChildNodes()) {
+            _t.routeSelector.removeChild(_t.routeSelector.lastChild);
+        }
+    },
+
     updateControlOptions: function() {
         var _t = this;
         _t.routeSelector = document.getElementsByClassName('route-selector')[0];
@@ -426,16 +453,14 @@ te_Mapper.prototype = {
         $('.route-selector').material_select();
         $(".route-selector").on('change', function() {
             console.log($(this).val());
+            _t.updateRoutesForSelector($(this).val())
         });
 
     },
 
-    clearControlOptions: function() {
-        var _t = this;
-        while (_t.routeSelector.hasChildNodes()) {
-            _t.routeSelector.removeChild(_t.routeSelector.lastChild);
-        }
-    },
+    updateRoutesForSelector: function() {}
+
+
 
 }
 
@@ -445,3 +470,21 @@ var liveMapper = new te_Mapper();
 function getRandomHexColor() {
     return '#' + ("000000" + Math.random().toString(16).slice(2, 8).toUpperCase()).slice(-6);
 }
+
+// Converts from degrees to radians.
+Math.radians = function(degrees) {
+    var degrees = parseInt(degrees);
+    return degrees * Math.PI / 180;
+};
+
+// Converts from radians to degrees.
+Math.degrees = function(radians) {
+    return radians * 180 / Math.PI;
+};
+
+//https://gist.github.com/trtg/3922684
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function(){
+  this.parentNode.appendChild(this);
+  });
+};
