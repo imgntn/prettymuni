@@ -1,10 +1,13 @@
 function te_Mapper() {
     this.setupDrawingSpace();
     this.loadAllBaseMaps();
+
 }
 
 te_Mapper.prototype = {
     refreshRate: 15,
+    baseProjectionTranslation: {},
+    baseProjectionScale: 250000,
     baseMapNames: [
         'neighborhoods',
         'streets',
@@ -13,27 +16,58 @@ te_Mapper.prototype = {
     ],
     baseMapGeoJSON: [],
     baseMapGroups: [],
-    vehicleGroups: [],
+    vehicleGroups: {},
+    zoomTransform:null,
     setupDrawingSpace: function() {
+        var _t = this;
         var width = window.innerWidth,
             height = window.innerHeight;
 
-        this.svg = d3.select("body").append("svg")
-            .attr("width", width)
-            .attr("height", height);
+        _t.zoom = d3.zoom()
+            .scaleExtent([1, 10])
+            .on("zoom", function() {
+                _t.zoomed()
+            })
 
-        this.projection = d3.geoMercator()
-            .scale(350000)
+
+        _t.svg = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .call(_t.zoom)
+
+
+        _t.baseProjectionTranslation.width = width / 2;
+        _t.baseProjectionTranslation.height = height / 2;
+
+        _t.projection = d3.geoMercator()
+            .scale(_t.baseProjectionScale)
             .rotate([0, 0])
             .center([-122.433701, 37.767683])
-            .translate([width / 2, height / 2]);
+            .translate([_t.baseProjectionTranslation.width, _t.baseProjectionTranslation.height])
+
+    },
+
+    zoomed: function() {
+        var _t = this;
+        _t.baseMapGroups.forEach(function(mapGroup) {
+            mapGroup.attr("transform", d3.event.transform);
+        });
+
+        for (var property in _t.vehicleGroups) {
+            if (_t.vehicleGroups.hasOwnProperty(property)) {
+                _t.vehicleGroups[property].attr("transform", d3.event.transform);
+            }
+        }
+
+        _t.zoomTransform = d3.event.transform;
+
     },
 
     loadAllBaseMaps: function() {
         var _t = this;
 
         _t.baseMapNames.forEach(function(mapName) {
-            _t.loadBaseMap(mapName)
+            _t.loadBaseMap(mapName);
         })
     },
 
@@ -73,7 +107,7 @@ te_Mapper.prototype = {
 
     addBaseMapLayer: function(geojson, mapName) {
         var _t = this;
-        var svgGroup = _t.svg.append("g").attr('id', 'layer_' + mapName);
+        var svgGroup = _t.svg.append("g").attr('id', 'layer_' + mapName)
 
         var geoPath = d3.geoPath()
             .projection(this.projection);
@@ -85,29 +119,33 @@ te_Mapper.prototype = {
             .style("fill", getRandomHexColor())
             .style("stroke", getRandomHexColor())
             .attr("d", geoPath)
-            // .on('mouseover', _t.mouseOver)
-            // .on('mouseout', _t.mouseOut)
-            .on('click', _t.clicked)
+            .on('click', _t.clickGeoJSON)
 
-        console.log('end of basemap drawing',
-            geojson.name)
+        console.log('end of basemap drawing',  geojson.name)
 
         this.baseMapGroups.push(svgGroup);
 
     },
 
-    mouseOver: function(val) {
-        console.log('val mouseOver', val)
+    clickGeoJSON: function(val) {
+        console.log('geoJSON clicked', val.properties)
     },
 
-    mouseOut: function(val) {
-        console.log('val mouseOut', val)
+    mouseoverVehicle: function(val) {
+        console.log('vehicle mouseover', val['@attributes'])
+
     },
 
-    clicked: function(val) {
-        console.log('val clicked', val.properties)
+    mouseoutVehicle: function(val) {
+        console.log('vehicle mouseout', val['@attributes'])
+
     },
 
+    clickVehicle: function(val) {
+        console.log('vehicle clicked', val['@attributes'])
+
+    },
+    
     fetchRouteList: function() {
         var _t = this;
         var routeListURL = 'http://webservices.nextbus.com/service/publicXMLFeed?command=routeList&a=sf-muni';
@@ -236,6 +274,7 @@ te_Mapper.prototype = {
     },
 
     drawVehicles: function(vehicles, tag) {
+        var _t = this;
         if (!vehicles) {
             console.log('no vehicles to draw')
             return;
@@ -243,19 +282,13 @@ te_Mapper.prototype = {
         var _t = this;
 
         var svgGroup;
-        // if (_t.vehicleGroups.hasOwnProperty(tag)) {
-        //     d3.select('#route_' + tag).remove()
-        // }
 
-       if (_t.vehicleGroups.hasOwnProperty(tag)) {
-           svgGroup= d3.select('#route_' + tag)
-        }
-        else{
+        if (_t.vehicleGroups.hasOwnProperty(tag)) {
+            svgGroup = d3.select('#route_' + tag)
+        } else {
             svgGroup = _t.svg.append("g").attr('id', "route_" + tag);
         }
-        // var svgGroup = _t.svg.append("g").attr('id', "route_" + tag);
         _t.vehicleGroups[tag] = svgGroup;
-
 
         if (Array.isArray(vehicles) === false) {
             //nextbus will return a single vehicle object instead of an array with one object if there is only one. so we make our own array
@@ -264,11 +297,15 @@ te_Mapper.prototype = {
             vehicles = temp;
         }
 
-       var vehicleDots= svgGroup.selectAll("circle").data(vehicles)
-            
-            vehicleDots.exit().remove()
+        var vehicleDots = svgGroup.selectAll("circle").data(vehicles)
 
-            vehicleDots.enter()
+
+        vehicleDots.exit()
+            .transition().attr("r", "0")
+            .duration(500)
+            .remove()
+
+        vehicleDots.enter()
             .append("circle")
             .attr("transform", function(d) {
                 return "translate(" + _t.projection([
@@ -276,24 +313,30 @@ te_Mapper.prototype = {
                     d['@attributes'].lat
                 ]) + ")";
             })
+            .call(_t.zoom.transform, _t.zoomTransform)
             .attr("r", "6")
             .attr("fill", getRandomHexColor())
-            .transition().attr("r", "10").duration(500)
+            .attr("stroke", getRandomHexColor())
+            .transition().attr("r", "10").duration(1000)
             .transition().attr("r", "6").duration(1000)
 
-            vehicleDots.attr("transform", function(d) {
+        svgGroup.selectAll('circle')
+            .on('click', _t.clickVehicle)
+            .on('mouseover', _t.mouseoverVehicle)
+            //.on('mouseout', _t.mouseoutVehicle)
+
+        //this updates the position of existing dots
+        vehicleDots
+            .transition()
+            .attr("transform", function(d) {
                 return "translate(" + _t.projection([
                     d['@attributes'].lon,
                     d['@attributes'].lat
                 ]) + ")";
             })
+            .duration(500)
 
     },
-
-    updateDrawnVehicles: function() {
-
-
-    }
 
 
 }

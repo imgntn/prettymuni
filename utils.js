@@ -37,3 +37,13 @@ function xmlToJson(xml) {
     }
     return obj;
 };
+
+
+// http://bl.ocks.org/patricksurry/6621971
+function mercatorBounds(projection, maxlat) {
+    var yaw = projection.rotate()[0],
+        xymax = projection([-yaw+180-1e-6,-maxlat]),
+        xymin = projection([-yaw-180+1e-6, maxlat]);
+    
+    return [xymin,xymax];
+}
