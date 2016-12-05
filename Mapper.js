@@ -2,7 +2,6 @@ function te_Mapper() {
     this.setupDrawingSpace();
     this.setupControls();
     this.loadAllBaseMaps();
-
 }
 
 te_Mapper.prototype = {
@@ -35,16 +34,10 @@ te_Mapper.prototype = {
 
 
         _t.svg = d3.select(".map-container").append("svg")
-            // .attr("width", width)
-            // .attr("height", height)
-             //responsive SVG needs these 2 attributes and no width and height attr
-   .attr("preserveAspectRatio", "xMinYMin meet")
-   .attr("viewBox","0 0 " + width + " " + height)
-   //class to make it responsive
-   .classed("svg-content-responsive", true)
+            .attr("preserveAspectRatio", "xMinYMin meet")
+            .attr("viewBox", "0 0 " + width + " " + height)
+            .classed("svg-content-responsive", true)
             .call(_t.zoom)
-
-
 
         _t.projection = d3.geoMercator()
             .scale(_t.baseProjectionScale)
@@ -76,9 +69,6 @@ te_Mapper.prototype = {
         _t.baseMapNames.forEach(function(mapName) {
             _t.loadBaseMap(mapName);
         })
-
-
-
     },
 
     loadBaseMapPromise: function(mapName) {
@@ -106,6 +96,7 @@ te_Mapper.prototype = {
 
         return p
     },
+
     loadBaseMap: function(mapName) {
         var _t = this;
 
@@ -343,12 +334,10 @@ te_Mapper.prototype = {
             vehicles = temp;
         }
 
-   
         var dotGroups = svgGroup.selectAll(".dot-group").data(vehicles, function(d) {
             return d['@attributes'].id;
         })
 
-        
         dotGroups.exit().remove();
 
         dotGroups
@@ -359,12 +348,12 @@ te_Mapper.prototype = {
                     d['@attributes'].lat
                 ]) + ")";
             })
-            .duration(_t.refreshRate * 1000/2)
+            .duration(_t.refreshRate * 1000 / 2)
 
         var dotGroup = dotGroups.enter()
-        .append("g")
-        .attr('class','dot-group')
-        .attr("transform", function(d) {
+            .append("g")
+            .attr('class', 'dot-group')
+            .attr("transform", function(d) {
                 return "translate(" + _t.projection([
                     d['@attributes'].lon,
                     d['@attributes'].lat
