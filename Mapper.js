@@ -102,7 +102,6 @@ Mapper.prototype = {
             _t.addBaseMapLayer(geoJSON, mapName);
         });
 
-        //_t.drawAllRoutesAtInterval();
     },
 
     drawAllRoutesAtInterval: function() {
@@ -431,6 +430,7 @@ Mapper.prototype = {
                 .then(function(data) {
                     _t.updateControlOptions();
                     _t.refreshActiveRoutes();
+                    _t.bindButtons();
                 })
                 .catch(function(err) {
                     console.error('Error drawing all routes', err);
@@ -509,6 +509,9 @@ Mapper.prototype = {
 
     refreshActiveRoutes: function() {
         var _t = this;
+        if(_t.refreshInterval!==null){
+            clearInterval(_t.refreshInterval);
+        }
         _t.refreshInterval = setInterval(function() {
             if (_t.activeRoutes.length === 0) {
                 return
@@ -517,6 +520,34 @@ Mapper.prototype = {
             }
         }, _t.refreshRate * 1000)
 
+    },
+
+    bindButtons: function() {
+        var _t = this;
+        _t.showAllButton = document.getElementById("showAllButton");
+        _t.showAllButton.onclick = function() {
+            _t.showAll()
+            return false;
+        }
+        _t.clearAllButton = document.getElementById("clearAllButton");
+        _t.clearAllButton.onclick = function() {
+            _t.clearAll();
+            return false;
+        }
+    },
+    clearAll: function(e) {
+        var _t = this;
+        console.log('clearAll', e)
+        _t.activeRoutes = [];
+        _t.removeInactiveRoutes();
+        _t.lastActiveRoutes = [];
+        $("select").val("none");
+        $('select').material_select();
+
+    },
+    showAll: function(e) {
+        var _t = this;
+        console.log('showAll', e)
     }
 
 }
