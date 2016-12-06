@@ -23,6 +23,8 @@ Mapper.prototype = {
     routes: [],
     routesColors: {},
     activeRoutes: [],
+    proxyURL:'https://jbpmunimap.herokuapp.com/?url=',
+    proxyURL:'/proxy?url=',
     setupDrawingSpace: function() {
         var _t = this;
         var width = window.innerWidth,
@@ -163,7 +165,7 @@ Mapper.prototype = {
 
     fetchRouteList: function() {
         var _t = this;
-        var routeListURL = 'http://webservices.nextbus.com/service/publicXMLFeed?command=routeList&a=sf-muni';
+        var routeListURL = _t.proxyURL+'http://webservices.nextbus.com/service/publicXMLFeed?command=routeList&a=sf-muni';
 
         var p = new Promise(function(resolve, reject) {
             var xhr = new XMLHttpRequest();
@@ -195,7 +197,7 @@ Mapper.prototype = {
         var tag = tag || '';
         tag = tag.toUpperCase();
 
-        var routeURL = 'http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=sf-muni&r=' + tag;
+        var routeURL = _t.proxyURL+'http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=sf-muni&r=' + tag;
 
         var p = new Promise(function(resolve, reject) {
 
@@ -229,7 +231,7 @@ Mapper.prototype = {
         var tag = tag;
         tag = tag.toUpperCase();
         var epochTime = epochTime || 0;
-        var vehicleLocationsURL = 'http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni&r=' + tag + '&t=' + epochTime;;
+        var vehicleLocationsURL = _t.proxyURL+'http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni&r=' + tag + '&t=' + epochTime;;
 
         var p = new Promise(function(resolve, reject) {
 
@@ -546,7 +548,7 @@ Mapper.prototype = {
         $('select').material_select();
 
     },
-    
+
     showAll: function(e) {
         var _t = this;
         console.log('showAll', e)
