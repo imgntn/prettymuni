@@ -1,10 +1,10 @@
-function te_Mapper() {
+function Mapper() {
     this.setupDrawingSpace();
     this.setupControls();
     this.loadAllBaseMaps();
 }
 
-te_Mapper.prototype = {
+Mapper.prototype = {
     refreshRate: 10,
     refreshInterval: null,
     baseProjectionScale: 350000,
@@ -21,6 +21,7 @@ te_Mapper.prototype = {
     vehicleGroups: {},
     zoomTransform: null,
     routes: [],
+    routesColors: {},
     setupDrawingSpace: function() {
         var _t = this;
         var width = window.innerWidth,
@@ -99,8 +100,10 @@ te_Mapper.prototype = {
             var geoJSON = _t.getBaseMapGeoJSONByName(mapName);
             _t.addBaseMapLayer(geoJSON, mapName);
         });
-        _t.drawAllRoutesAtInterval();
+        
+        //_t.drawAllRoutesAtInterval();
     },
+
     drawAllRoutesAtInterval: function() {
         console.log('should draw all routes')
         var _t = this;
@@ -110,6 +113,7 @@ te_Mapper.prototype = {
             _t.drawAllRoutes();
         }, _t.refreshRate * 1000)
     },
+
     getBaseMapGeoJSONByName: function(mapName) {
         return this.baseMapGeoJSON.filter(function(obj) {
             return obj.name == mapName;
@@ -271,6 +275,15 @@ te_Mapper.prototype = {
             });
     },
 
+    drawSetOfRoutes: function(routeSet) {
+        console.log('in draw all routes')
+        var _t = this;
+
+        routeSet.forEach(function(route) {
+            _t.drawVehiclesForRoute(route);
+        })
+    },
+
     drawVehiclesForRoute: function(tag) {
         var _t = this;
         var tag = tag || '5';
@@ -306,10 +319,10 @@ te_Mapper.prototype = {
             svgGroup = d3.select('#route_' + tag)
         } else {
             svgGroup = _t.svg.append("g").attr('id', "route_" + tag)
-            .on("mouseover", function() {
-                var sel = d3.select(this);
-                sel.moveToFront();
-            })
+                .on("mouseover", function() {
+                    var sel = d3.select(this);
+                    sel.moveToFront();
+                })
         }
         _t.vehicleGroups[tag] = svgGroup;
 
@@ -452,20 +465,27 @@ te_Mapper.prototype = {
         });
         $('.route-selector').material_select();
         $(".route-selector").on('change', function() {
-            console.log($(this).val());
             _t.updateRoutesForSelector($(this).val())
         });
 
     },
 
-    updateRoutesForSelector: function() {}
+    updateRoutesForSelector: function(routesToGet) {
+        var _t=this;
+        if (!routesToGet) {
+            return
+        };
+        _t.activeRoutes=routesToGet;
+        _t.drawSetOfRoutes(routesToGet)
+        console.log('chose routes', routesToGet)
+    }
 
 
 
 }
 
 
-var liveMapper = new te_Mapper();
+var liveMapper = new Mapper();
 
 function getRandomHexColor() {
     return '#' + ("000000" + Math.random().toString(16).slice(2, 8).toUpperCase()).slice(-6);
@@ -484,7 +504,7 @@ Math.degrees = function(radians) {
 
 //https://gist.github.com/trtg/3922684
 d3.selection.prototype.moveToFront = function() {
-  return this.each(function(){
-  this.parentNode.appendChild(this);
-  });
+    return this.each(function() {
+        this.parentNode.appendChild(this);
+    });
 };

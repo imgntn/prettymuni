@@ -29,6 +29,7 @@
 - [] scale text inside of circles to fit alwyays 
 - [] scale vehicle groups down as you zoom in so the fit the streets.
 - [] monochrome pallete choice
+
 # bugs
 - [x] when a new vehicle is added (or removed?) from a route, the route is being shuffled.  perhaps the order of the vehicles is not guaranteed and i should sort by id.  fixed by passing second parameter to .data() so it can keep track
 - [x] handle cases of predictable:'false' -- getting stranded circles right now.
@@ -45,6 +46,7 @@
 - 48kb font
 - miserable performance with all routes on MS edge
 - perf rankings:  chrome, firefox, edge.
+- a bit poky on the chromebook but it does run all routes.
 
 # wow-zone
 - [] use an elevation service to do a sweet altitude vis 
