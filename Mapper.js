@@ -163,7 +163,7 @@ Mapper.prototype = {
 
     fetchRouteList: function() {
         var _t = this;
-        var routeListURL = 'https://webservices.nextbus.com/service/publicXMLFeed?command=routeList&a=sf-muni';
+        var routeListURL = 'http://webservices.nextbus.com/service/publicXMLFeed?command=routeList&a=sf-muni';
 
         var p = new Promise(function(resolve, reject) {
             var xhr = new XMLHttpRequest();
@@ -195,7 +195,7 @@ Mapper.prototype = {
         var tag = tag || '';
         tag = tag.toUpperCase();
 
-        var routeURL = 'https://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=sf-muni&r=' + tag;
+        var routeURL = 'http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=sf-muni&r=' + tag;
 
         var p = new Promise(function(resolve, reject) {
 
