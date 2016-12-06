@@ -535,6 +535,7 @@ Mapper.prototype = {
             return false;
         }
     },
+
     clearAll: function(e) {
         var _t = this;
         console.log('clearAll', e)
@@ -545,6 +546,7 @@ Mapper.prototype = {
         $('select').material_select();
 
     },
+    
     showAll: function(e) {
         var _t = this;
         console.log('showAll', e)
