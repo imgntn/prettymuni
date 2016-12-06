@@ -22,6 +22,7 @@ Mapper.prototype = {
     zoomTransform: null,
     routes: [],
     routesColors: {},
+    activeRoutes: [],
     setupDrawingSpace: function() {
         var _t = this;
         var width = window.innerWidth,
@@ -100,7 +101,7 @@ Mapper.prototype = {
             var geoJSON = _t.getBaseMapGeoJSONByName(mapName);
             _t.addBaseMapLayer(geoJSON, mapName);
         });
-        
+
         //_t.drawAllRoutesAtInterval();
     },
 
@@ -261,7 +262,6 @@ Mapper.prototype = {
     },
 
     drawAllRoutes: function() {
-        console.log('in draw all routes')
         var _t = this;
         _t.fetchRouteList()
             .then(function(data) {
@@ -276,7 +276,6 @@ Mapper.prototype = {
     },
 
     drawSetOfRoutes: function(routeSet) {
-        console.log('in draw all routes')
         var _t = this;
 
         routeSet.forEach(function(route) {
@@ -300,11 +299,13 @@ Mapper.prototype = {
                 console.error('Error drawing vehicles for route', err);
             });
     },
+
     filterPredictableVehicles: function(vehicles) {
         return vehicles.filter(function(obj) {
             return obj['@attributes'].predictable === "true";
         });
     },
+
     drawVehicles: function(vehicles, tag) {
         var _t = this;
         if (!vehicles) {
@@ -429,6 +430,7 @@ Mapper.prototype = {
             _t.fetchRouteList()
                 .then(function(data) {
                     _t.updateControlOptions();
+                    _t.refreshActiveRoutes();
                 })
                 .catch(function(err) {
                     console.error('Error drawing all routes', err);
@@ -463,6 +465,7 @@ Mapper.prototype = {
             var control = _t.createControlOption(route['@attributes'].title, route['@attributes'].tag)
             _t.routeSelector.appendChild(control);
         });
+        //materialize uses jquery :/
         $('.route-selector').material_select();
         $(".route-selector").on('change', function() {
             _t.updateRoutesForSelector($(this).val())
@@ -471,16 +474,50 @@ Mapper.prototype = {
     },
 
     updateRoutesForSelector: function(routesToGet) {
-        var _t=this;
+        var _t = this;
         if (!routesToGet) {
             return
         };
-        _t.activeRoutes=routesToGet;
+        if (!_t.lastActiveRoutes) {
+            _t.lastActiveRoutes = routesToGet;
+        }
+        _t.activeRoutes = routesToGet;
+        _t.removeInactiveRoutes();
+
         _t.drawSetOfRoutes(routesToGet)
+        _t.lastActiveRoutes = _t.activeRoutes;
         console.log('chose routes', routesToGet)
+    },
+
+    removeInactiveRoutes: function() {
+        var _t = this;
+        var inactiveRoutes = _t.filterInactiveRoutes();
+        inactiveRoutes.forEach(function(inactiveRoute) {
+            svgGroup = d3.select('#route_' + inactiveRoute).data([]).exit().remove();
+            delete _t.vehicleGroups[inactiveRoute]
+        })
+        console.log('inactiveRoutes', inactiveRoutes);
+    },
+
+    filterInactiveRoutes: function(currentRoutes, lastRoutes) {
+        var _t = this;
+        return _t.lastActiveRoutes.filter(function(el) {
+            return _t.activeRoutes.indexOf(el) < 0;
+        });
+
+    },
+
+    refreshActiveRoutes: function() {
+        var _t = this;
+        _t.refreshInterval = setInterval(function() {
+            if (_t.activeRoutes.length === 0) {
+                return
+            } else {
+                _t.drawSetOfRoutes(_t.activeRoutes)
+            }
+        }, _t.refreshRate * 1000)
+
     }
-
-
 
 }
 

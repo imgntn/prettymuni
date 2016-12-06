@@ -1,0 +1,21 @@
+{
+  "name": "jbpmunimap",
+  "version": "1.0.0",
+  "description": "muni map by james b pollack",
+  "main": "proxy.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imgntn/liveMuniMap.git"
+  },
+  "author": "james b. pollack",
+  "license": "SEE LICENSE IN README",
+  "bugs": {
+    "url": "https://github.com/imgntn/liveMuniMap/issues"
+  },
+  "homepage": "https://github.com/imgntn/liveMuniMap#readme"
+}
