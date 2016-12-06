@@ -4,7 +4,9 @@
   "description": "muni map by james b pollack",
   "main": "proxy.js",
   "dependencies": {
+    "compression": "^1.6.2",
     "express": "^4.14.0",
+    "heroku-ssl-redirect": "0.0.3",
     "request": "^2.79.0"
   },
   "devDependencies": {},
