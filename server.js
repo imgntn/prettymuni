@@ -3,6 +3,13 @@ var request = require('request');
 var compression = require('compression');
 
 var app = express();
+
+app.use(function(err, req, res, next) {
+    console.error(err.stack)
+    res.status(500).send('Something broke!')
+})
+
+
 app.use(compression());
 app.use(express.static('public'))
 
@@ -19,6 +26,14 @@ app.use('/proxy', function(req, res) {
     }
 
 });
+
+app.use(function(err, req, res, next) {
+    console.error(err.stack)
+    res.status(500)
+    res.render('error', {
+        error: err
+    })
+})
 
 app.listen(process.env.PORT || 3000);
 

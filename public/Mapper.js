@@ -10,8 +10,8 @@ Mapper.prototype = {
     baseProjectionScale: 350000,
     baseMapNames: [
         'neighborhoods',
-        //'streets',
-        'streets_minified',
+        'streets',
+        //'streets_minified',
         //'streets_reduced_precision',
         'freeways',
         'arteries',
@@ -316,8 +316,8 @@ Mapper.prototype = {
                 stroke: 'black'
             },
             text: {
-                fill: null,
-                stroke: 'white'
+                fill: 'white',
+                stroke: 'black'
             },
             headingDot: {
                 fill: 'white',
@@ -435,6 +435,7 @@ Mapper.prototype = {
             .style("font-size", "8")
             .style('stroke-width', '1px')
             .style('paint-order', 'stroke')
+            .attr("fill", colors.text.fill)
             .attr("stroke", colors.text.stroke)
             .attr("dx", 0)
             .text(function(d) {

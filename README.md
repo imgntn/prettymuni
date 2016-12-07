@@ -1,3 +1,7 @@
+# What this is
+https://www.prettymuni.com
+I was asked to create a live map of San Francisco transportation recently when applying to a job, so I made this :)
+
 # To-Do
 
 # essentials
@@ -32,7 +36,7 @@
 - [] hover data for vehicles
 - [] inbound/ outbound checkboxes
 - [] different color ring for inbound / outbound
-- [] visual inbound outbound indicator.  maybe hatching.
+- [] visual inbound outbound indicator.  maybe hatching. tried h
 - [] draw route stops + paths
 - [] a neat vehicle svg
 - [] active color of tile is bus route color
@@ -81,6 +85,6 @@
     https://developers.google.com/maps/documentation/elevation/start
 - [] favorite routes
 - [] favorite colors
-- [] html5 geolocation + 'show neareest'
+- [] html5 geolocation + 'show nearest'
 
 
