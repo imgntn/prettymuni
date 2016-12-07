@@ -29,9 +29,7 @@ width:24%;
 float:left;
 }
 
-.route-selector-tile.active {
-background-color:#ADD8E6;
-}
+
 
 .button-overlay-container {
 cursor:pointer;

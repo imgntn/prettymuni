@@ -22,6 +22,7 @@ Mapper.prototype = {
     zoomTransform: null,
     routes: [],
     routeColors: {},
+    routeTileBackgroundColor:'blue',
     activeRoutes: [],
     proxyURL: 'https://jbpmunimap.herokuapp.com/?url=',
     proxyURL: '/proxy?url=',
@@ -523,8 +524,8 @@ Mapper.prototype = {
             return false;
         }
 
-        clearButton.onclick = function() {
-            _t.clearAll();
+        clearButton.onclick = function(e) {
+            _t.clearAll(e);
             return false;
         }
 
@@ -554,7 +555,7 @@ Mapper.prototype = {
 
         if (_t.activeRoutes.indexOf(value) > -1) {
             //already active, inactivate it
-            _t.makeRouteInactive(value)
+            _t.makeRouteInactive(value,el)
             el.classList.remove('active')
         } else {
             el.classList.add('active')
@@ -565,21 +566,17 @@ Mapper.prototype = {
 
     makeRouteActive: function(route, el) {
         var _t = this;
-        console.log('going active', route)
         _t.activeRoutes.push(route);
         _t.drawVehiclesForRoute(route);
-        console.log('el going active', el)
-        console.log('colors for active route', _t.routeColors)
         window.el=el;
-        el.style['background-color']=_t.routeColors[route].circle.fill;
+        el.style.backgroundColor=_t.routeColors[route].circle.fill;
     },
 
-    makeRouteInactive: function(route) {
-        console.log('going inactive', route)
-        var _t = this;
+    makeRouteInactive: function(route,el) {
+       var _t = this;
+        el.style.backgroundColor=_t.routeTileBackgroundColor;
         svgGroup = d3.select('#route_' + route).data([]).exit().remove();
         delete _t.vehicleGroups[route];
-        delete _t.routeColors[route];
         var index = _t.activeRoutes.indexOf(route);
         if (index !== -1) {
             _t.activeRoutes.splice(index, 1);
@@ -628,10 +625,12 @@ Mapper.prototype = {
         _t.activeRoutes = [];
         _t.vehicleGroups = {};
         _t.routeColors = {};
+        _t.generateColorsForAllRoutes();
         var activeTiles = document.querySelectorAll(".route-selector-tile.active");
 
         [].forEach.call(activeTiles, function(el) {
             el.classList.remove("active");
+            el.style.backgroundColor=_t.routeTileBackgroundColor;
         });
     },
 
