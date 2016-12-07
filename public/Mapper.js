@@ -659,16 +659,12 @@ Mapper.prototype = {
 
     makeRouteSelectorButtonsSticky: function() {
         var _t = this;
-        console.log('should make sticky')
         var closeButton = document.getElementsByClassName("close-route-selector-button-holder")[0];
         var stuck = false;
-        var stickPoint = 100;
+        var stickPoint = closeButton.offsetTop;
 
         stickPoint = closeButton.offsetTop + closeButton.offsetHeight;
-        console.log('stickPoint', stickPoint)
         _t.routeSelector.onscroll = function(e) {
-            console.log('scroll event', e.target.scrollTop)
-
             if ((e.target.scrollTop > stickPoint) && !stuck) {
                 closeButton.style.position = 'fixed';
                 stuck = true;

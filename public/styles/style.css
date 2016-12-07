@@ -24,7 +24,7 @@ overflow-x:hidden;
 cursor:pointer;
 margin-top:1%;
 text-align:center;
-font-size:1.2em;
+font-size:1.25em;
 background-color:rgba(0,0,0,0.40);
 height:10%;
 margin-left:0.5%;
@@ -64,6 +64,7 @@ margin:auto;
 }
 
 .clear-all-button-holder {
+        text-align:center;
 display:inline-flex;
 cursor:pointer;
 width:100%;
@@ -73,6 +74,7 @@ color:#FFF;
 }
 
 .close-route-selector-button-holder {
+
 display:inline-flex;
 cursor:pointer;
 width:100%;
@@ -99,7 +101,7 @@ left:0;
 
 .clear-all-button,.close-route-selector-button {
 font-size:2em;
-text-align:center;
+
 text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 margin:auto;
 }
