@@ -56,7 +56,6 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [x] browser default looks like crap on desktop and i don't want to start doing feature detection, so i think i'll roll my own.
 - [x] remove material design, jquery
 - [x] need my own route selector, layout, buttons. 
-- maintenence
 - [] heading dots sometimes get stuck large when adding multiple routes in a row
 
 # bandwidth and performance observations
