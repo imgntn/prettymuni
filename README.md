@@ -18,35 +18,29 @@ I was asked to create a live map of San Francisco transportation recently when a
 - [x] click data for vehicles
 - [x] allow selection of subset of vehicles for display from HTML5 control
 - [x] remove unused routes on select
-- [] simple loader
 - [x] clear all button
 - [x] vehicle headings
 - [x] dictionary of colors for routes so that new vehicles come in with the same one their route already has.
 - [x] route selection list
-    -[x] full screen
-    -[x] show route tag
-    -[] show route name (only at larger widths)
-    -[x] touch tile to toggle
-    -[x] needs to fill the active routes list
-- []
-- 
+-[x] full screen
+-[x] show route tag
+-[x] touch tile to toggle
+-[x] needs to fill the active routes list
+- [] simple loader
+
 # nice-to-haves
-- [] show all button
-- [] a decent base color pallete
-- [] hover data for vehicles
-- [] inbound/ outbound checkboxes
-- [] different color ring for inbound / outbound
-- [] draw route stops + paths
 - [x] active color of tile is bus route color
+- [] show all button
+- [] inbound/ outbound "ping" button
+- [] different color ring for inbound / outbound
 - [] scale text inside of circles to fit always 
 - [] scale vehicle groups down as you zoom in so the fit the streets.
-- [] monochrome pallete choice
-- [] offline detection
 - [] load streetmap async 
-- [] clicking should toggle route on off
 - [] fade in the streets when they are loaded async so that it looks nice
-- [] every line has two inner lines for inbound outbound directional pulse wave along the stops
-
+- [] clicking should toggle route line path display on off
+- [] every route line path has two inner lines for inbound outbound directional pulse wave along the stops
+- [] teardrop heading indicator
+- [] offline detection
 # bugs
 - [x] when a new vehicle is added or removed from a route, the route is being shuffled. fixed by passing second parameter to .data() to keep track
 - [x] handle cases of predictable:'false' -- getting stranded circles right now.
