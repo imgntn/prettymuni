@@ -26,10 +26,10 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [x] vehicle headings
 - [x] dictionary of colors for routes so that new vehicles come in with the same one their route already has.
 - [x] route selection list
--[x] full screen
--[x] show route tag
--[x] touch tile to toggle
--[x] needs to fill the active routes list
+- [x] full screen
+- [x] show route tag
+- [x] touch tile to toggle
+- [x] needs to fill the active routes list
 - [] simple loader
 
 # nice-to-haves
@@ -45,6 +45,7 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [] every route line path has two inner lines for inbound outbound directional pulse wave along the stops
 - [] teardrop heading indicator
 - [] offline detection
+
 # bugs
 - [x] when a new vehicle is added or removed from a route, the route is being shuffled. fixed by passing second parameter to .data() to keep track
 - [x] handle cases of predictable:'false' -- getting stranded circles right now.
@@ -56,8 +57,7 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [x] remove material design, jquery
 - [x] need my own route selector, layout, buttons. 
 - maintenence
- - [] heading dots sometimes get stuck large when adding multiple routes in a row
-
+- [] heading dots sometimes get stuck large when adding multiple routes in a row
 
 # bandwidth and performance observations
 - 1.1kb per route
