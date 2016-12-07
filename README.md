@@ -45,6 +45,7 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [] every route line path has two inner lines for inbound outbound directional pulse wave along the stops
 - [] teardrop heading indicator
 - [] offline detection
+- [] send google analytics event on route toggle
 
 # bugs
 - [x] when a new vehicle is added or removed from a route, the route is being shuffled. fixed by passing second parameter to .data() to keep track
@@ -85,4 +86,3 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [] html5 geolocation + 'show nearest'
 - [] maybe use topoJSON
 - [] maybe use vector tiles? http://bl.ocks.org/mbostock/5616813 https://mapzen.com/projects/vector-tiles/
-

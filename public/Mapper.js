@@ -24,7 +24,6 @@ Mapper.prototype = {
     routeColors: {},
     routeTileBackgroundColor:'rgba(0,0,0,0.40)',
     activeRoutes: [],
-    proxyURL: 'https://jbpmunimap.herokuapp.com/?url=',
     proxyURL: '/proxy?url=',
     setupDrawingSpace: function() {
         var _t = this;
@@ -106,17 +105,9 @@ Mapper.prototype = {
         });
 
         //post basemap load hook
+        _t.hideLoader()
     },
 
-    drawAllRoutesAtInterval: function() {
-        console.log('should draw all routes')
-        var _t = this;
-        _t.drawAllRoutes();
-
-        _t.refreshInterval = setInterval(function() {
-            _t.drawAllRoutes();
-        }, _t.refreshRate * 1000)
-    },
 
     getBaseMapGeoJSONByName: function(mapName) {
         return this.baseMapGeoJSON.filter(function(obj) {
@@ -139,11 +130,24 @@ Mapper.prototype = {
             .style("stroke", getRandomHexColor())
             .attr("d", geoPath)
             .on('click', _t.clickGeoJSON)
+            // .transition()
+            // .duration(5500)
+            // .attr('opacity', 1)
 
         console.log('end of basemap drawing', geojson.name)
 
         this.baseMapGroups.push(svgGroup);
 
+    },
+
+    drawAllRoutesAtInterval: function() {
+        console.log('should draw all routes')
+        var _t = this;
+        _t.drawAllRoutes();
+
+        _t.refreshInterval = setInterval(function() {
+            _t.drawAllRoutes();
+        }, _t.refreshRate * 1000)
     },
 
     clickGeoJSON: function(val) {
@@ -429,6 +433,7 @@ Mapper.prototype = {
             .transition().attr("r", "12").duration(1000)
             .transition().attr("r", "8").duration(1000)
 
+
         dotGroup.append("text")
             .attr('text-anchor', "middle")
             .attr('dy', '0.35em')
@@ -668,6 +673,13 @@ Mapper.prototype = {
                 stuck = false;
             }
         }
+    },
+
+    hideLoader:function(){
+        var loader = document.getElementsByClassName('loader-container')[0];
+        loader.style.display="none";
+        var showRouteSelectorButtonHolder = document.getElementsByClassName('show-route-selector-button-holder')[0];
+        showRouteSelectorButtonHolder.style.display='inline-flex';
     }
 
 }
