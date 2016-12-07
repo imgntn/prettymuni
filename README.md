@@ -35,11 +35,11 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 # nice-to-haves
 - [x] active color of tile is bus route color
 - [] show all button
+- [] show route name on hover in route selector tile
 - [] inbound/ outbound "ping" button
 - [] different color ring for inbound / outbound
-- [] scale text inside of circles to fit always 
 - [] scale vehicle groups down as you zoom in so the fit the streets.
-- [] load streetmap async 
+- [] load street map async 
 - [] fade in the streets when they are loaded async so that it looks nice
 - [] clicking should toggle route line path display on off
 - [] every route line path has two inner lines for inbound outbound directional pulse wave along the stops
@@ -83,5 +83,6 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [] favorite routes
 - [] favorite colors
 - [] html5 geolocation + 'show nearest'
-
+- [] maybe use topoJSON
+- [] maybe use vector tiles? http://bl.ocks.org/mbostock/5616813 https://mapzen.com/projects/vector-tiles/
 

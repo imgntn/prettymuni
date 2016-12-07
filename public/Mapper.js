@@ -489,7 +489,6 @@ Mapper.prototype = {
         el.classList.add('route-selector-tile')
         el.setAttribute('value', value);
         el.onclick = function(e) {
-            console.log('e on tile click')
             _t.toggleRoute(value, el);
             return false;
         }
@@ -553,7 +552,6 @@ Mapper.prototype = {
         }
 
         showRouteSelectorButtonHolder.onclick = function() {
-            console.log('hello click')
             _t.showRouteSelector();
             return false;
         }
@@ -573,9 +571,6 @@ Mapper.prototype = {
 
     toggleRoute: function(value, el) {
         var _t = this;
-        console.log('active routes at toggle', _t.activeRoutes)
-        console.log('toggling route', value)
-
         if (_t.activeRoutes.indexOf(value) > -1) {
             //already active, inactivate it
             _t.makeRouteInactive(value,el)
