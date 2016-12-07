@@ -36,10 +36,8 @@ I was asked to create a live map of San Francisco transportation recently when a
 - [] hover data for vehicles
 - [] inbound/ outbound checkboxes
 - [] different color ring for inbound / outbound
-- [] visual inbound outbound indicator.  maybe hatching. tried h
 - [] draw route stops + paths
-- [] a neat vehicle svg
-- [] active color of tile is bus route color
+- [x] active color of tile is bus route color
 - [] scale text inside of circles to fit always 
 - [] scale vehicle groups down as you zoom in so the fit the streets.
 - [] monochrome pallete choice
@@ -52,23 +50,22 @@ I was asked to create a live map of San Francisco transportation recently when a
 - [x] when dropdown is open, it cannot be closed without clicking in the top container area.  a click on the map should definitely close it too.
 - [x] mouseover brings group to front of route.  needs to bring route to front of other routes also.
 - [x] mixed content warnings since the nextbus api isn't https. fixed by creating my own proxy
-- [] heading dots sometimes get stuck large when adding multiple routes in a row
-- [] mobile: can't close dropdown at all :P even when pressing 'done' https://github.com/Dogfalo/materialize/issues/3501
-- [] browser default looks like crap on desktop and i don't want to start doing feature detection, so i think i'll roll my own.
-
+- [x] mobile: can't close dropdown at all :P even when pressing 'done' https://github.com/Dogfalo/materialize/issues/3501
+- [x] browser default looks like crap on desktop and i don't want to start doing feature detection, so i think i'll roll my own.
+- [x] remove material design, jquery
+- [x] need my own route selector, layout, buttons. 
 - maintenence
-- [] remove material design, jquery
-- [] need my own route selector, layout, buttons.  
+ - [] heading dots sometimes get stuck large when adding multiple routes in a row
 
 
 # bandwidth and performance observations
 - 1.1kb per route
 - ~80kb to get all routes
 - streets geoJSON is 9mb and probably needs to be simplified
-- 530kb .js
-- 20kb css
-- 48kb font
-- miserable performance with all routes on MS edge
+- gzipping on server reduces this to 1.2mb delivered, but should still try to do it async
+- 118kb .js
+- 1kb css
+- MS edge perf is bad.
 - perf rankings:  chrome, firefox, edge.
 - a bit poky on the chromebook but it does run all routes.
 
