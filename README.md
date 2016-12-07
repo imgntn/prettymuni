@@ -30,7 +30,7 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [x] show route tag
 - [x] touch tile to toggle
 - [x] needs to fill the active routes list
-- [] simple loader
+- [x] simple loader
 
 # nice-to-haves
 - [x] active color of tile is bus route color
@@ -39,6 +39,7 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [] inbound/ outbound "ping" button
 - [] different color ring for inbound / outbound
 - [] scale vehicle groups down as you zoom in so the fit the streets.
+- [] custom, thematic loader.  maybe like this but cirlces? http://cssload.net/en/3d-loaders
 - [] load street map async 
 - [] fade in the streets when they are loaded async so that it looks nice
 - [] clicking should toggle route line path display on off
