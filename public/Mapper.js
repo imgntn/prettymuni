@@ -21,10 +21,10 @@ Mapper.prototype = {
     vehicleGroups: {},
     zoomTransform: null,
     routes: [],
-    routesColors: {},
+    routeColors: {},
     activeRoutes: [],
-    proxyURL:'https://jbpmunimap.herokuapp.com/?url=',
-    proxyURL:'/proxy?url=',
+    proxyURL: 'https://jbpmunimap.herokuapp.com/?url=',
+    proxyURL: '/proxy?url=',
     setupDrawingSpace: function() {
         var _t = this;
         var width = window.innerWidth,
@@ -37,7 +37,7 @@ Mapper.prototype = {
             })
 
         _t.svg = d3.select(".map-container").append("svg")
-            .attr("preserveAspectRatio", "xMinYMin meet")
+            .attr("preserveAspectRatio", "xMidYMid slice")
             .attr("viewBox", "0 0 " + width + " " + height)
             .classed("svg-content-responsive", true)
             .call(_t.zoom)
@@ -104,6 +104,7 @@ Mapper.prototype = {
             _t.addBaseMapLayer(geoJSON, mapName);
         });
 
+        //post basemap load hook
     },
 
     drawAllRoutesAtInterval: function() {
@@ -165,7 +166,7 @@ Mapper.prototype = {
 
     fetchRouteList: function() {
         var _t = this;
-        var routeListURL = _t.proxyURL+'http://webservices.nextbus.com/service/publicXMLFeed?command=routeList&a=sf-muni';
+        var routeListURL = _t.proxyURL + 'http://webservices.nextbus.com/service/publicXMLFeed?command=routeList&a=sf-muni';
 
         var p = new Promise(function(resolve, reject) {
             var xhr = new XMLHttpRequest();
@@ -197,7 +198,7 @@ Mapper.prototype = {
         var tag = tag || '';
         tag = tag.toUpperCase();
 
-        var routeURL = _t.proxyURL+'http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=sf-muni&r=' + tag;
+        var routeURL = _t.proxyURL + 'http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=sf-muni&r=' + tag;
 
         var p = new Promise(function(resolve, reject) {
 
@@ -231,7 +232,7 @@ Mapper.prototype = {
         var tag = tag;
         tag = tag.toUpperCase();
         var epochTime = epochTime || 0;
-        var vehicleLocationsURL = _t.proxyURL+'http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni&r=' + tag + '&t=' + epochTime;;
+        var vehicleLocationsURL = _t.proxyURL + 'http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni&r=' + tag + '&t=' + epochTime;;
 
         var p = new Promise(function(resolve, reject) {
 
@@ -307,6 +308,40 @@ Mapper.prototype = {
         });
     },
 
+    generateRouteColors: function() {
+        return {
+            circle: {
+                fill: getRandomHexColor(),
+                stroke: 'black'
+            },
+            text: {
+                fill: null,
+                stroke: 'white'
+            },
+            headingDot: {
+                fill: 'white',
+                stroke: null
+            }
+        }
+    },
+
+    generateColorsForAllRoutes: function() {
+        var _t = this;
+        _t.routes.forEach(function(route) {
+            var tag = route['@attributes'].tag;
+            //resuse existing vehicle groups and colors
+            var colors;
+            if (_t.routeColors.hasOwnProperty(tag)) {
+                colors = _t.routeColors[tag];
+            } else {
+                colors = _t.generateRouteColors();
+            }
+            _t.routeColors[tag] = colors;
+        })
+
+
+    },
+
     drawVehicles: function(vehicles, tag) {
         var _t = this;
         if (!vehicles) {
@@ -316,16 +351,19 @@ Mapper.prototype = {
         var _t = this;
 
         var svgGroup;
+        var colors;
 
+        //resuse existing vehicle groups 
         if (_t.vehicleGroups.hasOwnProperty(tag)) {
             svgGroup = d3.select('#route_' + tag)
         } else {
-            svgGroup = _t.svg.append("g").attr('id', "route_" + tag)
+            svgGroup = _t.svg.append("g").attr('id', "route_" + tag).attr('class', 'route-group')
                 .on("mouseover", function() {
                     var sel = d3.select(this);
                     sel.moveToFront();
                 })
         }
+
         _t.vehicleGroups[tag] = svgGroup;
 
         if (Array.isArray(vehicles) === false) {
@@ -343,6 +381,8 @@ Mapper.prototype = {
         var headingDots = svgGroup.selectAll(".heading-dot").data(predictableVehicles, function(d) {
             return d['@attributes'].id;
         })
+
+        var colors = _t.routeColors[tag];
 
         dotGroups.exit().remove();
 
@@ -365,6 +405,13 @@ Mapper.prototype = {
         var dotGroup = dotGroups.enter()
             .append("g")
             .attr('class', 'dot-group')
+            .on("mouseover", function() {
+                var sel = d3.select(this);
+                sel.moveToFront();
+            })
+            .on('click', function(e) {
+                _t.clickVehicle(e)
+            })
             .attr("transform", function(d) {
                 return "translate(" + _t.projection([
                     d['@attributes'].lon,
@@ -375,19 +422,19 @@ Mapper.prototype = {
         dotGroup.append("circle")
             .call(_t.zoom.transform, _t.zoomTransform)
             .attr("r", "6")
-            .attr("fill", getRandomHexColor())
-            .attr("stroke", "black")
+            .attr("fill", colors.circle.fill)
+            .attr("stroke", colors.circle.stroke)
             .style('stroke-width', '1px')
             .transition().attr("r", "12").duration(1000)
             .transition().attr("r", "8").duration(1000)
 
         dotGroup.append("text")
-            .attr("stroke", "#fff")
             .attr('text-anchor', "middle")
             .attr('dy', '0.35em')
             .style("font-size", "8")
             .style('stroke-width', '1px')
             .style('paint-order', 'stroke')
+            .attr("stroke", colors.text.stroke)
             .attr("dx", 0)
             .text(function(d) {
                 return d['@attributes'].routeTag
@@ -399,20 +446,12 @@ Mapper.prototype = {
         dotGroup.append("circle").attr('class', 'heading-dot')
             .call(_t.zoom.transform, _t.zoomTransform)
             .attr("r", "0.45")
-            .attr("fill", "white")
+            .attr("fill", colors.headingDot.fill)
             //.attr("stroke", getRandomHexColor())
             .attr("transform", _t.translateHeadingDot)
-            .transition().attr("r", "1.5").duration(1000)
-            .transition().attr("r", "0.45").duration(1000)
+            // .transition().attr("r", "1.5").duration(1000)
+            // .transition().attr("r", "0.45").duration(1000)
 
-        svgGroup.selectAll('.dot-group')
-            .on('click', _t.clickVehicle)
-            //.on('mouseover', _t.mouseoverVehicle)
-            .on("mouseover", function() {
-                var sel = d3.select(this);
-                sel.moveToFront();
-            })
-            //.on('mouseout', _t.mouseoutVehicle)
 
     },
     translateHeadingDot: function(d) {
@@ -431,8 +470,9 @@ Mapper.prototype = {
             _t.fetchRouteList()
                 .then(function(data) {
                     _t.updateControlOptions();
+                    _t.generateColorsForAllRoutes();
+                    _t.makeRouteSelectorButtonsSticky();
                     _t.refreshActiveRoutes();
-                    _t.bindButtons();
                 })
                 .catch(function(err) {
                     console.error('Error drawing all routes', err);
@@ -442,10 +482,108 @@ Mapper.prototype = {
     },
 
     createControlOption: function(text, value) {
-        var el = document.createElement('option');
-        el.innerText = text;
+        var _t = this;
+        var el = document.createElement('div');
+        var routeTag = document.createElement('div')
+        routeTag.innerText = value;
+        el.appendChild(routeTag);
+        el.classList.add('route-selector-tile')
         el.setAttribute('value', value);
+        el.onclick = function(e) {
+            console.log('e on tile click')
+            _t.toggleRoute(value, el);
+            return false;
+        }
         return el
+    },
+
+    createControlButtons: function() {
+        var _t = this;
+        var clearButton = document.createElement('div')
+        clearButton.innerText = 'Clear All';
+        clearButton.classList.add('clear-all-button')
+
+        var closeRouteSelectorButton = document.createElement('div')
+        closeRouteSelectorButton.innerText = 'Close Route Selector';
+        closeRouteSelectorButton.classList.add('close-route-selector-button')
+
+        _t.routeSelector.appendChild(closeRouteSelectorButton);
+        _t.routeSelector.appendChild(clearButton);
+
+        var showRouteSelectorButton = document.createElement('div')
+        showRouteSelectorButton.innerText = 'Choose Routes';
+        showRouteSelectorButton.classList.add('show-route-selector-button')
+        var buttonOverlay = document.getElementsByClassName('button-overlay-container')[0];
+
+        buttonOverlay.appendChild(showRouteSelectorButton);
+        _t.buttonOverlay = buttonOverlay;
+
+        closeRouteSelectorButton.onclick = function() {
+            _t.hideRouteSelector()
+            return false;
+        }
+
+        clearButton.onclick = function() {
+            _t.clearAll();
+            return false;
+        }
+
+        showRouteSelectorButton.onclick = function() {
+            console.log('hello click')
+            _t.showRouteSelector();
+            return false;
+        }
+    },
+
+    hideRouteSelector: function() {
+        var _t = this;
+        _t.routeSelector.style.display = "none";
+        _t.buttonOverlay.style.display = "inline-block";
+    },
+
+    showRouteSelector: function() {
+        var _t = this;
+        _t.routeSelector.style.display = "inline-block";
+        _t.buttonOverlay.style.display = "none";
+    },
+
+    toggleRoute: function(value, el) {
+        var _t = this;
+        console.log('active routes at toggle', _t.activeRoutes)
+        console.log('toggling route', value)
+
+        if (_t.activeRoutes.indexOf(value) > -1) {
+            //already active, inactivate it
+            _t.makeRouteInactive(value)
+            el.classList.remove('active')
+        } else {
+            el.classList.add('active')
+            _t.makeRouteActive(value,el)
+
+        }
+    },
+
+    makeRouteActive: function(route, el) {
+        var _t = this;
+        console.log('going active', route)
+        _t.activeRoutes.push(route);
+        _t.drawVehiclesForRoute(route);
+        console.log('el going active', el)
+        console.log('colors for active route', _t.routeColors)
+        window.el=el;
+        el.style['background-color']=_t.routeColors[route].circle.fill;
+    },
+
+    makeRouteInactive: function(route) {
+        console.log('going inactive', route)
+        var _t = this;
+        svgGroup = d3.select('#route_' + route).data([]).exit().remove();
+        delete _t.vehicleGroups[route];
+        delete _t.routeColors[route];
+        var index = _t.activeRoutes.indexOf(route);
+        if (index !== -1) {
+            _t.activeRoutes.splice(index, 1);
+        }
     },
 
     clearControlOptions: function() {
@@ -459,59 +597,18 @@ Mapper.prototype = {
         var _t = this;
         _t.routeSelector = document.getElementsByClassName('route-selector')[0];
         _t.clearControlOptions();
-        var firstOption = _t.createControlOption('See Specific Routes', "");
-        firstOption.setAttribute('disabled', true);
-        firstOption.setAttribute('selected', true)
-        _t.routeSelector.appendChild(firstOption);
+        _t.createControlButtons();
         _t.routes.forEach(function(route) {
             var control = _t.createControlOption(route['@attributes'].title, route['@attributes'].tag)
             _t.routeSelector.appendChild(control);
         });
-        //materialize uses jquery :/
-        $('.route-selector').material_select();
-        $(".route-selector").on('change', function() {
-            _t.updateRoutesForSelector($(this).val())
-        });
 
     },
 
-    updateRoutesForSelector: function(routesToGet) {
-        var _t = this;
-        if (!routesToGet) {
-            return
-        };
-        if (!_t.lastActiveRoutes) {
-            _t.lastActiveRoutes = routesToGet;
-        }
-        _t.activeRoutes = routesToGet;
-        _t.removeInactiveRoutes();
-
-        _t.drawSetOfRoutes(routesToGet)
-        _t.lastActiveRoutes = _t.activeRoutes;
-        console.log('chose routes', routesToGet)
-    },
-
-    removeInactiveRoutes: function() {
-        var _t = this;
-        var inactiveRoutes = _t.filterInactiveRoutes();
-        inactiveRoutes.forEach(function(inactiveRoute) {
-            svgGroup = d3.select('#route_' + inactiveRoute).data([]).exit().remove();
-            delete _t.vehicleGroups[inactiveRoute]
-        })
-        console.log('inactiveRoutes', inactiveRoutes);
-    },
-
-    filterInactiveRoutes: function(currentRoutes, lastRoutes) {
-        var _t = this;
-        return _t.lastActiveRoutes.filter(function(el) {
-            return _t.activeRoutes.indexOf(el) < 0;
-        });
-
-    },
 
     refreshActiveRoutes: function() {
         var _t = this;
-        if(_t.refreshInterval!==null){
+        if (_t.refreshInterval !== null) {
             clearInterval(_t.refreshInterval);
         }
         _t.refreshInterval = setInterval(function() {
@@ -524,34 +621,44 @@ Mapper.prototype = {
 
     },
 
-    bindButtons: function() {
-        var _t = this;
-        _t.showAllButton = document.getElementById("showAllButton");
-        _t.showAllButton.onclick = function() {
-            _t.showAll()
-            return false;
-        }
-        _t.clearAllButton = document.getElementById("clearAllButton");
-        _t.clearAllButton.onclick = function() {
-            _t.clearAll();
-            return false;
-        }
-    },
-
     clearAll: function(e) {
         var _t = this;
         console.log('clearAll', e)
+        d3.selectAll(".route-group").data([]).exit().remove();
         _t.activeRoutes = [];
-        _t.removeInactiveRoutes();
-        _t.lastActiveRoutes = [];
-        $("select").val("none");
-        $('select').material_select();
+        _t.vehicleGroups = {};
+        _t.routeColors = {};
+        var activeTiles = document.querySelectorAll(".route-selector-tile.active");
 
+        [].forEach.call(activeTiles, function(el) {
+            el.classList.remove("active");
+        });
     },
 
-    showAll: function(e) {
+    makeRouteSelectorButtonsSticky: function() {
         var _t = this;
-        console.log('showAll', e)
+        console.log('should make sticky')
+        var closeButton = document.getElementsByClassName("close-route-selector-button")[0];
+        var stuck = false;
+        var stickPoint = 100;
+
+        stickPoint = closeButton.offsetTop + closeButton.offsetHeight;
+        console.log('stickPoint', stickPoint)
+        _t.routeSelector.onscroll = function(e) {
+            console.log('scroll event', e.target.scrollTop)
+
+
+            if ((e.target.scrollTop > stickPoint) && !stuck) {
+                closeButton.style.position = 'fixed';
+                closeButton.style.top = '0px';
+                stuck = true;
+                console.log('el stuck')
+            } else if (stuck && e.target.scrollTop <= stickPoint) {
+                closeButton.style.position = '';
+                stuck = false;
+                console.log('el not stuck')
+            }
+        }
     }
 
 }

@@ -2,89 +2,27 @@
 <head>
   <title>muni map by james b. pollack</title>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
   <link rel="shortcut icon" type="image/png" href="icons/favicon.ico"/>
   <link rel="stylesheet" type="text/css" href="styles/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
   <script src="vendor/es6-promise.auto.js"></script>
   <script src="vendor/utils.js"></script>
   <script src="vendor/d3/d3.js"></script>
-</head>
+</head> 
 
 <body>
-<div class="container">
-  <div class="row hide">
-      <div class="col s12">
-        <div class="input-field col s12">
-          <select multiple class="route-selector"></select>
-          <label>San Francisco Muni</label>
-        </div>
-      </div>
-  </div>
 
-  <div class="row hide">
-      <div class="col s12">
-            <a class="waves-effect waves-light btn" id="showAllButton">Show All</a>
-            <a class="waves-effect waves-light btn" id="clearAllButton">Clear All</a>
-      </div>
-  </div>
-  <div class="row">
-
-
-  <div class="col s12">
-  <div class="preloader-wrapper big active">
-      <div class="spinner-layer spinner-blue">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-          <div class="circle"></div>
-        </div><div class="circle-clipper right">
-          <div class="circle"></div>
-        </div>
-      </div>
-
-      <div class="spinner-layer spinner-red">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-          <div class="circle"></div>
-        </div><div class="circle-clipper right">
-          <div class="circle"></div>
-        </div>
-      </div>
-
-      <div class="spinner-layer spinner-yellow">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-          <div class="circle"></div>
-        </div><div class="circle-clipper right">
-          <div class="circle"></div>
-        </div>
-      </div>
-
-      <div class="spinner-layer spinner-green">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-          <div class="circle"></div>
-        </div><div class="circle-clipper right">
-          <div class="circle"></div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  </div>
+<div class="map-container ">
+</div> 
+<div class="route-selector">
 </div>
 
-<div class="map-container">
-</div> 
+<div class="button-overlay-container">
 
+</div>
 
-
+<canvas id="canvas"></canvas>
+<svg height="6" width="6" xmlns="http://www.w3.org/2000/svg" version="1.1"> <defs> <pattern id="diagonal-stripe-2" patternUnits="userSpaceOnUse" width="6" height="6"> <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScvPgogIDxwYXRoIGQ9J00tMSwxIGwyLC0yCiAgICAgICAgICAgTTAsMTAgbDEwLC0xMAogICAgICAgICAgIE05LDExIGwyLC0yJyBzdHJva2U9J2JsYWNrJyBzdHJva2Utd2lkdGg9JzInLz4KPC9zdmc+" x="0" y="0" width="6" height="6"> </image> </pattern> </defs> </svg>
 <script src="Mapper.js"></script>
 </body>
 <html>
