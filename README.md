@@ -28,8 +28,8 @@ I was asked to create a live map of San Francisco transportation recently when a
     -[] show route name (only at larger widths)
     -[x] touch tile to toggle
     -[x] needs to fill the active routes list
-
-
+- []
+- 
 # nice-to-haves
 - [] show all button
 - [] a decent base color pallete
@@ -43,6 +43,9 @@ I was asked to create a live map of San Francisco transportation recently when a
 - [] monochrome pallete choice
 - [] offline detection
 - [] load streetmap async 
+- [] clicking should toggle route on off
+- [] fade in the streets when they are loaded async so that it looks nice
+- [] every line has two inner lines for inbound outbound directional pulse wave along the stops
 
 # bugs
 - [x] when a new vehicle is added or removed from a route, the route is being shuffled. fixed by passing second parameter to .data() to keep track

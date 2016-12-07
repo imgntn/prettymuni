@@ -22,7 +22,7 @@ Mapper.prototype = {
     zoomTransform: null,
     routes: [],
     routeColors: {},
-    routeTileBackgroundColor:'blue',
+    routeTileBackgroundColor:'rgba(0,0,0,0.40)',
     activeRoutes: [],
     proxyURL: 'https://jbpmunimap.herokuapp.com/?url=',
     proxyURL: '/proxy?url=',
@@ -486,9 +486,6 @@ Mapper.prototype = {
     createControlOption: function(text, value) {
         var _t = this;
         var el = document.createElement('div');
-        var routeTag = document.createElement('div')
-        routeTag.innerText = value;
-        el.appendChild(routeTag);
         el.classList.add('route-selector-tile')
         el.setAttribute('value', value);
         el.onclick = function(e) {
@@ -496,41 +493,66 @@ Mapper.prototype = {
             _t.toggleRoute(value, el);
             return false;
         }
+
+        var routeTag = document.createElement('div')
+        routeTag.innerText = value;
+        routeTag.classList.add('route-selector-tile-tag')
+        el.appendChild(routeTag);
+
         return el
     },
 
     createControlButtons: function() {
         var _t = this;
+
+        var clearButtonHolder=document.createElement('div');
+        clearButtonHolder.classList.add('clear-all-button-holder')
+
         var clearButton = document.createElement('div')
         clearButton.innerText = 'Clear All';
         clearButton.classList.add('clear-all-button')
 
-        var closeRouteSelectorButton = document.createElement('div')
+        clearButtonHolder.appendChild(clearButton);
+
+
+        var closeRouteSelectorButtonHolder=document.createElement('div');
+        closeRouteSelectorButtonHolder.classList.add('close-route-selector-button-holder')
+
+        var closeRouteSelectorButton = document.createElement('div');
         closeRouteSelectorButton.innerText = 'Close Route Selector';
-        closeRouteSelectorButton.classList.add('close-route-selector-button')
+        closeRouteSelectorButton.classList.add('close-route-selector-button');
 
-        _t.routeSelector.appendChild(closeRouteSelectorButton);
-        _t.routeSelector.appendChild(clearButton);
+        closeRouteSelectorButtonHolder.appendChild(closeRouteSelectorButton);
 
-        var showRouteSelectorButton = document.createElement('div')
+        _t.routeSelector.appendChild(closeRouteSelectorButtonHolder);
+        _t.routeSelector.appendChild(clearButtonHolder);
+
+        var showRouteSelectorButtonHolder=document.createElement('div');
+        showRouteSelectorButtonHolder.classList.add('show-route-selector-button-holder');
+
+        var showRouteSelectorButton = document.createElement('div');
         showRouteSelectorButton.innerText = 'Choose Routes';
+
         showRouteSelectorButton.classList.add('show-route-selector-button')
+
+        showRouteSelectorButtonHolder.appendChild(showRouteSelectorButton);
+
         var buttonOverlay = document.getElementsByClassName('button-overlay-container')[0];
 
-        buttonOverlay.appendChild(showRouteSelectorButton);
+        buttonOverlay.appendChild(showRouteSelectorButtonHolder);
         _t.buttonOverlay = buttonOverlay;
 
-        closeRouteSelectorButton.onclick = function() {
+        closeRouteSelectorButtonHolder.onclick = function() {
             _t.hideRouteSelector()
             return false;
         }
 
-        clearButton.onclick = function(e) {
+        clearButtonHolder.onclick = function(e) {
             _t.clearAll(e);
             return false;
         }
 
-        showRouteSelectorButton.onclick = function() {
+        showRouteSelectorButtonHolder.onclick = function() {
             console.log('hello click')
             _t.showRouteSelector();
             return false;
@@ -638,7 +660,7 @@ Mapper.prototype = {
     makeRouteSelectorButtonsSticky: function() {
         var _t = this;
         console.log('should make sticky')
-        var closeButton = document.getElementsByClassName("close-route-selector-button")[0];
+        var closeButton = document.getElementsByClassName("close-route-selector-button-holder")[0];
         var stuck = false;
         var stickPoint = 100;
 
@@ -647,16 +669,12 @@ Mapper.prototype = {
         _t.routeSelector.onscroll = function(e) {
             console.log('scroll event', e.target.scrollTop)
 
-
             if ((e.target.scrollTop > stickPoint) && !stuck) {
                 closeButton.style.position = 'fixed';
-                closeButton.style.top = '0px';
                 stuck = true;
-                console.log('el stuck')
             } else if (stuck && e.target.scrollTop <= stickPoint) {
                 closeButton.style.position = '';
                 stuck = false;
-                console.log('el not stuck')
             }
         }
     }
