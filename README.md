@@ -1,10 +1,11 @@
 # https://www.prettymuni.com
-![Alt text](https://github.com/imgntn/prettymuni/raw/master/screenshot.PNG?raw=true "Optional Title")
 # What this is
 
 I was asked to create a live map of San Francisco transportation recently when applying to a job, so I made this :)
 
 It uses d3.js and vanilla javascript to show and update current positions of realtime buses in the San Francisco Muni system.
+
+![Alt text](https://github.com/imgntn/prettymuni/raw/master/screenshot.PNG?raw=true "Optional Title")
 
 # To-Do
 
