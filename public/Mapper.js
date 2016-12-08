@@ -8,6 +8,7 @@ Mapper.prototype = {
     refreshRate: 10,
     refreshInterval: null,
     baseProjectionScale: 350000,
+    baseMapCenter: [-122.433701, 37.767683],
     baseMapNames: [
         'neighborhoods',
         'streets',
@@ -45,7 +46,7 @@ Mapper.prototype = {
         _t.projection = d3.geoMercator()
             .scale(_t.baseProjectionScale)
             .rotate([0, 0])
-            .center([-122.433701, 37.767683])
+            .center(_t.baseMapCenter)
             .translate([width / 2, height / 2])
 
     },
@@ -294,7 +295,7 @@ Mapper.prototype = {
             //     return routeData['@attributes'].title;
             // })
 
-            console.log('should have made one ', myPath)
+            //console.log('should have made a path ', myPath)
         })
 
 
@@ -455,6 +456,10 @@ Mapper.prototype = {
             return d['@attributes'].id;
         })
 
+        var headingDrops = svgGroup.selectAll(".drop-group").data(predictableVehicles, function(d) {
+            return d['@attributes'].id;
+        })
+
         var colors = _t.routeColors[tag];
 
         dotGroups.exit().remove();
@@ -468,6 +473,11 @@ Mapper.prototype = {
                 ]) + ")";
             })
             .duration(_t.refreshRate * 1000)
+
+        headingDrops
+            .transition()
+            .attr("transform", _t.placeHeadingDrop)
+            // .duration(_t.refreshRate * 1000)
 
         //the headings change fairly frequently so we update them as well. would be nicer if they went around the arc.
         headingDots
@@ -492,6 +502,18 @@ Mapper.prototype = {
                 ]) + ")";
             })
 
+
+        //create a heading drop
+
+        var drop = dotGroup.append('path')
+            .attr('d', _t.dropPath)
+            .attr('class', 'drop-group')
+            // .attr('stroke-width','1px')
+            // .attr('stroke',colors.circle.fill)
+            .attr('fill', 'black')
+            .attr("transform", _t.placeHeadingDrop)
+
+
         dotGroup.append("circle")
             .call(_t.zoom.transform, _t.zoomTransform)
             .attr("r", "6")
@@ -504,7 +526,8 @@ Mapper.prototype = {
 
         dotGroup.append("text")
             .attr('text-anchor', "middle")
-            .attr('dy', '0.35em')
+
+        .attr('dy', '0.35em')
             .style("font-size", "8")
             .style('stroke-width', '1px')
             .style('paint-order', 'stroke')
@@ -517,24 +540,54 @@ Mapper.prototype = {
             .transition().style("font-size", "12").duration(1000)
             .transition().style("font-size", "8").duration(1000)
 
+
+        var dropGroups = svgGroup.selectAll(".drop-group").data(predictableVehicles, function(d) {
+            return d['@attributes'].id;
+        })
+
+
+
         //create a heading dot
-        dotGroup.append("circle").attr('class', 'heading-dot')
+        dotGroup.append("circle")
+            .attr('class', 'heading-dot')
             .call(_t.zoom.transform, _t.zoomTransform)
-            .attr("r", "0.45")
-            .attr("fill", colors.headingDot.fill)
+            .attr("r", "0.5")
+            .attr("fill", colors.circle.fill)
             //.attr("stroke", getRandomHexColor())
             .attr("transform", _t.translateHeadingDot)
             // .transition().attr("r", "1.5").duration(1000)
             // .transition().attr("r", "0.45").duration(1000)
 
-
+    },
+    dropPath: function(d) {
+        var dropPath = "M15 6 Q 15 6, 25 18 A 12.8 12.8 0 1 1 5 18 Q 15 6 15 6z"
+        return dropPath
+    },
+    placeHeadingDrop: function(d) {
+        //console.log('drop place d', d)
+        var heading = d['@attributes'].heading;
+        var radianHeading = Math.radians(heading);
+        var y = 9 * -Math.cos(radianHeading) + 0
+        var x = 9 * Math.sin(radianHeading) + 0
+        return "rotate(" + heading + ")scale(0.65)translate(" + -15 + "," + -25 + ")"
+    },
+    rotateHeadingDrop: function(d) {
+        console.log('drop rotate d ', d)
+        var heading = d['@attributes'].heading;
+        return "rotate(" + heading + ")"
     },
     translateHeadingDot: function(d) {
         var heading = d['@attributes'].heading;
         var radianHeading = Math.radians(heading);
-        var y = 8 * -Math.cos(radianHeading) + 0
-        var x = 8 * Math.sin(radianHeading) + 0
+        var y = 9 * -Math.cos(radianHeading) + 0
+        var x = 9 * Math.sin(radianHeading) + 0
         return "translate(" + x + "," + y + ")";
+    },
+
+    createHeadingTeardrop: function() {
+
+
+
     },
 
     setupControls: function() {

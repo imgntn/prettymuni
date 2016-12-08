@@ -35,7 +35,7 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 
 # nice-to-haves
 - [x] active color of tile is bus route color
-- [] teardrop heading indicator
+- [x] teardrop heading indicator
 - [] show all button
 - [] show route name on hover in route selector tile
 - [] inbound/ outbound "ping" button
@@ -72,7 +72,7 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - MS edge perf is bad.
 - perf rankings:  chrome, firefox, edge.
 - a bit poky on the chromebook but it does run all routes.
-
+- perf problems are likely related to the number of svg elements.  dom manipulation can get slow.
 
 # mobile observations
 - not a lot of space on the flip on an iphone 5s.  but likely okay on bigger phones.  
