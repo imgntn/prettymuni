@@ -464,6 +464,11 @@ Mapper.prototype = {
 
         dotGroups.exit().remove();
 
+        headingDrops
+            .transition()
+            .attr("transform", _t.placeHeadingDrop)
+            .duration(_t.refreshRate * 1000)
+            
         dotGroups
             .transition()
             .attr("transform", function(d) {
@@ -474,10 +479,6 @@ Mapper.prototype = {
             })
             .duration(_t.refreshRate * 1000)
 
-        headingDrops
-            .transition()
-            .attr("transform", _t.placeHeadingDrop)
-            // .duration(_t.refreshRate * 1000)
 
         //the headings change fairly frequently so we update them as well. would be nicer if they went around the arc.
         headingDots
@@ -569,7 +570,7 @@ Mapper.prototype = {
         var radianHeading = Math.radians(heading);
         var y = 9 * -Math.cos(radianHeading) + 0
         var x = 9 * Math.sin(radianHeading) + 0
-        return "rotate(" + heading + ")scale(0.65)translate(" + -15 + "," + -25 + ")"
+        return "scale(0.65)rotate(" + heading + ")translate(" + -15 + "," + -25 + ")"
     },
     rotateHeadingDrop: function(d) {
         console.log('drop rotate d ', d)
