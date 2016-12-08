@@ -22,7 +22,7 @@ Mapper.prototype = {
     zoomTransform: null,
     routes: [],
     routeColors: {},
-    routeTileBackgroundColor:'rgba(0,0,0,0.40)',
+    routeTileBackgroundColor: 'rgba(0,0,0,0.40)',
     activeRoutes: [],
     proxyURL: '/proxy?url=',
     setupDrawingSpace: function() {
@@ -509,7 +509,7 @@ Mapper.prototype = {
     createControlButtons: function() {
         var _t = this;
 
-        var clearButtonHolder=document.createElement('div');
+        var clearButtonHolder = document.createElement('div');
         clearButtonHolder.classList.add('clear-all-button-holder')
 
         var clearButton = document.createElement('div')
@@ -519,7 +519,7 @@ Mapper.prototype = {
         clearButtonHolder.appendChild(clearButton);
 
 
-        var closeRouteSelectorButtonHolder=document.createElement('div');
+        var closeRouteSelectorButtonHolder = document.createElement('div');
         closeRouteSelectorButtonHolder.classList.add('close-route-selector-button-holder')
 
         var closeRouteSelectorButton = document.createElement('div');
@@ -531,7 +531,7 @@ Mapper.prototype = {
         _t.routeSelector.appendChild(closeRouteSelectorButtonHolder);
         _t.routeSelector.appendChild(clearButtonHolder);
 
-        var showRouteSelectorButtonHolder=document.createElement('div');
+        var showRouteSelectorButtonHolder = document.createElement('div');
         showRouteSelectorButtonHolder.classList.add('show-route-selector-button-holder');
 
         var showRouteSelectorButton = document.createElement('div');
@@ -578,11 +578,11 @@ Mapper.prototype = {
         var _t = this;
         if (_t.activeRoutes.indexOf(value) > -1) {
             //already active, inactivate it
-            _t.makeRouteInactive(value,el)
+            _t.makeRouteInactive(value, el)
             el.classList.remove('active')
         } else {
             el.classList.add('active')
-            _t.makeRouteActive(value,el)
+            _t.makeRouteActive(value, el)
 
         }
     },
@@ -591,13 +591,13 @@ Mapper.prototype = {
         var _t = this;
         _t.activeRoutes.push(route);
         _t.drawVehiclesForRoute(route);
-        window.el=el;
-        el.style.backgroundColor=_t.routeColors[route].circle.fill;
+        window.el = el;
+        el.style.backgroundColor = _t.routeColors[route].circle.fill;
     },
 
-    makeRouteInactive: function(route,el) {
-       var _t = this;
-        el.style.backgroundColor=_t.routeTileBackgroundColor;
+    makeRouteInactive: function(route, el) {
+        var _t = this;
+        el.style.backgroundColor = _t.routeTileBackgroundColor;
         svgGroup = d3.select('#route_' + route).data([]).exit().remove();
         delete _t.vehicleGroups[route];
         var index = _t.activeRoutes.indexOf(route);
@@ -653,7 +653,7 @@ Mapper.prototype = {
 
         [].forEach.call(activeTiles, function(el) {
             el.classList.remove("active");
-            el.style.backgroundColor=_t.routeTileBackgroundColor;
+            el.style.backgroundColor = _t.routeTileBackgroundColor;
         });
     },
 
@@ -675,11 +675,13 @@ Mapper.prototype = {
         }
     },
 
-    hideLoader:function(){
+    hideLoader: function() {
         var loader = document.getElementsByClassName('loader-container')[0];
-        loader.style.display="none";
-        var showRouteSelectorButtonHolder = document.getElementsByClassName('show-route-selector-button-holder')[0];
-        showRouteSelectorButtonHolder.style.display='inline-flex';
+        loader.style.display = "none";
+        setTimeout(function() {
+            var showRouteSelectorButtonHolder = document.getElementsByClassName('show-route-selector-button-holder')[0];
+            showRouteSelectorButtonHolder.style.display = 'inline-flex';
+        }, 0)
     }
 
 }
@@ -708,3 +710,38 @@ d3.selection.prototype.moveToFront = function() {
         this.parentNode.appendChild(this);
     });
 };
+
+function savePNG() {
+    var doctype = '<?xml version="1.0" standalone="no"?>' + '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
+    // serialize our SVG XML to a string.
+    var source = (new XMLSerializer()).serializeToString(d3.select('svg').node());
+    // create a file blob of our SVG.
+    var blob = new Blob([doctype + source], {
+        type: 'image/svg+xml;charset=utf-8'
+    });
+    var url = window.URL.createObjectURL(blob);
+    // Put the svg into an image tag so that the Canvas element can read it in.
+    var img = d3.select('body').append('img')
+        .attr('width', 1920)
+        .attr('height', 1280)
+        .node();
+    img.onload = function() {
+            // Now that the image has loaded, put the image into a canvas element.
+            var canvas = d3.select('body').append('canvas').node();
+            canvas.width = 1920;
+            canvas.height = 1280;
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            var canvasUrl = canvas.toDataURL("image/png");
+            var img2 = d3.select('body').append('img')
+                .attr('width', 1920)
+                .attr('height', 1280)
+                .node();
+            // this is now the base64 encoded version of our PNG! you could optionally 
+            // redirect the user to download the PNG by sending them to the url with 
+           window.open(canvasUrl)
+            img2.src = canvasUrl;
+        }
+        // start loading the image.
+    img.src = url;
+}

@@ -35,19 +35,20 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 
 # nice-to-haves
 - [x] active color of tile is bus route color
+- [] teardrop heading indicator
 - [] show all button
 - [] show route name on hover in route selector tile
 - [] inbound/ outbound "ping" button
 - [] different color ring for inbound / outbound
 - [] scale vehicle groups down as you zoom in so the fit the streets.
-- [] custom, thematic loader.  maybe like this but cirlces? http://cssload.net/en/3d-loaders
+- [] custom, thematic loader.  
 - [] load street map async 
 - [] fade in the streets when they are loaded async so that it looks nice
 - [] clicking should toggle route line path display on off
 - [] every route line path has two inner lines for inbound outbound directional pulse wave along the stops
-- [] teardrop heading indicator
 - [] offline detection
 - [] send google analytics event on route toggle
+- [] add 'live indicator to top of page'
 
 # bugs
 - [x] when a new vehicle is added or removed from a route, the route is being shuffled. fixed by passing second parameter to .data() to keep track
