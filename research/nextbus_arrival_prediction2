@@ -1,0 +1,2767 @@
+{
+  "log": {
+    "version": "1.2",
+    "creator": {
+      "name": "WebInspector",
+      "version": "537.36"
+    },
+    "pages": [],
+    "entries": [
+      {
+        "startedDateTime": "2016-12-08T05:33:52.219Z",
+        "time": 20.999999993364327,
+        "request": {
+          "method": "GET",
+          "url": "https://www.nextbus.com/api/pub/v1/agencies/sf-muni/stops/3927/messages?key=8b4256b04bfb81cd0fc8718f18d650d6&timestamp=1481175232218",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Cookie",
+              "value": "userID_rev4=TEST_COOKIE; JSESSIONID=265618931A8F5B0AE417A4B8A3C6E9BC; visid_incap_609786=PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2; incap_ses_569_609786=7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==; nbcts_profile=sf-muni|5|5____I_F00|3927|4843|en-US|1|0|0|0|1; Coyote-2-d0b8d6f5=c0a80a74:0"
+            },
+            {
+              "name": "DNT",
+              "value": "1"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, sdch, br"
+            },
+            {
+              "name": "Host",
+              "value": "www.nextbus.com"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.8"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json, text/javascript, */*; q=0.01"
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.nextbus.com/?a=ttc"
+            },
+            {
+              "name": "X-Requested-With",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "key",
+              "value": "8b4256b04bfb81cd0fc8718f18d650d6"
+            },
+            {
+              "name": "timestamp",
+              "value": "1481175232218"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "userID_rev4",
+              "value": "TEST_COOKIE",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "JSESSIONID",
+              "value": "265618931A8F5B0AE417A4B8A3C6E9BC",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "visid_incap_609786",
+              "value": "PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "incap_ses_569_609786",
+              "value": "7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "nbcts_profile",
+              "value": "sf-muni|5|5____I_F00|3927|4843|en-US|1|0|0|0|1",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "headersSize": 849,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Thu, 08 Dec 2016 05:33:51 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache"
+            },
+            {
+              "name": "Set-Cookie",
+              "value": "Coyote-2-d0b8d6f5=c0a80a74:0; path=/"
+            },
+            {
+              "name": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "X-Iinfo",
+              "value": "6-27961332-27962100 PNNN RT(1481175209112 21449) q(0 0 0 -1) r(0 0) U5"
+            },
+            {
+              "name": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "name": "Keep-Alive",
+              "value": "timeout=5, max=100"
+            },
+            {
+              "name": "Content-Length",
+              "value": "2346"
+            },
+            {
+              "name": "X-CDN",
+              "value": "Incapsula"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "path": "/",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "content": {
+            "size": 2346,
+            "mimeType": "application/json",
+            "compression": 0,
+            "text": "[{\"id\":18419,\"text\":\"We're on Twitter: @sfmta_muni\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":null}},{\"id\":23606,\"text\":\"No Elevator at\\nMontgomery Sta.\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"F\",\"stops\":null},{\"id\":\"L\",\"stops\":null},{\"id\":\"M\",\"stops\":null},{\"id\":\"N\",\"stops\":null},{\"id\":\"KT\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}},{\"id\":23336,\"text\":\"Construction on Van Ness: Lane changes in effect. More at sfmta.com.\",\"startBoundary\":1478973600000,\"endBoundary\":1481310000000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"49\",\"stops\":null},{\"id\":\"47\",\"stops\":null}]}},{\"id\":20137,\"text\":\"Sign up for email & text service alerts at sfmta.com.\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":null}},{\"id\":23535,\"text\":\"Fare changes starting Jan. 1 Use Clipper or MuniMobile to save Details at sfmta.com\",\"startBoundary\":1480541040000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":null}},{\"id\":23448,\"text\":\"EB Ocean btwn Gen./SJ CLSD until 12/11. OB 29/IB 49 re-routed.\",\"startBoundary\":1478869200000,\"endBoundary\":1481461200000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"49\",\"stops\":null},{\"id\":\"29\",\"stops\":null}]}},{\"id\":22533,\"text\":\"Temp. J & K stop changes @ Balboa Park now thru end of year.\",\"startBoundary\":1473163200000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"KT\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}},{\"id\":23310,\"text\":\"Now until 12/14 partial K svc btwn WP & CCSF will be provided by bus shuttles btwn 5 to 9am.\",\"startBoundary\":1479128400000,\"endBoundary\":1481720340000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"KT\",\"stops\":null}]}},{\"id\":22797,\"text\":\"Balboa Park Sta. entrance on SJ Av. closed til Jan. for construction.\",\"startBoundary\":1475496000000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"43\",\"stops\":null},{\"id\":\"91\",\"stops\":null},{\"id\":\"28R\",\"stops\":null},{\"id\":\"M\",\"stops\":null},{\"id\":\"54\",\"stops\":null},{\"id\":\"KT\",\"stops\":null},{\"id\":\"88\",\"stops\":null},{\"id\":\"8BX\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}}]"
+          },
+          "redirectURL": "",
+          "headersSize": 360,
+          "bodySize": 2346,
+          "_transferSize": 2706
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 1,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 20,
+          "receive": -6.6356733441352844e-9,
+          "ssl": -1
+        },
+        "serverIPAddress": "199.83.131.86",
+        "connection": "215710"
+      },
+      {
+        "startedDateTime": "2016-12-08T05:33:52.220Z",
+        "time": 25.00000000873115,
+        "request": {
+          "method": "GET",
+          "url": "https://www.nextbus.com/api/pub/v1/agencies/sf-muni/routes/5/stops/3927/predictions?coincident=true&direction=5____I_F00&destination=4843&key=8b4256b04bfb81cd0fc8718f18d650d6&timestamp=1481175232219",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Cookie",
+              "value": "userID_rev4=TEST_COOKIE; JSESSIONID=265618931A8F5B0AE417A4B8A3C6E9BC; visid_incap_609786=PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2; incap_ses_569_609786=7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==; nbcts_profile=sf-muni|5|5____I_F00|3927|4843|en-US|1|0|0|0|1; Coyote-2-d0b8d6f5=c0a80a74:0"
+            },
+            {
+              "name": "DNT",
+              "value": "1"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, sdch, br"
+            },
+            {
+              "name": "Host",
+              "value": "www.nextbus.com"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.8"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json, text/javascript, */*; q=0.01"
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.nextbus.com/?a=ttc"
+            },
+            {
+              "name": "X-Requested-With",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "coincident",
+              "value": "true"
+            },
+            {
+              "name": "direction",
+              "value": "5____I_F00"
+            },
+            {
+              "name": "destination",
+              "value": "4843"
+            },
+            {
+              "name": "key",
+              "value": "8b4256b04bfb81cd0fc8718f18d650d6"
+            },
+            {
+              "name": "timestamp",
+              "value": "1481175232219"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "userID_rev4",
+              "value": "TEST_COOKIE",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "JSESSIONID",
+              "value": "265618931A8F5B0AE417A4B8A3C6E9BC",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "visid_incap_609786",
+              "value": "PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "incap_ses_569_609786",
+              "value": "7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "nbcts_profile",
+              "value": "sf-muni|5|5____I_F00|3927|4843|en-US|1|0|0|0|1",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "headersSize": 915,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Thu, 08 Dec 2016 05:33:51 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache"
+            },
+            {
+              "name": "Set-Cookie",
+              "value": "Coyote-2-d0b8d6f5=c0a80a74:0; path=/"
+            },
+            {
+              "name": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "X-Iinfo",
+              "value": "6-27961335-27962100 PNNN RT(1481175209163 21403) q(0 0 0 -1) r(0 0) U5"
+            },
+            {
+              "name": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "name": "Keep-Alive",
+              "value": "timeout=5, max=99"
+            },
+            {
+              "name": "Content-Length",
+              "value": "906"
+            },
+            {
+              "name": "X-CDN",
+              "value": "Incapsula"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "path": "/",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "content": {
+            "size": 906,
+            "mimeType": "application/json",
+            "compression": 0,
+            "text": "[{\"serverTimestamp\":1481175231468,\"route\":{\"id\":\"5\",\"title\":\"5-Fulton\",\"color\":\"666699\",\"textColor\":\"ffffff\",\"hidden\":false},\"stop\":{\"id\":\"3927\",\"lat\":37.7735299,\"lon\":-122.51,\"name\":\"Cabrillo St & La Playa St\",\"code\":\"13927\",\"hidden\":false,\"showDestinationSelector\":true,\"route\":\"5\"},\"values\":[{\"timestamp\":1481175380985,\"minutes\":2,\"affectedByLayover\":true,\"isDeparture\":true,\"vehicleId\":\"5418\",\"direction\":{\"id\":\"5____I_E00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to McAllister&Fillmore\"}},{\"timestamp\":1481176029762,\"minutes\":13,\"affectedByLayover\":true,\"isDeparture\":true,\"vehicleId\":\"5414\",\"direction\":{\"id\":\"5____I_E00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to McAllister&Fillmore\"}},{\"timestamp\":1481176200000,\"minutes\":16,\"affectedByLayover\":true,\"isDeparture\":true,\"vehicleId\":\"5470\",\"direction\":{\"id\":\"5____I_F00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to Transbay Terminal\"}}]}]"
+          },
+          "redirectURL": "",
+          "headersSize": 358,
+          "bodySize": 906,
+          "_transferSize": 1264
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 0.961,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 23.077,
+          "receive": 0.9620000087311489,
+          "ssl": -1
+        },
+        "serverIPAddress": "199.83.131.86",
+        "connection": "215748"
+      },
+      {
+        "startedDateTime": "2016-12-08T05:33:52.549Z",
+        "time": 0,
+        "request": {
+          "method": "GET",
+          "url": "https://www.nextbus.com/api/pub/v1/agencies/sf-muni/stops/4235/messages?key=8b4256b04bfb81cd0fc8718f18d650d6&timestamp=1481175232548",
+          "httpVersion": "unknown",
+          "headers": [
+            {
+              "name": "Accept",
+              "value": "application/json, text/javascript, */*; q=0.01"
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.nextbus.com/?a=ttc"
+            },
+            {
+              "name": "X-Requested-With",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "key",
+              "value": "8b4256b04bfb81cd0fc8718f18d650d6"
+            },
+            {
+              "name": "timestamp",
+              "value": "1481175232548"
+            }
+          ],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 0,
+          "statusText": "",
+          "httpVersion": "unknown",
+          "headers": [],
+          "cookies": [],
+          "content": {
+            "size": 0,
+            "mimeType": "x-unknown"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 0,
+          "_error": ""
+        },
+        "cache": {},
+        "timings": {
+          "blocked": -1,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 0,
+          "receive": 0,
+          "ssl": -1
+        },
+        "serverIPAddress": ""
+      },
+      {
+        "startedDateTime": "2016-12-08T05:33:52.555Z",
+        "time": 17.000000007101335,
+        "request": {
+          "method": "GET",
+          "url": "https://www.nextbus.com/api/pub/v1/agencies/sf-muni/stops/4235/messages?key=8b4256b04bfb81cd0fc8718f18d650d6&timestamp=1481175232554",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Cookie",
+              "value": "userID_rev4=TEST_COOKIE; JSESSIONID=265618931A8F5B0AE417A4B8A3C6E9BC; visid_incap_609786=PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2; incap_ses_569_609786=7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==; nbcts_profile=sf-muni|5|5____I_F00|3927|4843|en-US|1|0|0|0|1; Coyote-2-d0b8d6f5=c0a80a74:0"
+            },
+            {
+              "name": "DNT",
+              "value": "1"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, sdch, br"
+            },
+            {
+              "name": "Host",
+              "value": "www.nextbus.com"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.8"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json, text/javascript, */*; q=0.01"
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.nextbus.com/?a=ttc"
+            },
+            {
+              "name": "X-Requested-With",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "key",
+              "value": "8b4256b04bfb81cd0fc8718f18d650d6"
+            },
+            {
+              "name": "timestamp",
+              "value": "1481175232554"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "userID_rev4",
+              "value": "TEST_COOKIE",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "JSESSIONID",
+              "value": "265618931A8F5B0AE417A4B8A3C6E9BC",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "visid_incap_609786",
+              "value": "PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "incap_ses_569_609786",
+              "value": "7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "nbcts_profile",
+              "value": "sf-muni|5|5____I_F00|3927|4843|en-US|1|0|0|0|1",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "headersSize": 849,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Thu, 08 Dec 2016 05:33:51 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache"
+            },
+            {
+              "name": "Set-Cookie",
+              "value": "Coyote-2-d0b8d6f5=c0a80a74:0; path=/"
+            },
+            {
+              "name": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "X-Iinfo",
+              "value": "6-27961332-27962100 PNNN RT(1481175209112 21783) q(0 0 0 -1) r(0 0) U5"
+            },
+            {
+              "name": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "name": "Keep-Alive",
+              "value": "timeout=5, max=97"
+            },
+            {
+              "name": "Content-Length",
+              "value": "2346"
+            },
+            {
+              "name": "X-CDN",
+              "value": "Incapsula"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "path": "/",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "content": {
+            "size": 2346,
+            "mimeType": "application/json",
+            "compression": 0,
+            "text": "[{\"id\":18419,\"text\":\"We're on Twitter: @sfmta_muni\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":null}},{\"id\":23606,\"text\":\"No Elevator at\\nMontgomery Sta.\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"F\",\"stops\":null},{\"id\":\"L\",\"stops\":null},{\"id\":\"M\",\"stops\":null},{\"id\":\"N\",\"stops\":null},{\"id\":\"KT\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}},{\"id\":23336,\"text\":\"Construction on Van Ness: Lane changes in effect. More at sfmta.com.\",\"startBoundary\":1478973600000,\"endBoundary\":1481310000000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"49\",\"stops\":null},{\"id\":\"47\",\"stops\":null}]}},{\"id\":20137,\"text\":\"Sign up for email & text service alerts at sfmta.com.\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":null}},{\"id\":23535,\"text\":\"Fare changes starting Jan. 1 Use Clipper or MuniMobile to save Details at sfmta.com\",\"startBoundary\":1480541040000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":null}},{\"id\":23448,\"text\":\"EB Ocean btwn Gen./SJ CLSD until 12/11. OB 29/IB 49 re-routed.\",\"startBoundary\":1478869200000,\"endBoundary\":1481461200000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"49\",\"stops\":null},{\"id\":\"29\",\"stops\":null}]}},{\"id\":22533,\"text\":\"Temp. J & K stop changes @ Balboa Park now thru end of year.\",\"startBoundary\":1473163200000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"KT\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}},{\"id\":23310,\"text\":\"Now until 12/14 partial K svc btwn WP & CCSF will be provided by bus shuttles btwn 5 to 9am.\",\"startBoundary\":1479128400000,\"endBoundary\":1481720340000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"KT\",\"stops\":null}]}},{\"id\":22797,\"text\":\"Balboa Park Sta. entrance on SJ Av. closed til Jan. for construction.\",\"startBoundary\":1475496000000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"43\",\"stops\":null},{\"id\":\"91\",\"stops\":null},{\"id\":\"28R\",\"stops\":null},{\"id\":\"M\",\"stops\":null},{\"id\":\"54\",\"stops\":null},{\"id\":\"KT\",\"stops\":null},{\"id\":\"88\",\"stops\":null},{\"id\":\"8BX\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}}]"
+          },
+          "redirectURL": "",
+          "headersSize": 359,
+          "bodySize": 2346,
+          "_transferSize": 2705
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 0,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 17,
+          "receive": 7.101334631443024e-9,
+          "ssl": -1
+        },
+        "serverIPAddress": "199.83.131.86",
+        "connection": "215710"
+      },
+      {
+        "startedDateTime": "2016-12-08T05:33:52.556Z",
+        "time": 28.00000000570435,
+        "request": {
+          "method": "GET",
+          "url": "https://www.nextbus.com/api/pub/v1/agencies/sf-muni/routes/5/stops/4235/predictions?coincident=true&direction=5____I_F00&destination=4234&key=8b4256b04bfb81cd0fc8718f18d650d6&timestamp=1481175232555",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Cookie",
+              "value": "userID_rev4=TEST_COOKIE; JSESSIONID=265618931A8F5B0AE417A4B8A3C6E9BC; visid_incap_609786=PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2; incap_ses_569_609786=7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==; nbcts_profile=sf-muni|5|5____I_F00|3927|4843|en-US|1|0|0|0|1; Coyote-2-d0b8d6f5=c0a80a74:0"
+            },
+            {
+              "name": "DNT",
+              "value": "1"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, sdch, br"
+            },
+            {
+              "name": "Host",
+              "value": "www.nextbus.com"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.8"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json, text/javascript, */*; q=0.01"
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.nextbus.com/?a=ttc"
+            },
+            {
+              "name": "X-Requested-With",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "coincident",
+              "value": "true"
+            },
+            {
+              "name": "direction",
+              "value": "5____I_F00"
+            },
+            {
+              "name": "destination",
+              "value": "4234"
+            },
+            {
+              "name": "key",
+              "value": "8b4256b04bfb81cd0fc8718f18d650d6"
+            },
+            {
+              "name": "timestamp",
+              "value": "1481175232555"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "userID_rev4",
+              "value": "TEST_COOKIE",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "JSESSIONID",
+              "value": "265618931A8F5B0AE417A4B8A3C6E9BC",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "visid_incap_609786",
+              "value": "PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "incap_ses_569_609786",
+              "value": "7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "nbcts_profile",
+              "value": "sf-muni|5|5____I_F00|3927|4843|en-US|1|0|0|0|1",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "headersSize": 915,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Thu, 08 Dec 2016 05:33:51 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache"
+            },
+            {
+              "name": "Set-Cookie",
+              "value": "Coyote-2-d0b8d6f5=c0a80a74:0; path=/"
+            },
+            {
+              "name": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "X-Iinfo",
+              "value": "5-38822490-38823249 NNNN CT(1 2 0) RT(1481175209112 21789) q(0 0 0 -1) r(0 0) U5"
+            },
+            {
+              "name": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "name": "Keep-Alive",
+              "value": "timeout=5, max=100"
+            },
+            {
+              "name": "Content-Length",
+              "value": "911"
+            },
+            {
+              "name": "X-CDN",
+              "value": "Incapsula"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "path": "/",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "content": {
+            "size": 911,
+            "mimeType": "application/json",
+            "compression": 0,
+            "text": "[{\"serverTimestamp\":1481175231806,\"route\":{\"id\":\"5\",\"title\":\"5-Fulton\",\"color\":\"666699\",\"textColor\":\"ffffff\",\"hidden\":false},\"stop\":{\"id\":\"4235\",\"lat\":37.7747599,\"lon\":-122.45452,\"name\":\"Fulton St & Stanyan St\",\"code\":\"14235\",\"hidden\":false,\"showDestinationSelector\":true,\"route\":\"5\"},\"values\":[{\"timestamp\":1481175883874,\"minutes\":10,\"affectedByLayover\":false,\"isDeparture\":false,\"vehicleId\":\"5480\",\"direction\":{\"id\":\"5____I_F00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to Transbay Terminal\"}},{\"timestamp\":1481176111891,\"minutes\":14,\"affectedByLayover\":true,\"isDeparture\":false,\"vehicleId\":\"5418\",\"direction\":{\"id\":\"5____I_E00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to McAllister&Fillmore\"}},{\"timestamp\":1481176760668,\"minutes\":25,\"affectedByLayover\":true,\"isDeparture\":false,\"vehicleId\":\"5414\",\"direction\":{\"id\":\"5____I_E00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to McAllister&Fillmore\"}}]}]"
+          },
+          "redirectURL": "",
+          "headersSize": 369,
+          "bodySize": 911,
+          "_transferSize": 1280
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 0,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 28,
+          "receive": 5.704350769519806e-9,
+          "ssl": -1
+        },
+        "serverIPAddress": "199.83.131.86",
+        "connection": "215717"
+      },
+      {
+        "startedDateTime": "2016-12-08T05:34:02.556Z",
+        "time": 31.999999991967343,
+        "request": {
+          "method": "GET",
+          "url": "https://www.nextbus.com/api/pub/v1/agencies/sf-muni/stops/4235/messages?key=8b4256b04bfb81cd0fc8718f18d650d6&timestamp=1481175242555",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Cookie",
+              "value": "userID_rev4=TEST_COOKIE; JSESSIONID=265618931A8F5B0AE417A4B8A3C6E9BC; visid_incap_609786=PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2; incap_ses_569_609786=7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==; nbcts_profile=sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1; Coyote-2-d0b8d6f5=c0a80a74:0"
+            },
+            {
+              "name": "DNT",
+              "value": "1"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, sdch, br"
+            },
+            {
+              "name": "Host",
+              "value": "www.nextbus.com"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.8"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json, text/javascript, */*; q=0.01"
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.nextbus.com/?a=ttc"
+            },
+            {
+              "name": "X-Requested-With",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "key",
+              "value": "8b4256b04bfb81cd0fc8718f18d650d6"
+            },
+            {
+              "name": "timestamp",
+              "value": "1481175242555"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "userID_rev4",
+              "value": "TEST_COOKIE",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "JSESSIONID",
+              "value": "265618931A8F5B0AE417A4B8A3C6E9BC",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "visid_incap_609786",
+              "value": "PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "incap_ses_569_609786",
+              "value": "7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "nbcts_profile",
+              "value": "sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "headersSize": 849,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Thu, 08 Dec 2016 05:34:01 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache"
+            },
+            {
+              "name": "Set-Cookie",
+              "value": "Coyote-2-d0b8d6f5=c0a80a74:0; path=/"
+            },
+            {
+              "name": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "X-Iinfo",
+              "value": "5-38822490-38823632 NNNN CT(2 3 0) RT(1481175209112 31792) q(0 0 0 -1) r(0 0) U5"
+            },
+            {
+              "name": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "name": "Keep-Alive",
+              "value": "timeout=5, max=100"
+            },
+            {
+              "name": "Content-Length",
+              "value": "2346"
+            },
+            {
+              "name": "X-CDN",
+              "value": "Incapsula"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "path": "/",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "content": {
+            "size": 2346,
+            "mimeType": "application/json",
+            "compression": 0,
+            "text": "[{\"id\":18419,\"text\":\"We're on Twitter: @sfmta_muni\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":null}},{\"id\":23606,\"text\":\"No Elevator at\\nMontgomery Sta.\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"F\",\"stops\":null},{\"id\":\"L\",\"stops\":null},{\"id\":\"M\",\"stops\":null},{\"id\":\"N\",\"stops\":null},{\"id\":\"KT\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}},{\"id\":23336,\"text\":\"Construction on Van Ness: Lane changes in effect. More at sfmta.com.\",\"startBoundary\":1478973600000,\"endBoundary\":1481310000000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"49\",\"stops\":null},{\"id\":\"47\",\"stops\":null}]}},{\"id\":20137,\"text\":\"Sign up for email & text service alerts at sfmta.com.\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":null}},{\"id\":23535,\"text\":\"Fare changes starting Jan. 1 Use Clipper or MuniMobile to save Details at sfmta.com\",\"startBoundary\":1480541040000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":null}},{\"id\":23448,\"text\":\"EB Ocean btwn Gen./SJ CLSD until 12/11. OB 29/IB 49 re-routed.\",\"startBoundary\":1478869200000,\"endBoundary\":1481461200000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"49\",\"stops\":null},{\"id\":\"29\",\"stops\":null}]}},{\"id\":22533,\"text\":\"Temp. J & K stop changes @ Balboa Park now thru end of year.\",\"startBoundary\":1473163200000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"KT\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}},{\"id\":23310,\"text\":\"Now until 12/14 partial K svc btwn WP & CCSF will be provided by bus shuttles btwn 5 to 9am.\",\"startBoundary\":1479128400000,\"endBoundary\":1481720340000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"KT\",\"stops\":null}]}},{\"id\":22797,\"text\":\"Balboa Park Sta. entrance on SJ Av. closed til Jan. for construction.\",\"startBoundary\":1475496000000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"43\",\"stops\":null},{\"id\":\"91\",\"stops\":null},{\"id\":\"28R\",\"stops\":null},{\"id\":\"M\",\"stops\":null},{\"id\":\"54\",\"stops\":null},{\"id\":\"KT\",\"stops\":null},{\"id\":\"88\",\"stops\":null},{\"id\":\"8BX\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}}]"
+          },
+          "redirectURL": "",
+          "headersSize": 370,
+          "bodySize": 2346,
+          "_transferSize": 2716
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 1,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 30,
+          "receive": 0.9999999919673428,
+          "ssl": -1
+        },
+        "serverIPAddress": "199.83.131.86",
+        "connection": "215717"
+      },
+      {
+        "startedDateTime": "2016-12-08T05:34:02.557Z",
+        "time": 32.00000000651926,
+        "request": {
+          "method": "GET",
+          "url": "https://www.nextbus.com/api/pub/v1/agencies/sf-muni/routes/5/stops/4235/predictions?coincident=true&direction=5____I_F00&destination=4234&key=8b4256b04bfb81cd0fc8718f18d650d6&timestamp=1481175242556",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Cookie",
+              "value": "userID_rev4=TEST_COOKIE; JSESSIONID=265618931A8F5B0AE417A4B8A3C6E9BC; visid_incap_609786=PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2; incap_ses_569_609786=7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==; nbcts_profile=sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1; Coyote-2-d0b8d6f5=c0a80a74:0"
+            },
+            {
+              "name": "DNT",
+              "value": "1"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, sdch, br"
+            },
+            {
+              "name": "Host",
+              "value": "www.nextbus.com"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.8"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json, text/javascript, */*; q=0.01"
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.nextbus.com/?a=ttc"
+            },
+            {
+              "name": "X-Requested-With",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "coincident",
+              "value": "true"
+            },
+            {
+              "name": "direction",
+              "value": "5____I_F00"
+            },
+            {
+              "name": "destination",
+              "value": "4234"
+            },
+            {
+              "name": "key",
+              "value": "8b4256b04bfb81cd0fc8718f18d650d6"
+            },
+            {
+              "name": "timestamp",
+              "value": "1481175242556"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "userID_rev4",
+              "value": "TEST_COOKIE",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "JSESSIONID",
+              "value": "265618931A8F5B0AE417A4B8A3C6E9BC",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "visid_incap_609786",
+              "value": "PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "incap_ses_569_609786",
+              "value": "7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "nbcts_profile",
+              "value": "sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "headersSize": 915,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Thu, 08 Dec 2016 05:34:01 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache"
+            },
+            {
+              "name": "Set-Cookie",
+              "value": "Coyote-2-d0b8d6f5=c0a80a74:0; path=/"
+            },
+            {
+              "name": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "X-Iinfo",
+              "value": "6-27961332-27962335 PNNN RT(1481175209112 31797) q(0 0 0 -1) r(0 0) U5"
+            },
+            {
+              "name": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "name": "Keep-Alive",
+              "value": "timeout=5, max=100"
+            },
+            {
+              "name": "Content-Length",
+              "value": "911"
+            },
+            {
+              "name": "X-CDN",
+              "value": "Incapsula"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "path": "/",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "content": {
+            "size": 911,
+            "mimeType": "application/json",
+            "compression": 0,
+            "text": "[{\"serverTimestamp\":1481175241811,\"route\":{\"id\":\"5\",\"title\":\"5-Fulton\",\"color\":\"666699\",\"textColor\":\"ffffff\",\"hidden\":false},\"stop\":{\"id\":\"4235\",\"lat\":37.7747599,\"lon\":-122.45452,\"name\":\"Fulton St & Stanyan St\",\"code\":\"14235\",\"hidden\":false,\"showDestinationSelector\":true,\"route\":\"5\"},\"values\":[{\"timestamp\":1481175883874,\"minutes\":10,\"affectedByLayover\":false,\"isDeparture\":false,\"vehicleId\":\"5480\",\"direction\":{\"id\":\"5____I_F00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to Transbay Terminal\"}},{\"timestamp\":1481176111891,\"minutes\":14,\"affectedByLayover\":true,\"isDeparture\":false,\"vehicleId\":\"5418\",\"direction\":{\"id\":\"5____I_E00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to McAllister&Fillmore\"}},{\"timestamp\":1481176760668,\"minutes\":25,\"affectedByLayover\":true,\"isDeparture\":false,\"vehicleId\":\"5414\",\"direction\":{\"id\":\"5____I_E00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to McAllister&Fillmore\"}}]}]"
+          },
+          "redirectURL": "",
+          "headersSize": 359,
+          "bodySize": 911,
+          "_transferSize": 1270
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 1,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 31,
+          "receive": 6.51925802230835e-9,
+          "ssl": -1
+        },
+        "serverIPAddress": "199.83.131.86",
+        "connection": "215710"
+      },
+      {
+        "startedDateTime": "2016-12-08T05:34:12.558Z",
+        "time": 19.00000000023283,
+        "request": {
+          "method": "GET",
+          "url": "https://www.nextbus.com/api/pub/v1/agencies/sf-muni/stops/4235/messages?key=8b4256b04bfb81cd0fc8718f18d650d6&timestamp=1481175252557",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Cookie",
+              "value": "userID_rev4=TEST_COOKIE; JSESSIONID=265618931A8F5B0AE417A4B8A3C6E9BC; visid_incap_609786=PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2; incap_ses_569_609786=7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==; nbcts_profile=sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1; Coyote-2-d0b8d6f5=c0a80a74:0"
+            },
+            {
+              "name": "DNT",
+              "value": "1"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, sdch, br"
+            },
+            {
+              "name": "Host",
+              "value": "www.nextbus.com"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.8"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json, text/javascript, */*; q=0.01"
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.nextbus.com/?a=ttc"
+            },
+            {
+              "name": "X-Requested-With",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "key",
+              "value": "8b4256b04bfb81cd0fc8718f18d650d6"
+            },
+            {
+              "name": "timestamp",
+              "value": "1481175252557"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "userID_rev4",
+              "value": "TEST_COOKIE",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "JSESSIONID",
+              "value": "265618931A8F5B0AE417A4B8A3C6E9BC",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "visid_incap_609786",
+              "value": "PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "incap_ses_569_609786",
+              "value": "7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "nbcts_profile",
+              "value": "sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "headersSize": 849,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Thu, 08 Dec 2016 05:34:11 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache"
+            },
+            {
+              "name": "Set-Cookie",
+              "value": "Coyote-2-d0b8d6f5=c0a80a74:0; path=/"
+            },
+            {
+              "name": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "X-Iinfo",
+              "value": "6-27961332-27962565 PNNN RT(1481175209112 41786) q(0 0 0 -1) r(1 1) U5"
+            },
+            {
+              "name": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "name": "Keep-Alive",
+              "value": "timeout=5, max=100"
+            },
+            {
+              "name": "Content-Length",
+              "value": "2346"
+            },
+            {
+              "name": "X-CDN",
+              "value": "Incapsula"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "path": "/",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "content": {
+            "size": 2346,
+            "mimeType": "application/json",
+            "compression": 0,
+            "text": "[{\"id\":18419,\"text\":\"We're on Twitter: @sfmta_muni\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":null}},{\"id\":23606,\"text\":\"No Elevator at\\nMontgomery Sta.\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"F\",\"stops\":null},{\"id\":\"L\",\"stops\":null},{\"id\":\"M\",\"stops\":null},{\"id\":\"N\",\"stops\":null},{\"id\":\"KT\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}},{\"id\":23336,\"text\":\"Construction on Van Ness: Lane changes in effect. More at sfmta.com.\",\"startBoundary\":1478973600000,\"endBoundary\":1481310000000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"49\",\"stops\":null},{\"id\":\"47\",\"stops\":null}]}},{\"id\":20137,\"text\":\"Sign up for email & text service alerts at sfmta.com.\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":null}},{\"id\":23535,\"text\":\"Fare changes starting Jan. 1 Use Clipper or MuniMobile to save Details at sfmta.com\",\"startBoundary\":1480541040000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":null}},{\"id\":23448,\"text\":\"EB Ocean btwn Gen./SJ CLSD until 12/11. OB 29/IB 49 re-routed.\",\"startBoundary\":1478869200000,\"endBoundary\":1481461200000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"49\",\"stops\":null},{\"id\":\"29\",\"stops\":null}]}},{\"id\":22533,\"text\":\"Temp. J & K stop changes @ Balboa Park now thru end of year.\",\"startBoundary\":1473163200000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"KT\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}},{\"id\":23310,\"text\":\"Now until 12/14 partial K svc btwn WP & CCSF will be provided by bus shuttles btwn 5 to 9am.\",\"startBoundary\":1479128400000,\"endBoundary\":1481720340000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"KT\",\"stops\":null}]}},{\"id\":22797,\"text\":\"Balboa Park Sta. entrance on SJ Av. closed til Jan. for construction.\",\"startBoundary\":1475496000000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"43\",\"stops\":null},{\"id\":\"91\",\"stops\":null},{\"id\":\"28R\",\"stops\":null},{\"id\":\"M\",\"stops\":null},{\"id\":\"54\",\"stops\":null},{\"id\":\"KT\",\"stops\":null},{\"id\":\"88\",\"stops\":null},{\"id\":\"8BX\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}}]"
+          },
+          "redirectURL": "",
+          "headersSize": 360,
+          "bodySize": 2346,
+          "_transferSize": 2706
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 0,
+          "dns": -1,
+          "connect": -1,
+          "send": 1,
+          "wait": 18,
+          "receive": 2.3283064365386963e-10,
+          "ssl": -1
+        },
+        "serverIPAddress": "199.83.131.86",
+        "connection": "215710"
+      },
+      {
+        "startedDateTime": "2016-12-08T05:34:12.558Z",
+        "time": 26.499999992665835,
+        "request": {
+          "method": "GET",
+          "url": "https://www.nextbus.com/api/pub/v1/agencies/sf-muni/routes/5/stops/4235/predictions?coincident=true&direction=5____I_F00&destination=4234&key=8b4256b04bfb81cd0fc8718f18d650d6&timestamp=1481175252558",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Cookie",
+              "value": "userID_rev4=TEST_COOKIE; JSESSIONID=265618931A8F5B0AE417A4B8A3C6E9BC; visid_incap_609786=PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2; incap_ses_569_609786=7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==; nbcts_profile=sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1; Coyote-2-d0b8d6f5=c0a80a74:0"
+            },
+            {
+              "name": "DNT",
+              "value": "1"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, sdch, br"
+            },
+            {
+              "name": "Host",
+              "value": "www.nextbus.com"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.8"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json, text/javascript, */*; q=0.01"
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.nextbus.com/?a=ttc"
+            },
+            {
+              "name": "X-Requested-With",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "coincident",
+              "value": "true"
+            },
+            {
+              "name": "direction",
+              "value": "5____I_F00"
+            },
+            {
+              "name": "destination",
+              "value": "4234"
+            },
+            {
+              "name": "key",
+              "value": "8b4256b04bfb81cd0fc8718f18d650d6"
+            },
+            {
+              "name": "timestamp",
+              "value": "1481175252558"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "userID_rev4",
+              "value": "TEST_COOKIE",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "JSESSIONID",
+              "value": "265618931A8F5B0AE417A4B8A3C6E9BC",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "visid_incap_609786",
+              "value": "PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "incap_ses_569_609786",
+              "value": "7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "nbcts_profile",
+              "value": "sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "headersSize": 915,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Thu, 08 Dec 2016 05:34:11 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache"
+            },
+            {
+              "name": "Set-Cookie",
+              "value": "Coyote-2-d0b8d6f5=c0a80a74:0; path=/"
+            },
+            {
+              "name": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "X-Iinfo",
+              "value": "5-38822490-38824079 NNNN CT(2 2 0) RT(1481175209112 41791) q(0 0 0 -1) r(0 0) U5"
+            },
+            {
+              "name": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "name": "Keep-Alive",
+              "value": "timeout=5, max=100"
+            },
+            {
+              "name": "Content-Length",
+              "value": "911"
+            },
+            {
+              "name": "X-CDN",
+              "value": "Incapsula"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "path": "/",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "content": {
+            "size": 911,
+            "mimeType": "application/json",
+            "compression": 0,
+            "text": "[{\"serverTimestamp\":1481175251808,\"route\":{\"id\":\"5\",\"title\":\"5-Fulton\",\"color\":\"666699\",\"textColor\":\"ffffff\",\"hidden\":false},\"stop\":{\"id\":\"4235\",\"lat\":37.7747599,\"lon\":-122.45452,\"name\":\"Fulton St & Stanyan St\",\"code\":\"14235\",\"hidden\":false,\"showDestinationSelector\":true,\"route\":\"5\"},\"values\":[{\"timestamp\":1481175879124,\"minutes\":10,\"affectedByLayover\":false,\"isDeparture\":false,\"vehicleId\":\"5480\",\"direction\":{\"id\":\"5____I_F00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to Transbay Terminal\"}},{\"timestamp\":1481176111891,\"minutes\":14,\"affectedByLayover\":true,\"isDeparture\":false,\"vehicleId\":\"5418\",\"direction\":{\"id\":\"5____I_E00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to McAllister&Fillmore\"}},{\"timestamp\":1481176737673,\"minutes\":24,\"affectedByLayover\":true,\"isDeparture\":false,\"vehicleId\":\"5414\",\"direction\":{\"id\":\"5____I_E00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to McAllister&Fillmore\"}}]}]"
+          },
+          "redirectURL": "",
+          "headersSize": 369,
+          "bodySize": 911,
+          "_transferSize": 1280
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 0,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 26,
+          "receive": 0.4999999926658347,
+          "ssl": -1
+        },
+        "serverIPAddress": "199.83.131.86",
+        "connection": "215717"
+      },
+      {
+        "startedDateTime": "2016-12-08T05:34:22.558Z",
+        "time": 23.000000001047738,
+        "request": {
+          "method": "GET",
+          "url": "https://www.nextbus.com/api/pub/v1/agencies/sf-muni/stops/4235/messages?key=8b4256b04bfb81cd0fc8718f18d650d6&timestamp=1481175262557",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Cookie",
+              "value": "userID_rev4=TEST_COOKIE; JSESSIONID=265618931A8F5B0AE417A4B8A3C6E9BC; visid_incap_609786=PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2; incap_ses_569_609786=7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==; nbcts_profile=sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1; Coyote-2-d0b8d6f5=c0a80a74:0"
+            },
+            {
+              "name": "DNT",
+              "value": "1"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, sdch, br"
+            },
+            {
+              "name": "Host",
+              "value": "www.nextbus.com"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.8"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json, text/javascript, */*; q=0.01"
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.nextbus.com/?a=ttc"
+            },
+            {
+              "name": "X-Requested-With",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "key",
+              "value": "8b4256b04bfb81cd0fc8718f18d650d6"
+            },
+            {
+              "name": "timestamp",
+              "value": "1481175262557"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "userID_rev4",
+              "value": "TEST_COOKIE",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "JSESSIONID",
+              "value": "265618931A8F5B0AE417A4B8A3C6E9BC",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "visid_incap_609786",
+              "value": "PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "incap_ses_569_609786",
+              "value": "7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "nbcts_profile",
+              "value": "sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "headersSize": 849,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Thu, 08 Dec 2016 05:34:21 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache"
+            },
+            {
+              "name": "Set-Cookie",
+              "value": "Coyote-2-d0b8d6f5=c0a80a74:0; path=/"
+            },
+            {
+              "name": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "X-Iinfo",
+              "value": "5-38822490-38824360 NNNN CT(1 2 0) RT(1481175209112 51787) q(0 0 1 -1) r(1 1) U5"
+            },
+            {
+              "name": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "name": "Keep-Alive",
+              "value": "timeout=5, max=100"
+            },
+            {
+              "name": "Content-Length",
+              "value": "2346"
+            },
+            {
+              "name": "X-CDN",
+              "value": "Incapsula"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "path": "/",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "content": {
+            "size": 2346,
+            "mimeType": "application/json",
+            "compression": 0,
+            "text": "[{\"id\":18419,\"text\":\"We're on Twitter: @sfmta_muni\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":null}},{\"id\":23606,\"text\":\"No Elevator at\\nMontgomery Sta.\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"F\",\"stops\":null},{\"id\":\"L\",\"stops\":null},{\"id\":\"M\",\"stops\":null},{\"id\":\"N\",\"stops\":null},{\"id\":\"KT\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}},{\"id\":23336,\"text\":\"Construction on Van Ness: Lane changes in effect. More at sfmta.com.\",\"startBoundary\":1478973600000,\"endBoundary\":1481310000000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"49\",\"stops\":null},{\"id\":\"47\",\"stops\":null}]}},{\"id\":20137,\"text\":\"Sign up for email & text service alerts at sfmta.com.\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":null}},{\"id\":23535,\"text\":\"Fare changes starting Jan. 1 Use Clipper or MuniMobile to save Details at sfmta.com\",\"startBoundary\":1480541040000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":null}},{\"id\":23448,\"text\":\"EB Ocean btwn Gen./SJ CLSD until 12/11. OB 29/IB 49 re-routed.\",\"startBoundary\":1478869200000,\"endBoundary\":1481461200000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"49\",\"stops\":null},{\"id\":\"29\",\"stops\":null}]}},{\"id\":22533,\"text\":\"Temp. J & K stop changes @ Balboa Park now thru end of year.\",\"startBoundary\":1473163200000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"KT\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}},{\"id\":23310,\"text\":\"Now until 12/14 partial K svc btwn WP & CCSF will be provided by bus shuttles btwn 5 to 9am.\",\"startBoundary\":1479128400000,\"endBoundary\":1481720340000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"KT\",\"stops\":null}]}},{\"id\":22797,\"text\":\"Balboa Park Sta. entrance on SJ Av. closed til Jan. for construction.\",\"startBoundary\":1475496000000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"43\",\"stops\":null},{\"id\":\"91\",\"stops\":null},{\"id\":\"28R\",\"stops\":null},{\"id\":\"M\",\"stops\":null},{\"id\":\"54\",\"stops\":null},{\"id\":\"KT\",\"stops\":null},{\"id\":\"88\",\"stops\":null},{\"id\":\"8BX\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}}]"
+          },
+          "redirectURL": "",
+          "headersSize": 370,
+          "bodySize": 2346,
+          "_transferSize": 2716
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 1,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 22,
+          "receive": 1.0477378964424133e-9,
+          "ssl": -1
+        },
+        "serverIPAddress": "199.83.131.86",
+        "connection": "215717"
+      },
+      {
+        "startedDateTime": "2016-12-08T05:34:22.559Z",
+        "time": 27.000000001862645,
+        "request": {
+          "method": "GET",
+          "url": "https://www.nextbus.com/api/pub/v1/agencies/sf-muni/routes/5/stops/4235/predictions?coincident=true&direction=5____I_F00&destination=4234&key=8b4256b04bfb81cd0fc8718f18d650d6&timestamp=1481175262558",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Cookie",
+              "value": "userID_rev4=TEST_COOKIE; JSESSIONID=265618931A8F5B0AE417A4B8A3C6E9BC; visid_incap_609786=PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2; incap_ses_569_609786=7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==; nbcts_profile=sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1; Coyote-2-d0b8d6f5=c0a80a74:0"
+            },
+            {
+              "name": "DNT",
+              "value": "1"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, sdch, br"
+            },
+            {
+              "name": "Host",
+              "value": "www.nextbus.com"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.8"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json, text/javascript, */*; q=0.01"
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.nextbus.com/?a=ttc"
+            },
+            {
+              "name": "X-Requested-With",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "coincident",
+              "value": "true"
+            },
+            {
+              "name": "direction",
+              "value": "5____I_F00"
+            },
+            {
+              "name": "destination",
+              "value": "4234"
+            },
+            {
+              "name": "key",
+              "value": "8b4256b04bfb81cd0fc8718f18d650d6"
+            },
+            {
+              "name": "timestamp",
+              "value": "1481175262558"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "userID_rev4",
+              "value": "TEST_COOKIE",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "JSESSIONID",
+              "value": "265618931A8F5B0AE417A4B8A3C6E9BC",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "visid_incap_609786",
+              "value": "PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "incap_ses_569_609786",
+              "value": "7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "nbcts_profile",
+              "value": "sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "headersSize": 915,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Thu, 08 Dec 2016 05:34:21 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache"
+            },
+            {
+              "name": "Set-Cookie",
+              "value": "Coyote-2-d0b8d6f5=c0a80a74:0; path=/"
+            },
+            {
+              "name": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "X-Iinfo",
+              "value": "6-27961332-27962812 PNNN RT(1481175209112 51793) q(0 0 0 -1) r(0 0) U5"
+            },
+            {
+              "name": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "name": "Keep-Alive",
+              "value": "timeout=5, max=100"
+            },
+            {
+              "name": "Content-Length",
+              "value": "911"
+            },
+            {
+              "name": "X-CDN",
+              "value": "Incapsula"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "path": "/",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "content": {
+            "size": 911,
+            "mimeType": "application/json",
+            "compression": 0,
+            "text": "[{\"serverTimestamp\":1481175261807,\"route\":{\"id\":\"5\",\"title\":\"5-Fulton\",\"color\":\"666699\",\"textColor\":\"ffffff\",\"hidden\":false},\"stop\":{\"id\":\"4235\",\"lat\":37.7747599,\"lon\":-122.45452,\"name\":\"Fulton St & Stanyan St\",\"code\":\"14235\",\"hidden\":false,\"showDestinationSelector\":true,\"route\":\"5\"},\"values\":[{\"timestamp\":1481175879124,\"minutes\":10,\"affectedByLayover\":false,\"isDeparture\":false,\"vehicleId\":\"5480\",\"direction\":{\"id\":\"5____I_F00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to Transbay Terminal\"}},{\"timestamp\":1481176119353,\"minutes\":14,\"affectedByLayover\":true,\"isDeparture\":false,\"vehicleId\":\"5418\",\"direction\":{\"id\":\"5____I_E00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to McAllister&Fillmore\"}},{\"timestamp\":1481176737673,\"minutes\":24,\"affectedByLayover\":true,\"isDeparture\":false,\"vehicleId\":\"5414\",\"direction\":{\"id\":\"5____I_E00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to McAllister&Fillmore\"}}]}]"
+          },
+          "redirectURL": "",
+          "headersSize": 359,
+          "bodySize": 911,
+          "_transferSize": 1270
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 1,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 26,
+          "receive": 1.862645149230957e-9,
+          "ssl": -1
+        },
+        "serverIPAddress": "199.83.131.86",
+        "connection": "215710"
+      },
+      {
+        "startedDateTime": "2016-12-08T05:34:32.559Z",
+        "time": 743.0000000022119,
+        "request": {
+          "method": "GET",
+          "url": "https://www.nextbus.com/api/pub/v1/agencies/sf-muni/stops/4235/messages?key=8b4256b04bfb81cd0fc8718f18d650d6&timestamp=1481175272558",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Cookie",
+              "value": "userID_rev4=TEST_COOKIE; JSESSIONID=265618931A8F5B0AE417A4B8A3C6E9BC; visid_incap_609786=PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2; incap_ses_569_609786=7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==; nbcts_profile=sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1; Coyote-2-d0b8d6f5=c0a80a74:0"
+            },
+            {
+              "name": "DNT",
+              "value": "1"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, sdch, br"
+            },
+            {
+              "name": "Host",
+              "value": "www.nextbus.com"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.8"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json, text/javascript, */*; q=0.01"
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.nextbus.com/?a=ttc"
+            },
+            {
+              "name": "X-Requested-With",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "key",
+              "value": "8b4256b04bfb81cd0fc8718f18d650d6"
+            },
+            {
+              "name": "timestamp",
+              "value": "1481175272558"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "userID_rev4",
+              "value": "TEST_COOKIE",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "JSESSIONID",
+              "value": "265618931A8F5B0AE417A4B8A3C6E9BC",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "visid_incap_609786",
+              "value": "PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "incap_ses_569_609786",
+              "value": "7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "nbcts_profile",
+              "value": "sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "headersSize": 849,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Thu, 08 Dec 2016 05:34:32 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache"
+            },
+            {
+              "name": "Set-Cookie",
+              "value": "Coyote-2-d0b8d6f5=c0a80a74:0; path=/"
+            },
+            {
+              "name": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "X-Iinfo",
+              "value": "6-27961332-27963142 PNNN RT(1481175209112 61787) q(0 0 0 -1) r(7 7) U5"
+            },
+            {
+              "name": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "name": "Keep-Alive",
+              "value": "timeout=5, max=100"
+            },
+            {
+              "name": "Content-Length",
+              "value": "2346"
+            },
+            {
+              "name": "X-CDN",
+              "value": "Incapsula"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "path": "/",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "content": {
+            "size": 2346,
+            "mimeType": "application/json",
+            "compression": 0,
+            "text": "[{\"id\":18419,\"text\":\"We're on Twitter: @sfmta_muni\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":null}},{\"id\":23606,\"text\":\"No Elevator at\\nMontgomery Sta.\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"F\",\"stops\":null},{\"id\":\"L\",\"stops\":null},{\"id\":\"M\",\"stops\":null},{\"id\":\"N\",\"stops\":null},{\"id\":\"KT\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}},{\"id\":23336,\"text\":\"Construction on Van Ness: Lane changes in effect. More at sfmta.com.\",\"startBoundary\":1478973600000,\"endBoundary\":1481310000000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"49\",\"stops\":null},{\"id\":\"47\",\"stops\":null}]}},{\"id\":20137,\"text\":\"Sign up for email & text service alerts at sfmta.com.\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":null}},{\"id\":23535,\"text\":\"Fare changes starting Jan. 1 Use Clipper or MuniMobile to save Details at sfmta.com\",\"startBoundary\":1480541040000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":null}},{\"id\":23448,\"text\":\"EB Ocean btwn Gen./SJ CLSD until 12/11. OB 29/IB 49 re-routed.\",\"startBoundary\":1478869200000,\"endBoundary\":1481461200000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"49\",\"stops\":null},{\"id\":\"29\",\"stops\":null}]}},{\"id\":22533,\"text\":\"Temp. J & K stop changes @ Balboa Park now thru end of year.\",\"startBoundary\":1473163200000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"KT\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}},{\"id\":23310,\"text\":\"Now until 12/14 partial K svc btwn WP & CCSF will be provided by bus shuttles btwn 5 to 9am.\",\"startBoundary\":1479128400000,\"endBoundary\":1481720340000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"KT\",\"stops\":null}]}},{\"id\":22797,\"text\":\"Balboa Park Sta. entrance on SJ Av. closed til Jan. for construction.\",\"startBoundary\":1475496000000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"43\",\"stops\":null},{\"id\":\"91\",\"stops\":null},{\"id\":\"28R\",\"stops\":null},{\"id\":\"M\",\"stops\":null},{\"id\":\"54\",\"stops\":null},{\"id\":\"KT\",\"stops\":null},{\"id\":\"88\",\"stops\":null},{\"id\":\"8BX\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}}]"
+          },
+          "redirectURL": "",
+          "headersSize": 360,
+          "bodySize": 2346,
+          "_transferSize": 2706
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 0.998,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 742.002,
+          "receive": 2.2118911147117615e-9,
+          "ssl": -1
+        },
+        "serverIPAddress": "199.83.131.86",
+        "connection": "215710"
+      },
+      {
+        "startedDateTime": "2016-12-08T05:34:32.560Z",
+        "time": 826.0000000009313,
+        "request": {
+          "method": "GET",
+          "url": "https://www.nextbus.com/api/pub/v1/agencies/sf-muni/routes/5/stops/4235/predictions?coincident=true&direction=5____I_F00&destination=4234&key=8b4256b04bfb81cd0fc8718f18d650d6&timestamp=1481175272559",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Cookie",
+              "value": "userID_rev4=TEST_COOKIE; JSESSIONID=265618931A8F5B0AE417A4B8A3C6E9BC; visid_incap_609786=PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2; incap_ses_569_609786=7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==; nbcts_profile=sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1; Coyote-2-d0b8d6f5=c0a80a74:0"
+            },
+            {
+              "name": "DNT",
+              "value": "1"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, sdch, br"
+            },
+            {
+              "name": "Host",
+              "value": "www.nextbus.com"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.8"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json, text/javascript, */*; q=0.01"
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.nextbus.com/?a=ttc"
+            },
+            {
+              "name": "X-Requested-With",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "coincident",
+              "value": "true"
+            },
+            {
+              "name": "direction",
+              "value": "5____I_F00"
+            },
+            {
+              "name": "destination",
+              "value": "4234"
+            },
+            {
+              "name": "key",
+              "value": "8b4256b04bfb81cd0fc8718f18d650d6"
+            },
+            {
+              "name": "timestamp",
+              "value": "1481175272559"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "userID_rev4",
+              "value": "TEST_COOKIE",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "JSESSIONID",
+              "value": "265618931A8F5B0AE417A4B8A3C6E9BC",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "visid_incap_609786",
+              "value": "PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "incap_ses_569_609786",
+              "value": "7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "nbcts_profile",
+              "value": "sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "headersSize": 915,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Thu, 08 Dec 2016 05:34:32 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache"
+            },
+            {
+              "name": "Set-Cookie",
+              "value": "Coyote-2-d0b8d6f5=c0a80a74:0; path=/"
+            },
+            {
+              "name": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "X-Iinfo",
+              "value": "5-38822490-38824713 NNNN CT(2 3 0) RT(1481175209112 61793) q(0 0 0 -1) r(8 8) U5"
+            },
+            {
+              "name": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "name": "Keep-Alive",
+              "value": "timeout=5, max=100"
+            },
+            {
+              "name": "Content-Length",
+              "value": "911"
+            },
+            {
+              "name": "X-CDN",
+              "value": "Incapsula"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "path": "/",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "content": {
+            "size": 911,
+            "mimeType": "application/json",
+            "compression": 0,
+            "text": "[{\"serverTimestamp\":1481175272614,\"route\":{\"id\":\"5\",\"title\":\"5-Fulton\",\"color\":\"666699\",\"textColor\":\"ffffff\",\"hidden\":false},\"stop\":{\"id\":\"4235\",\"lat\":37.7747599,\"lon\":-122.45452,\"name\":\"Fulton St & Stanyan St\",\"code\":\"14235\",\"hidden\":false,\"showDestinationSelector\":true,\"route\":\"5\"},\"values\":[{\"timestamp\":1481175876503,\"minutes\":10,\"affectedByLayover\":false,\"isDeparture\":false,\"vehicleId\":\"5480\",\"direction\":{\"id\":\"5____I_F00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to Transbay Terminal\"}},{\"timestamp\":1481176119353,\"minutes\":14,\"affectedByLayover\":true,\"isDeparture\":false,\"vehicleId\":\"5418\",\"direction\":{\"id\":\"5____I_E00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to McAllister&Fillmore\"}},{\"timestamp\":1481176737673,\"minutes\":24,\"affectedByLayover\":true,\"isDeparture\":false,\"vehicleId\":\"5414\",\"direction\":{\"id\":\"5____I_E00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to McAllister&Fillmore\"}}]}]"
+          },
+          "redirectURL": "",
+          "headersSize": 369,
+          "bodySize": 911,
+          "_transferSize": 1280
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 0.998,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 825.002,
+          "receive": 9.313225746154785e-10,
+          "ssl": -1
+        },
+        "serverIPAddress": "199.83.131.86",
+        "connection": "215717"
+      },
+      {
+        "startedDateTime": "2016-12-08T05:34:42.561Z",
+        "time": 24.49999999953434,
+        "request": {
+          "method": "GET",
+          "url": "https://www.nextbus.com/api/pub/v1/agencies/sf-muni/stops/4235/messages?key=8b4256b04bfb81cd0fc8718f18d650d6&timestamp=1481175282560",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Cookie",
+              "value": "userID_rev4=TEST_COOKIE; JSESSIONID=265618931A8F5B0AE417A4B8A3C6E9BC; visid_incap_609786=PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2; incap_ses_569_609786=7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==; nbcts_profile=sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1; Coyote-2-d0b8d6f5=c0a80a74:0"
+            },
+            {
+              "name": "DNT",
+              "value": "1"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, sdch, br"
+            },
+            {
+              "name": "Host",
+              "value": "www.nextbus.com"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.8"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json, text/javascript, */*; q=0.01"
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.nextbus.com/?a=ttc"
+            },
+            {
+              "name": "X-Requested-With",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "key",
+              "value": "8b4256b04bfb81cd0fc8718f18d650d6"
+            },
+            {
+              "name": "timestamp",
+              "value": "1481175282560"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "userID_rev4",
+              "value": "TEST_COOKIE",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "JSESSIONID",
+              "value": "265618931A8F5B0AE417A4B8A3C6E9BC",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "visid_incap_609786",
+              "value": "PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "incap_ses_569_609786",
+              "value": "7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "nbcts_profile",
+              "value": "sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "headersSize": 849,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Thu, 08 Dec 2016 05:34:41 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache"
+            },
+            {
+              "name": "Set-Cookie",
+              "value": "Coyote-2-d0b8d6f5=c0a80a74:0; path=/"
+            },
+            {
+              "name": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "X-Iinfo",
+              "value": "5-38822490-38825265 NNNN CT(1 2 0) RT(1481175209112 71790) q(0 0 0 -1) r(0 0) U5"
+            },
+            {
+              "name": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "name": "Keep-Alive",
+              "value": "timeout=5, max=100"
+            },
+            {
+              "name": "Content-Length",
+              "value": "2346"
+            },
+            {
+              "name": "X-CDN",
+              "value": "Incapsula"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "path": "/",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "content": {
+            "size": 2346,
+            "mimeType": "application/json",
+            "compression": 0,
+            "text": "[{\"id\":18419,\"text\":\"We're on Twitter: @sfmta_muni\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":null}},{\"id\":23606,\"text\":\"No Elevator at\\nMontgomery Sta.\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"F\",\"stops\":null},{\"id\":\"L\",\"stops\":null},{\"id\":\"M\",\"stops\":null},{\"id\":\"N\",\"stops\":null},{\"id\":\"KT\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}},{\"id\":23336,\"text\":\"Construction on Van Ness: Lane changes in effect. More at sfmta.com.\",\"startBoundary\":1478973600000,\"endBoundary\":1481310000000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"49\",\"stops\":null},{\"id\":\"47\",\"stops\":null}]}},{\"id\":20137,\"text\":\"Sign up for email & text service alerts at sfmta.com.\",\"startBoundary\":null,\"endBoundary\":null,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":null}},{\"id\":23535,\"text\":\"Fare changes starting Jan. 1 Use Clipper or MuniMobile to save Details at sfmta.com\",\"startBoundary\":1480541040000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":null}},{\"id\":23448,\"text\":\"EB Ocean btwn Gen./SJ CLSD until 12/11. OB 29/IB 49 re-routed.\",\"startBoundary\":1478869200000,\"endBoundary\":1481461200000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"49\",\"stops\":null},{\"id\":\"29\",\"stops\":null}]}},{\"id\":22533,\"text\":\"Temp. J & K stop changes @ Balboa Park now thru end of year.\",\"startBoundary\":1473163200000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Normal\",\"targeting\":{\"routes\":[{\"id\":\"KT\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}},{\"id\":23310,\"text\":\"Now until 12/14 partial K svc btwn WP & CCSF will be provided by bus shuttles btwn 5 to 9am.\",\"startBoundary\":1479128400000,\"endBoundary\":1481720340000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"KT\",\"stops\":null}]}},{\"id\":22797,\"text\":\"Balboa Park Sta. entrance on SJ Av. closed til Jan. for construction.\",\"startBoundary\":1475496000000,\"endBoundary\":1483257540000,\"sendToBuses\":false,\"priority\":\"Low\",\"targeting\":{\"routes\":[{\"id\":\"43\",\"stops\":null},{\"id\":\"91\",\"stops\":null},{\"id\":\"28R\",\"stops\":null},{\"id\":\"M\",\"stops\":null},{\"id\":\"54\",\"stops\":null},{\"id\":\"KT\",\"stops\":null},{\"id\":\"88\",\"stops\":null},{\"id\":\"8BX\",\"stops\":null},{\"id\":\"J\",\"stops\":null}]}}]"
+          },
+          "redirectURL": "",
+          "headersSize": 370,
+          "bodySize": 2346,
+          "_transferSize": 2716
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 0,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 24,
+          "receive": 0.4999999995343387,
+          "ssl": -1
+        },
+        "serverIPAddress": "199.83.131.86",
+        "connection": "215717"
+      },
+      {
+        "startedDateTime": "2016-12-08T05:34:42.560Z",
+        "time": 28.00000000570435,
+        "request": {
+          "method": "GET",
+          "url": "https://www.nextbus.com/api/pub/v1/agencies/sf-muni/routes/5/stops/4235/predictions?coincident=true&direction=5____I_F00&destination=4234&key=8b4256b04bfb81cd0fc8718f18d650d6&timestamp=1481175282560",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Cookie",
+              "value": "userID_rev4=TEST_COOKIE; JSESSIONID=265618931A8F5B0AE417A4B8A3C6E9BC; visid_incap_609786=PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2; incap_ses_569_609786=7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==; nbcts_profile=sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1; Coyote-2-d0b8d6f5=c0a80a74:0"
+            },
+            {
+              "name": "DNT",
+              "value": "1"
+            },
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, deflate, sdch, br"
+            },
+            {
+              "name": "Host",
+              "value": "www.nextbus.com"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US,en;q=0.8"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json, text/javascript, */*; q=0.01"
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.nextbus.com/?a=ttc"
+            },
+            {
+              "name": "X-Requested-With",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "name": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "coincident",
+              "value": "true"
+            },
+            {
+              "name": "direction",
+              "value": "5____I_F00"
+            },
+            {
+              "name": "destination",
+              "value": "4234"
+            },
+            {
+              "name": "key",
+              "value": "8b4256b04bfb81cd0fc8718f18d650d6"
+            },
+            {
+              "name": "timestamp",
+              "value": "1481175282560"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "userID_rev4",
+              "value": "TEST_COOKIE",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "JSESSIONID",
+              "value": "265618931A8F5B0AE417A4B8A3C6E9BC",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "visid_incap_609786",
+              "value": "PGMqtmQiR5CfTwlUhAnu7KnwSFgAAAAAQUIPAAAAAAAQJHHal9ezwJz0+52vu8e2",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "incap_ses_569_609786",
+              "value": "7GApF1uIUnKTna6hhX7lB6nwSFgAAAAA15HktRJrDLCR0LCgIcov8g==",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "nbcts_profile",
+              "value": "sf-muni|5|5____I_F00|4235|4234|en-US|1|0|0|0|1",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            },
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "headersSize": 915,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            {
+              "name": "Date",
+              "value": "Thu, 08 Dec 2016 05:34:41 GMT"
+            },
+            {
+              "name": "Server",
+              "value": "Apache"
+            },
+            {
+              "name": "Set-Cookie",
+              "value": "Coyote-2-d0b8d6f5=c0a80a74:0; path=/"
+            },
+            {
+              "name": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "X-Iinfo",
+              "value": "6-27961332-27963427 PNNN RT(1481175209112 71795) q(0 0 0 -1) r(0 0) U5"
+            },
+            {
+              "name": "Connection",
+              "value": "Keep-Alive"
+            },
+            {
+              "name": "Keep-Alive",
+              "value": "timeout=5, max=100"
+            },
+            {
+              "name": "Content-Length",
+              "value": "910"
+            },
+            {
+              "name": "X-CDN",
+              "value": "Incapsula"
+            }
+          ],
+          "cookies": [
+            {
+              "name": "Coyote-2-d0b8d6f5",
+              "value": "c0a80a74:0",
+              "path": "/",
+              "expires": null,
+              "httpOnly": false,
+              "secure": false
+            }
+          ],
+          "content": {
+            "size": 910,
+            "mimeType": "application/json",
+            "compression": 0,
+            "text": "[{\"serverTimestamp\":1481175281810,\"route\":{\"id\":\"5\",\"title\":\"5-Fulton\",\"color\":\"666699\",\"textColor\":\"ffffff\",\"hidden\":false},\"stop\":{\"id\":\"4235\",\"lat\":37.7747599,\"lon\":-122.45452,\"name\":\"Fulton St & Stanyan St\",\"code\":\"14235\",\"hidden\":false,\"showDestinationSelector\":true,\"route\":\"5\"},\"values\":[{\"timestamp\":1481175876503,\"minutes\":9,\"affectedByLayover\":false,\"isDeparture\":false,\"vehicleId\":\"5480\",\"direction\":{\"id\":\"5____I_F00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to Transbay Terminal\"}},{\"timestamp\":1481176125270,\"minutes\":14,\"affectedByLayover\":true,\"isDeparture\":false,\"vehicleId\":\"5418\",\"direction\":{\"id\":\"5____I_E00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to McAllister&Fillmore\"}},{\"timestamp\":1481176737673,\"minutes\":24,\"affectedByLayover\":true,\"isDeparture\":false,\"vehicleId\":\"5414\",\"direction\":{\"id\":\"5____I_E00\",\"name\":\"Inbound\",\"destinationName\":\"Inbound to McAllister&Fillmore\"}}]}]"
+          },
+          "redirectURL": "",
+          "headersSize": 359,
+          "bodySize": 910,
+          "_transferSize": 1269
+        },
+        "cache": {},
+        "timings": {
+          "blocked": 0,
+          "dns": -1,
+          "connect": -1,
+          "send": 0,
+          "wait": 27,
+          "receive": 1.0000000057043508,
+          "ssl": -1
+        },
+        "serverIPAddress": "199.83.131.86",
+        "connection": "215710"
+      }
+    ]
+  }
+}
