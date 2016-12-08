@@ -187,8 +187,9 @@ Mapper.prototype = {
                         if (parsedRouteList.hasOwnProperty('body') && parsedRouteList.body.hasOwnProperty('Error')) {
                             reject(parsedRouteList.body.Error)
                         } else {
-                            resolve(parsedRouteList);
                             _t.routes = parsedRouteList.body.route;
+                            resolve(parsedRouteList);
+
                         }
                     }
                 }
@@ -221,6 +222,8 @@ Mapper.prototype = {
                         if (parsedRoute.hasOwnProperty('body') && parsedRoute.body.hasOwnProperty('Error')) {
                             reject(parsedRoute.body.Error)
                         } else {
+                            console.log('parsedRoute')
+                            _t.drawRoutePath(parsedRoute.body.route)
                             resolve(parsedRoute);
                         }
                     }
@@ -229,6 +232,71 @@ Mapper.prototype = {
         });
 
         return p
+
+    },
+
+    drawRoutePath: function(route) {
+
+        //         Due to the nature of the configuration there can be many separate paths, some of them
+        // overlapping. A map client should simply draw all of the paths. The paths are not necessarily in
+        // any kind of order so you should only connect the points within a path. You should not connect the
+        // points between two separate paths though.
+
+        console.log('route to draw', route)
+        var _t = this;
+        var allPaths = route.path;
+
+        allPaths.forEach(function(path) {
+            _t.connectPoints(path, route);
+        })
+
+
+        //given a route
+        //for every 'path'
+        //create a d3 path using all of the points in that 'path'
+        //(will have to project latlon to get xy)
+    },
+
+
+    connectPoints: function(path, routeData) {
+        var _t = this;
+
+        var projectLine = d3.line()
+            .x(function(d) {
+                console.log('in line x', d)
+                return _t.projection([
+                    d['@attributes'].lon,
+                    d['@attributes'].lat
+                ])[0];
+            })
+            .y(function(d) {
+                return _t.projection([
+                    d['@attributes'].lon,
+                    d['@attributes'].lat
+                ])[1];
+            });
+
+
+        console.log('path in connec', path)
+        path.point.forEach(function(point) {
+            var myPath = _t.svg.append("path")
+                .data(path)
+                .enter()
+                .attr("d", projectLine(point))
+                .attr("data-tag", routeData['@attributes'].tag)
+                .attr("stroke", '#' + routeData['@attributes'].color)
+                .attr("stroke-width", 20)
+                .style("stroke-opacity", 0.5)
+                .attr("fill", "none")
+                .attr("class", "route-path_" + routeData['@attributes'].tag);
+            //.append("svg:title")
+            // .text(function(d) { 
+            //     return routeData['@attributes'].title;
+            // })
+
+            console.log('should have made one ', myPath)
+        })
+
 
     },
 
@@ -739,7 +807,7 @@ function savePNG() {
                 .node();
             // this is now the base64 encoded version of our PNG! you could optionally 
             // redirect the user to download the PNG by sending them to the url with 
-           window.open(canvasUrl)
+            window.open(canvasUrl)
             img2.src = canvasUrl;
         }
         // start loading the image.
