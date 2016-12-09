@@ -26,11 +26,7 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [x] clear all button
 - [x] vehicle headings
 - [x] dictionary of colors for routes so that new vehicles come in with the same one their route already has.
-- [x] route selection list
-- [x] full screen
-- [x] show route tag
-- [x] touch tile to toggle
-- [x] needs to fill the active routes list
+- [x] route selection list:  full screen, show route tag, touch tile to toggle, fill the active routes list
 - [x] simple loader
 
 # nice-to-haves
@@ -61,7 +57,6 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [x] need my own route selector, layout, buttons. 
 - [] rotations on tearpdrop transitions are weird.  sort out how to make a group
 
-
 # bandwidth and performance observations
 - 1.1kb per route
 - ~80kb to get all routes
@@ -73,20 +68,17 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - perf rankings:  chrome, firefox, edge.
 - a bit poky on the chromebook but it does run all routes.
 - perf problems are likely related to the number of svg elements.  dom manipulation can get slow.
+- also should add caching so i'm not transforming / transitioning locations that havent really changed.
 
 # mobile observations
-- not a lot of space on the flip on an iphone 5s.  but likely okay on bigger phones.  
-- standard multiple select works nicely on iphone
+- something weird on landscape iphone 5, need to see whats up there
 
-# framework observations
--  well, materialize didn't end up being helpful and the standard html5 select sucks so i'm rolling my own
-
-# wow-zone
+# wow-zone someday
 - [] use an elevation service to do a sweet altitude vis 
     https://developers.google.com/maps/documentation/elevation/start
 - [] favorite routes
 - [] favorite colors
 - [] html5 geolocation + 'show nearest'
 - [] maybe use topoJSON
-- [] maybe use vector tiles? http://bl.ocks.org/mbostock/5616813 https://mapzen.com/projects/vector-tiles/
+- [] maybe use vector tiles http://bl.ocks.org/mbostock/5616813 https://mapzen.com/projects/vector-tiles/
 - [] every route line path has two inner lines for inbound outbound directional pulse wave along the stops

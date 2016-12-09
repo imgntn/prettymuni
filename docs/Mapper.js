@@ -594,9 +594,9 @@ Mapper.prototype = {
             // .transition().attr("r", "0.45").duration(1000)
 
         headingDrops
-            // .transition()
-            //.attrTween("transform", tween)
-            // .attr("transform", _t.placeHeadingDrop)
+            .transition()
+            .attr("transform", _t.placeHeadingDrop)
+            // .attrTween("transform", tween)
             // .duration(_t.refreshRate * 1000)
 
 
@@ -638,7 +638,7 @@ Mapper.prototype = {
         var x = 9 * Math.sin(radianHeading) + 0;
         var tag = d['@attributes'].routeTag;
 
-        return "scale(0.65)rotate(" + heading + ")translate(" + -15 + "," + -25 + ")"
+        return "scale(0.6)rotate(" + heading + ")translate(" + -15 + "," + -25 + ")"
     },
 
     translateHeadingDot: function(d) {

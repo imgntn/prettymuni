@@ -87,6 +87,7 @@ margin:auto;
 
 .show-route-selector-button-holder {
 
+min-height: 100px;
 display:none;
 
 height:10%;
@@ -186,6 +187,26 @@ margin:auto;
     display: inline-flex;
 }
 
+
+@media screen and (max-width: 500px) {
+  #github-banner{
+       display:none;
+    }
+}
+
+.scrollbar-measure {
+  width: 100px;
+  height: 100px;
+  overflow: scroll;
+  position: absolute;
+  top: -9999px;
+}
+
+.background-color-selector{
+      position: fixed;
+    top: 100px;
+}
+
 .spinner {
   width: 60px;
   height: 60px;
@@ -216,10 +237,3 @@ margin:auto;
   }
 }
 
-.scrollbar-measure {
-  width: 100px;
-  height: 100px;
-  overflow: scroll;
-  position: absolute;
-  top: -9999px;
-}
