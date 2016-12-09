@@ -24,7 +24,7 @@ overflow-x:hidden;
 cursor:pointer;
 margin-top:1%;
 text-align:center;
-font-size:1.5em;
+font-size:2em;
 background-color:rgba(0,0,0,0.40);
 height:10%;
 margin-left:0.5%;
@@ -45,7 +45,6 @@ margin:auto;
 }
 
 .show-route-selector-button-holder {
-
 min-height: 100px;
 display:none;
 height:10%;
@@ -70,7 +69,7 @@ text-align:center;
 display:inline-flex;
 cursor:pointer;
 width:100%;
-height:15%;
+height:10%;
 background-color:lightgrey;
 color:#FFF;
 }
@@ -79,7 +78,7 @@ color:#FFF;
 display:inline-flex;
 cursor:pointer;
 width:100%;
-height:15%;
+height:10%;
 background-color:grey;
 color:#FFF;
 }
@@ -125,6 +124,9 @@ left:0;
     .route-selector-tile {
       font-size:1.1em;
     }
+    .close-route-selector-button-holder ,.clear-all-button-holder {
+      height:15%;
+    }
 }
 
 .scrollbar-measure {
@@ -136,9 +138,18 @@ left:0;
 }
 
 .background-color-selector{
-      position: fixed;
-    top: 100px;
+  position: fixed;
+  top: 100px;
 }
+
+.share-button-holder{
+top: 110px;
+left: 10px;
+position: fixed;
+
+}
+  
+
 
 .spinner {
   width: 60px;
