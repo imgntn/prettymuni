@@ -25,7 +25,7 @@ Mapper.prototype = {
     routeColors: {},
     routeTileBackgroundColor: 'rgba(0,0,0,0.40)',
     activeRoutes: [],
-    proxyURL: '/proxy?url=',
+    proxyURL: 'https://jbpmunimap.herokuapp.com/proxy?url=',
     headingStore: {},
     setupDrawingSpace: function() {
         var _t = this;
