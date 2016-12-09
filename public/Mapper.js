@@ -171,6 +171,7 @@ Mapper.prototype = {
 
     },
     isSecure:function(){
+        var _t=this;
         if( window.location.protocol.indexOf('https:')>-1){
             return _t.proxyURL
         }

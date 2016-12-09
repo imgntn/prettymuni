@@ -4,13 +4,17 @@ var compression = require('compression');
 
 var app = express();
 
-app.use(function(err, req, res, next) {
-    console.error(err.stack)
-    res.status(500).send('Something broke!')
-})
-
 app.use(compression());
 app.use(express.static('public'))
+
+app.use(function(err, req, res, next) {
+    console.error(err.stack)
+    res.status(500)
+    res.render('error', {
+        error: err
+    })
+})
+
 
 //so because nextbus is http only, we have to proxy this request to avoid mixed content warnings and still serve our app over https.
 app.use('/proxy', function(req, res) {
@@ -26,13 +30,6 @@ app.use('/proxy', function(req, res) {
 
 });
 
-app.use(function(err, req, res, next) {
-    console.error(err.stack)
-    res.status(500)
-    res.render('error', {
-        error: err
-    })
-})
 
 app.listen(process.env.PORT || 3000);
 
