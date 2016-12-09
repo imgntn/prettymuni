@@ -183,7 +183,6 @@ Mapper.prototype = {
             // .duration(5500)
             // .attr('opacity', 1)
 
-        console.log('end of basemap drawing', geojson.name)
 
         this.baseMapGroups.push(svgGroup);
 
