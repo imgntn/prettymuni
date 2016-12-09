@@ -26,6 +26,7 @@ Mapper.prototype = {
     routeTileBackgroundColor: 'rgba(0,0,0,0.40)',
     activeRoutes: [],
     proxyURL: '/proxy?url=',
+    headingStore: {},
     setupDrawingSpace: function() {
         var _t = this;
         var width = window.innerWidth,
@@ -238,7 +239,7 @@ Mapper.prototype = {
 
     drawRoutePath: function(route) {
 
-        //         Due to the nature of the configuration there can be many separate paths, some of them
+        // Due to the nature of the configuration there can be many separate paths, some of them
         // overlapping. A map client should simply draw all of the paths. The paths are not necessarily in
         // any kind of order so you should only connect the points within a path. You should not connect the
         // points between two separate paths though.
@@ -466,9 +467,17 @@ Mapper.prototype = {
 
         headingDrops
             .transition()
+            //.attrTween("transform", tween)
             .attr("transform", _t.placeHeadingDrop)
             .duration(_t.refreshRate * 1000)
-            
+
+
+        function tween(d, i, a) {
+            console.log('d here', d)
+
+            return d3.interpolateString("rotate(0, 0, 0)", "rotate(" + d['@attributes'].heading + ",0,0)");
+        }
+
         dotGroups
             .transition()
             .attr("transform", function(d) {
@@ -506,14 +515,15 @@ Mapper.prototype = {
 
         //create a heading drop
 
-        var drop = dotGroup.append('path')
+        var dropGroup = dotGroup.append('g')
+        .style('transform-origin','center center')
+
+        var drop = dropGroup.append('path')
+        .style('transform-origin','center center')
             .attr('d', _t.dropPath)
             .attr('class', 'drop-group')
-            // .attr('stroke-width','1px')
-            // .attr('stroke',colors.circle.fill)
             .attr('fill', 'black')
             .attr("transform", _t.placeHeadingDrop)
-
 
         dotGroup.append("circle")
             .call(_t.zoom.transform, _t.zoomTransform)
@@ -562,33 +572,27 @@ Mapper.prototype = {
     },
     dropPath: function(d) {
         var dropPath = "M15 6 Q 15 6, 25 18 A 12.8 12.8 0 1 1 5 18 Q 15 6 15 6z"
+            //var dropPath="M8 48 L56 48 L32 12 Q24 24 20 30 Z"
         return dropPath
     },
     placeHeadingDrop: function(d) {
+        var _t = this;
         //console.log('drop place d', d)
         var heading = d['@attributes'].heading;
         var radianHeading = Math.radians(heading);
-        var y = 9 * -Math.cos(radianHeading) + 0
-        var x = 9 * Math.sin(radianHeading) + 0
+        var y = 9 * -Math.cos(radianHeading) + 0;
+        var x = 9 * Math.sin(radianHeading) + 0;
+        var tag = d['@attributes'].routeTag;
+      
         return "scale(0.65)rotate(" + heading + ")translate(" + -15 + "," + -25 + ")"
     },
-    rotateHeadingDrop: function(d) {
-        console.log('drop rotate d ', d)
-        var heading = d['@attributes'].heading;
-        return "rotate(" + heading + ")"
-    },
+
     translateHeadingDot: function(d) {
         var heading = d['@attributes'].heading;
         var radianHeading = Math.radians(heading);
         var y = 9 * -Math.cos(radianHeading) + 0
         var x = 9 * Math.sin(radianHeading) + 0
         return "translate(" + x + "," + y + ")";
-    },
-
-    createHeadingTeardrop: function() {
-
-
-
     },
 
     setupControls: function() {
