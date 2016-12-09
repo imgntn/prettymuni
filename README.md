@@ -44,6 +44,8 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [x] send google analytics event on route toggle
 - [] add gulp deploy task for copying a /public folder into docs to cleanup that naming mess and detach github pushes from production
 - [] ^^ or stop working on master ;P
+- [] favorite routes
+- [] favorite colors
 
 # bugs
 - [x] when a new vehicle is added or removed from a route, the route is being shuffled. fixed by passing second parameter to .data() to keep track
@@ -74,9 +76,7 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 # wow-zone someday
 - [] use an elevation service to do a sweet altitude vis 
     https://developers.google.com/maps/documentation/elevation/start
-- [] favorite routes
-- [] favorite colors
 - [] html5 geolocation + 'show nearest'
-- [] maybe use topoJSON
+- [] maybe use topoJSON (what are expected savings?)
 - [] maybe use vector tiles http://bl.ocks.org/mbostock/5616813 https://mapzen.com/projects/vector-tiles/
 - [] every route line path has two inner lines for inbound outbound directional pulse wave along the stops
