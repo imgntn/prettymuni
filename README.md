@@ -48,6 +48,7 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [] offline detection
 - [x] send google analytics event on route toggle
 - [] add 'live' indicator to top of page
+- [] add gulp deploy task for copying a /public folder into docs to cleanup that naming mess.
 
 # bugs
 - [x] when a new vehicle is added or removed from a route, the route is being shuffled. fixed by passing second parameter to .data() to keep track
