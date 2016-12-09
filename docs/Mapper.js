@@ -875,9 +875,25 @@ Mapper.prototype = {
         _t.routeSelector.onscroll = function(e) {
             if ((e.target.scrollTop > stickPoint) && !stuck) {
                 closeButton.style.position = 'fixed';
+                // Create the measurement node
+
+
+var scrollDiv = document.createElement("div");
+scrollDiv.className = "scrollbar-measure";
+document.body.appendChild(scrollDiv);
+
+// Get the scrollbar width
+var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+console.warn(scrollbarWidth); // Mac:  15
+
+// Delete the DIV 
+document.body.removeChild(scrollDiv);
+
+                closeButton.style.right=scrollbarWidth/2+'px';
                 stuck = true;
             } else if (stuck && e.target.scrollTop <= stickPoint) {
                 closeButton.style.position = '';
+                closeButton.style.right='';
                 stuck = false;
             }
         }

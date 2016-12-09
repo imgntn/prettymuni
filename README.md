@@ -9,7 +9,7 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 
 # To-Do
 
-# essentials
+# essentials + level one
 - [x] base maps
 - [x] get and parse muni data
 - [x] draw muni vehicles for a given route
@@ -36,18 +36,16 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 # nice-to-haves
 - [x] active color of tile is bus route color
 - [x] teardrop heading indicator
-- [] show all button
-- [] show route name on hover in route selector tile
+- [] add 'live' indicator to top of page
+- [] show route name on hover in route selector tile + map
 - [] inbound/ outbound "ping" button
 - [] scale vehicle groups down as you zoom in so the fit the streets.
 - [] custom, thematic loader.  
 - [] load street map async 
 - [] fade in the streets when they are loaded async so that it looks nice
 - [] clicking should toggle route line path display on off
-- [] every route line path has two inner lines for inbound outbound directional pulse wave along the stops
 - [] offline detection
 - [x] send google analytics event on route toggle
-- [] add 'live' indicator to top of page
 - [] add gulp deploy task for copying a /public folder into docs to cleanup that naming mess and detach github pushes from production
 -[] ^^ stop working on master ;P
 
@@ -91,3 +89,4 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [] html5 geolocation + 'show nearest'
 - [] maybe use topoJSON
 - [] maybe use vector tiles? http://bl.ocks.org/mbostock/5616813 https://mapzen.com/projects/vector-tiles/
+- [] every route line path has two inner lines for inbound outbound directional pulse wave along the stops
