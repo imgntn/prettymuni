@@ -465,6 +465,76 @@ Mapper.prototype = {
 
         dotGroups.exit().remove();
 
+        var dotGroup = dotGroups.enter()
+            .append("g")
+            .attr('class', 'dot-group')
+            .on("mouseover", function() {
+                var sel = d3.select(this);
+                sel.moveToFront();
+            })
+            .on('click', function(e) {
+                _t.clickVehicle(e)
+            })
+            .attr("transform", function(d) {
+                return "translate(" + _t.projection([
+                    d['@attributes'].lon,
+                    d['@attributes'].lat
+                ]) + ")";
+            })
+
+        //create a heading drop
+
+        var dropGroup = dotGroup.append('g')
+            .style('transform-origin', 'center center')
+
+        var drop = dropGroup.append('path')
+            .style('transform-origin', 'center center')
+            .attr('d', _t.dropPath)
+            .attr('class', 'drop-group')
+            .attr('fill', 'black')
+            .attr("transform", _t.placeHeadingDrop)
+
+        dotGroup.append("circle")
+            .call(_t.zoom.transform, _t.zoomTransform)
+            .attr("r", "6")
+            .attr("fill", colors.circle.fill)
+            .attr("stroke", colors.circle.stroke)
+            .style('stroke-width', '1px')
+            .transition().attr("r", "12").duration(1000)
+            .transition().attr("r", "8").duration(1000)
+
+        dotGroup.append("text")
+            .attr('text-anchor', "middle")
+
+        .attr('dy', '0.35em')
+            .style("font-size", "8")
+            .style('stroke-width', '1px')
+            .style('paint-order', 'stroke')
+            .attr("fill", colors.text.fill)
+            .attr("stroke", colors.text.stroke)
+            .attr("dx", 0)
+            .text(function(d) {
+                return d['@attributes'].routeTag
+            })
+            .transition().style("font-size", "12").duration(1000)
+            .transition().style("font-size", "8").duration(1000)
+
+
+        var dropGroups = svgGroup.selectAll(".drop-group").data(predictableVehicles, function(d) {
+            return d['@attributes'].id;
+        })
+
+        //create a heading dot
+        dotGroup.append("circle")
+            .attr('class', 'heading-dot')
+            .call(_t.zoom.transform, _t.zoomTransform)
+            .attr("r", "0.5")
+            .attr("fill", colors.circle.fill)
+            //.attr("stroke", getRandomHexColor())
+            .attr("transform", _t.translateHeadingDot)
+            // .transition().attr("r", "1.5").duration(1000)
+            // .transition().attr("r", "0.45").duration(1000)
+
         headingDrops
             .transition()
             //.attrTween("transform", tween)
@@ -488,93 +558,19 @@ Mapper.prototype = {
             })
             .duration(_t.refreshRate * 1000)
 
-
         //the headings change fairly frequently so we update them as well. would be nicer if they went around the arc.
         headingDots
             .transition()
             .attr("transform", _t.translateHeadingDot)
             .duration(_t.refreshRate * 1000)
 
-        var dotGroup = dotGroups.enter()
-            .append("g")
-            .attr('class', 'dot-group')
-            .on("mouseover", function() {
-                var sel = d3.select(this);
-                sel.moveToFront();
-            })
-            .on('click', function(e) {
-                _t.clickVehicle(e)
-            })
-            .attr("transform", function(d) {
-                return "translate(" + _t.projection([
-                    d['@attributes'].lon,
-                    d['@attributes'].lat
-                ]) + ")";
-            })
-
-
-        //create a heading drop
-
-        var dropGroup = dotGroup.append('g')
-            .style('transform-origin', 'center center')
-
-        var drop = dropGroup.append('path')
-            .style('transform-origin', 'center center')
-            .attr('d', _t.dropPath)
-            .attr('class', 'drop-group')
-            .attr('fill', 'black')
-            .attr("transform", _t.placeHeadingDrop)
-
-        dotGroup.append("circle")
-            .call(_t.zoom.transform, _t.zoomTransform)
-            .attr("r", "6")
-            .attr("fill", colors.circle.fill)
-            .attr("stroke", colors.circle.stroke)
-            .style('stroke-width', '1px')
-            .transition().attr("r", "12").duration(1000)
-            .transition().attr("r", "8").duration(1000)
-
-
-        dotGroup.append("text")
-            .attr('text-anchor', "middle")
-
-        .attr('dy', '0.35em')
-            .style("font-size", "8")
-            .style('stroke-width', '1px')
-            .style('paint-order', 'stroke')
-            .attr("fill", colors.text.fill)
-            .attr("stroke", colors.text.stroke)
-            .attr("dx", 0)
-            .text(function(d) {
-                return d['@attributes'].routeTag
-            })
-            .transition().style("font-size", "12").duration(1000)
-            .transition().style("font-size", "8").duration(1000)
-
-
-        var dropGroups = svgGroup.selectAll(".drop-group").data(predictableVehicles, function(d) {
-            return d['@attributes'].id;
-        })
-
-
-
-        //create a heading dot
-        dotGroup.append("circle")
-            .attr('class', 'heading-dot')
-            .call(_t.zoom.transform, _t.zoomTransform)
-            .attr("r", "0.5")
-            .attr("fill", colors.circle.fill)
-            //.attr("stroke", getRandomHexColor())
-            .attr("transform", _t.translateHeadingDot)
-            // .transition().attr("r", "1.5").duration(1000)
-            // .transition().attr("r", "0.45").duration(1000)
-
     },
+
     dropPath: function(d) {
         var dropPath = "M15 6 Q 15 6, 25 18 A 12.8 12.8 0 1 1 5 18 Q 15 6 15 6z"
-            //var dropPath="M8 48 L56 48 L32 12 Q24 24 20 30 Z"
         return dropPath
     },
+
     placeHeadingDrop: function(d) {
         var _t = this;
         //console.log('drop place d', d)
@@ -637,8 +633,7 @@ Mapper.prototype = {
     createControlButtons: function() {
         var _t = this;
 
-        var clearButtonHolder = document.createElement('div');
-        clearButtonHolder.classList.add('clear-all-button-holder')
+        var clearButtonHolder = document.getElementsByClassName('clear-all-button-holder')[0]
 
         var clearButton = document.createElement('div')
         clearButton.innerText = 'Clear All';
@@ -647,7 +642,7 @@ Mapper.prototype = {
         clearButtonHolder.appendChild(clearButton);
 
 
-        var closeRouteSelectorButtonHolder = document.createElement('div');
+        var closeRouteSelectorButtonHolder = document.getElementsByClassName('close-route-selector-button-holder')[0]
         closeRouteSelectorButtonHolder.classList.add('close-route-selector-button-holder')
 
         var closeRouteSelectorButton = document.createElement('div');
@@ -656,11 +651,7 @@ Mapper.prototype = {
 
         closeRouteSelectorButtonHolder.appendChild(closeRouteSelectorButton);
 
-        _t.routeSelector.appendChild(closeRouteSelectorButtonHolder);
-        _t.routeSelector.appendChild(clearButtonHolder);
-
-        var showRouteSelectorButtonHolder = document.createElement('div');
-        showRouteSelectorButtonHolder.classList.add('show-route-selector-button-holder');
+        var showRouteSelectorButtonHolder = document.getElementsByClassName('show-route-selector-button-holder')[0]
 
         var showRouteSelectorButton = document.createElement('div');
         showRouteSelectorButton.innerText = 'Choose Routes';
@@ -671,7 +662,6 @@ Mapper.prototype = {
 
         var buttonOverlay = document.getElementsByClassName('button-overlay-container')[0];
 
-        buttonOverlay.appendChild(showRouteSelectorButtonHolder);
         _t.buttonOverlay = buttonOverlay;
 
         closeRouteSelectorButtonHolder.onclick = function() {
@@ -744,7 +734,7 @@ Mapper.prototype = {
     updateControlOptions: function() {
         var _t = this;
         _t.routeSelector = document.getElementsByClassName('route-selector')[0];
-        _t.clearControlOptions();
+
         _t.createControlButtons();
         _t.routes.forEach(function(route) {
             var control = _t.createControlOption(route['@attributes'].title, route['@attributes'].tag)
@@ -806,10 +796,8 @@ Mapper.prototype = {
     hideLoader: function() {
         var loader = document.getElementsByClassName('loader-container')[0];
         loader.style.display = "none";
-        setTimeout(function() {
-            var showRouteSelectorButtonHolder = document.getElementsByClassName('show-route-selector-button-holder')[0];
-            showRouteSelectorButtonHolder.style.display = 'inline-flex';
-        }, 0)
+        var showRouteSelectorButtonHolder = document.getElementsByClassName('show-route-selector-button-holder')[0];
+        showRouteSelectorButtonHolder.style.display = 'inline-flex'
     }
 
 }
