@@ -5,7 +5,7 @@ var compression = require('compression');
 var app = express();
 
 app.use(compression());
-app.use(express.static('public'))
+app.use(express.static('docs'))
 
 app.use(function(err, req, res, next) {
     console.error(err.stack)
