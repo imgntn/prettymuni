@@ -56,6 +56,7 @@ Mapper.prototype = {
 
     zoomed: function() {
         var _t = this;
+
         _t.baseMapGroups.forEach(function(mapGroup) {
             mapGroup.attr("transform", d3.event.transform);
         });
@@ -165,6 +166,7 @@ Mapper.prototype = {
     },
 
     addBaseMapLayer: function(geojson, mapName) {
+        if(!geojson || typeof geojson==='undefined'){return};
         var _t = this;
         var svgGroup = _t.svg.append("g").attr('id', 'layer_' + mapName)
 
@@ -961,4 +963,5 @@ function savePNG() {
 
 document.addEventListener("DOMContentLoaded", function() {
     var liveMapper = new Mapper();
-});
+    window.liveMapper=liveMapper;
+},{passive:true});

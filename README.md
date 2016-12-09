@@ -40,12 +40,13 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [] scale vehicle groups down as you zoom in so the fit the streets.
 - [] custom, thematic loader.  
 - [] clicking should toggle route line path display on off
-- [] offline detection
+- [] offline detection 
 - [x] send google analytics event on route toggle
 - [] add gulp deploy task for copying a /public folder into docs to cleanup that naming mess and detach github pushes from production
 - [] ^^ or stop working on master ;P
 - [] favorite routes
 - [] favorite colors
+- [] manifest to install as home screen app
 
 # bugs
 - [x] when a new vehicle is added or removed from a route, the route is being shuffled. fixed by passing second parameter to .data() to keep track
@@ -72,6 +73,8 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - a bit poky on the chromebook but it does run all routes.
 - perf problems are likely related to the number of svg elements.  dom manipulation can get slow.
 - should add caching so i'm not transforming / transitioning locations and headings that haven't really changed. this could be a filter/threshold 
+- i could add passive event listeners to d3.js -- scrolling messes with the main thread
+- doing the drop and dot as a group and then rotating that group around the other group containing the text and circle would reduce listeners.
 
 # wow-zone someday
 - [] use an elevation service to do a sweet altitude vis 

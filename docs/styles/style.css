@@ -1,5 +1,11 @@
+html{
+  touch-action: manipulation;
+}
+
 body {
-overflow:hidden;
+       overflow: hidden;
+        overflow-y: auto;
+        overflow-x: auto;
 font-family: 'Fira Sans', sans-serif;
 margin:0!important;
 }
