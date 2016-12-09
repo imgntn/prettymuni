@@ -11,7 +11,7 @@ Mapper.prototype = {
     baseMapCenter: [-122.433701, 37.767683],
     baseMapNames: [
         'neighborhoods',
-        'streets',
+        //'streets',
         //'streets_minified',
         //'streets_reduced_precision',
         'freeways',
@@ -170,19 +170,18 @@ Mapper.prototype = {
         console.log('vehicle clicked', val['@attributes'])
 
     },
-    isSecure:function(){
-        var _t=this;
-        if( window.location.protocol.indexOf('https:')>-1){
+    isSecure: function() {
+        var _t = this;
+        if (window.location.protocol.indexOf('https:') > -1) {
             return _t.proxyURL
-        }
-        else{
-              return ''      
+        } else {
+            return ''
         }
 
     },
     fetchRouteList: function() {
         var _t = this;
-       
+
         var routeListURL = _t.isSecure() + 'http://webservices.nextbus.com/service/publicXMLFeed?command=routeList&a=sf-muni';
 
         var p = new Promise(function(resolve, reject) {
@@ -628,6 +627,7 @@ Mapper.prototype = {
         el.classList.add('route-selector-tile')
         el.setAttribute('value', value);
         el.onclick = function(e) {
+
             _t.toggleRoute(value, el);
             return false;
         }
@@ -708,11 +708,25 @@ Mapper.prototype = {
             //already active, inactivate it
             _t.makeRouteInactive(value, el)
             el.classList.remove('active')
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'Route Selection',
+                eventAction: 'Hide Route',
+                eventLabel: value
+            });
+
         } else {
             el.classList.add('active')
             _t.makeRouteActive(value, el)
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'Route Selection',
+                eventAction: 'Show Route',
+                eventLabel: value
+            });
 
         }
+
     },
 
     makeRouteActive: function(route, el) {
