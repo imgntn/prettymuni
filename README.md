@@ -1,6 +1,8 @@
 # https://www.prettymuni.com
 # What this is
 
+https://medium.com/@jamesbpollack/pretty-muni-71773427e83d
+
 I was asked to create a live map of San Francisco transportation recently when applying to a job, so I made this :)
 
 It uses d3.js and vanilla javascript to show and update current positions of realtime buses in the San Francisco Muni system.
