@@ -48,7 +48,8 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [] offline detection
 - [x] send google analytics event on route toggle
 - [] add 'live' indicator to top of page
-- [] add gulp deploy task for copying a /public folder into docs to cleanup that naming mess.
+- [] add gulp deploy task for copying a /public folder into docs to cleanup that naming mess and detach github pushes from production
+-[] ^^ stop working on master ;P
 
 # bugs
 - [x] when a new vehicle is added or removed from a route, the route is being shuffled. fixed by passing second parameter to .data() to keep track
@@ -61,6 +62,7 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [x] remove material design, jquery
 - [x] need my own route selector, layout, buttons. 
 - [] rotations on tearpdrop transitions are weird.  sort out how to make a group
+
 
 # bandwidth and performance observations
 - 1.1kb per route
