@@ -113,18 +113,11 @@ Mapper.prototype = {
             .style("fill", getRandomHexColor())
             .style("stroke", getRandomHexColor())
             .attr("d", geoPath)
-            .transition()
-            .duration(1750)
-            .attr('opacity', 1)
-
 
         var streetsLayer = document.getElementById('layer_streets');
         var svg = document.getElementsByTagName('svg')[0];
 
-
         svg.insertBefore(streetsLayer, svg.children[1])
-
-
 
         console.log('end of basemap drawing', geojson.name)
 
