@@ -15,8 +15,9 @@ Mapper.prototype = {
         //'streets',
         //'streets_minified',
         //'streets_reduced_precision',
-        'freeways',
+
         'arteries',
+        'freeways',
     ],
     baseMapGeoJSON: [],
     baseMapGroups: [],
@@ -77,8 +78,8 @@ Mapper.prototype = {
         })
     },
 
-    lazyLoadStreetsBaseMap:function(){
-            var _t = this;
+    lazyLoadStreetsBaseMap: function() {
+        var _t = this;
 
 
         // do a thing, possibly async, then…
@@ -92,11 +93,11 @@ Mapper.prototype = {
             geojson.name = 'streets';
             _t.baseMapGeoJSON.push(geojson);
             _t.addStreetsBaseMapLayer(geojson);
-   
-        });    
+
+        });
     },
 
-   addStreetsBaseMapLayer: function(geojson) {
+    addStreetsBaseMapLayer: function(geojson) {
         var _t = this;
         var svgGroup = _t.svg.append("g").attr('id', 'layer_streets')
 
@@ -113,16 +114,15 @@ Mapper.prototype = {
             .style("stroke", getRandomHexColor())
             .attr("d", geoPath)
             .transition()
-            .duration(1000)
+            .duration(1750)
             .attr('opacity', 1)
 
 
-         var v = document.getElementById('layer_streets');
-        var z = document.getElementsByTagName('svg')[0];
-        console.log('z is ',z)
-        window.z =z ;
+        var streetsLayer = document.getElementById('layer_streets');
+        var svg = document.getElementsByTagName('svg')[0];
 
-        z.insertBefore(v,z.children[2])
+
+        svg.insertBefore(streetsLayer, svg.children[1])
 
 
 
