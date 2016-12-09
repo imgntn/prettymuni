@@ -131,7 +131,7 @@ Mapper.prototype = {
             .style("fill", getRandomHexColor())
             .style("stroke", getRandomHexColor())
             .attr("d", geoPath)
-            .on('click', _t.clickGeoJSON)
+            // .on('click', _t.clickGeoJSON)
             // .transition()
             // .duration(5500)
             // .attr('opacity', 1)
@@ -170,10 +170,19 @@ Mapper.prototype = {
         console.log('vehicle clicked', val['@attributes'])
 
     },
+    isSecure:function(){
+        if( window.location.protocol.indexOf('https:')>-1){
+            return _t.proxyURL
+        }
+        else{
+              return ''      
+        }
 
+    },
     fetchRouteList: function() {
         var _t = this;
-        var routeListURL = _t.proxyURL + 'http://webservices.nextbus.com/service/publicXMLFeed?command=routeList&a=sf-muni';
+       
+        var routeListURL = _t.isSecure() + 'http://webservices.nextbus.com/service/publicXMLFeed?command=routeList&a=sf-muni';
 
         var p = new Promise(function(resolve, reject) {
             var xhr = new XMLHttpRequest();
@@ -206,7 +215,7 @@ Mapper.prototype = {
         var tag = tag || '';
         tag = tag.toUpperCase();
 
-        var routeURL = _t.proxyURL + 'http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=sf-muni&r=' + tag;
+        var routeURL = _t.isSecure() + 'http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=sf-muni&r=' + tag;
 
         var p = new Promise(function(resolve, reject) {
 
