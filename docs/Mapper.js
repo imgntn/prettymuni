@@ -594,10 +594,10 @@ Mapper.prototype = {
             // .transition().attr("r", "0.45").duration(1000)
 
         headingDrops
-            .transition()
+            // .transition()
             //.attrTween("transform", tween)
-            .attr("transform", _t.placeHeadingDrop)
-            .duration(_t.refreshRate * 1000)
+            // .attr("transform", _t.placeHeadingDrop)
+            // .duration(_t.refreshRate * 1000)
 
 
         function tween(d, i, a) {
