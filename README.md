@@ -34,18 +34,16 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 # nice-to-haves
 - [x] active color of tile is bus route color
 - [x] teardrop heading indicator
-- [] add 'live' indicator to top of page
+- [x] load street map async 
+- [x] fade in the streets when they are loaded async so that it looks nice
 - [] show route name on hover in route selector tile + map
-- [] inbound/ outbound "ping" button
 - [] scale vehicle groups down as you zoom in so the fit the streets.
 - [] custom, thematic loader.  
-- [] load street map async 
-- [] fade in the streets when they are loaded async so that it looks nice
 - [] clicking should toggle route line path display on off
 - [] offline detection
 - [x] send google analytics event on route toggle
 - [] add gulp deploy task for copying a /public folder into docs to cleanup that naming mess and detach github pushes from production
--[] ^^ stop working on master ;P
+- [] ^^ or stop working on master ;P
 
 # bugs
 - [x] when a new vehicle is added or removed from a route, the route is being shuffled. fixed by passing second parameter to .data() to keep track
@@ -57,23 +55,21 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [x] browser default looks like crap on desktop and i don't want to start doing feature detection, so i think i'll roll my own.
 - [x] remove material design, jquery
 - [x] need my own route selector, layout, buttons. 
-- [] rotations on tearpdrop transitions are weird.  sort out how to make a group
+- [] rotations on tearpdrop transitions are weird.  redraw tear path SVG so it is around origin, or create a group and pre-translate and then attach the paths to that (rotate the group)
 
 # bandwidth and performance observations
-- 1.1kb per route
-- ~80kb to get all routes
+- 1.1kb per route from nextBus
+- ~80kb to get all routes at once
 - streets geoJSON is 9mb and probably needs to be simplified
 - gzipping on server reduces this to 1.2mb delivered, but should still try to do it async
-- 118kb .js
-- 1kb css
-- MS edge perf is bad.
+- 132kb .js
+- 2kb css
+- 11kb fonts
 - perf rankings:  chrome, firefox, edge.
+- MS edge perf is extra bad.
 - a bit poky on the chromebook but it does run all routes.
 - perf problems are likely related to the number of svg elements.  dom manipulation can get slow.
-- also should add caching so i'm not transforming / transitioning locations that havent really changed.
-
-# mobile observations
-- something weird on landscape iphone 5, need to see whats up there
+- should add caching so i'm not transforming / transitioning locations and headings that haven't really changed. this could be a filter/threshold 
 
 # wow-zone someday
 - [] use an elevation service to do a sweet altitude vis 
