@@ -282,8 +282,8 @@ Mapper.prototype = {
                         if (parsedRoute.hasOwnProperty('body') && parsedRoute.body.hasOwnProperty('Error')) {
                             reject(parsedRoute.body.Error)
                         } else {
-                            console.log('parsedRoute')
-                            _t.drawRoutePath(parsedRoute.body.route)
+                            console.log('parsedRoute',parsedRoute)
+                            //_t.drawRoutePath(parsedRoute.body.route)
                             resolve(parsedRoute);
                         }
                     }
@@ -631,14 +631,13 @@ Mapper.prototype = {
 
     placeHeadingDrop: function(d) {
         var _t = this;
-        //console.log('drop place d', d)
         var heading = d['@attributes'].heading;
         var radianHeading = Math.radians(heading);
         var y = 9 * -Math.cos(radianHeading) + 0;
         var x = 9 * Math.sin(radianHeading) + 0;
         var tag = d['@attributes'].routeTag;
 
-        return "scale(0.6)rotate(" + heading + ")translate(" + -15 + "," + -25 + ")"
+        return "scale(0.6)rotate(" + heading + ")translate(" + -15 + "," + -28 + ")"
     },
 
     translateHeadingDot: function(d) {
@@ -652,11 +651,6 @@ Mapper.prototype = {
     setupControls: function() {
         var _t = this;
 
-        document.addEventListener("DOMContentLoaded", function() {
-
-        });
-
-        // code…
         _t.fetchRouteList()
             .then(function(data) {
                 _t.updateControlOptions();
@@ -878,22 +872,22 @@ Mapper.prototype = {
                 // Create the measurement node
 
 
-var scrollDiv = document.createElement("div");
-scrollDiv.className = "scrollbar-measure";
-document.body.appendChild(scrollDiv);
+                var scrollDiv = document.createElement("div");
+                scrollDiv.className = "scrollbar-measure";
+                document.body.appendChild(scrollDiv);
 
-// Get the scrollbar width
-var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-console.warn(scrollbarWidth); // Mac:  15
+                // Get the scrollbar width
+                var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+                console.warn(scrollbarWidth); // Mac:  15
 
-// Delete the DIV 
-document.body.removeChild(scrollDiv);
+                // Delete the DIV 
+                document.body.removeChild(scrollDiv);
 
-                closeButton.style.right=scrollbarWidth/2+'px';
+                closeButton.style.right = scrollbarWidth / 2 + 'px';
                 stuck = true;
             } else if (stuck && e.target.scrollTop <= stickPoint) {
                 closeButton.style.position = '';
-                closeButton.style.right='';
+                closeButton.style.right = '';
                 stuck = false;
             }
         }
