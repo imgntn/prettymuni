@@ -694,12 +694,22 @@ Mapper.prototype = {
         var _t = this;
         _t.routeSelector.style.display = "none";
         _t.buttonOverlay.style.display = "inline-block";
+        ga('send', {
+            hitType: 'event',
+            eventCategory: 'Route Selection',
+            eventAction: 'Close Route Selector (Show Map)',
+        });
     },
 
     showRouteSelector: function() {
         var _t = this;
         _t.routeSelector.style.display = "inline-block";
         _t.buttonOverlay.style.display = "none";
+        ga('send', {
+            hitType: 'event',
+            eventCategory: 'Route Selection',
+            eventAction: 'Show Route Selector',
+        });
     },
 
     toggleRoute: function(value, el) {
@@ -753,6 +763,7 @@ Mapper.prototype = {
         while (_t.routeSelector.hasChildNodes()) {
             _t.routeSelector.removeChild(_t.routeSelector.lastChild);
         }
+
     },
 
     updateControlOptions: function() {
@@ -796,6 +807,12 @@ Mapper.prototype = {
         [].forEach.call(activeTiles, function(el) {
             el.classList.remove("active");
             el.style.backgroundColor = _t.routeTileBackgroundColor;
+        });
+
+        ga('send', {
+            hitType: 'event',
+            eventCategory: 'Route Selection',
+            eventAction: 'Clear',
         });
     },
 
