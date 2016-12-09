@@ -119,8 +119,6 @@ Mapper.prototype = {
 
         svg.insertBefore(streetsLayer, svg.children[1])
 
-        console.log('end of basemap drawing', geojson.name)
-
         this.baseMapGroups.push(svgGroup);
 
     },
@@ -142,7 +140,7 @@ Mapper.prototype = {
             if (_t.baseMapGeoJSON.length === _t.baseMapNames.length) {
                 _t.drawBaseMaps();
             } else {
-                console.log('Waiting for basemaps to finish loading')
+                //console.log('Waiting for basemaps to finish loading')
             }
         });
     },
@@ -878,7 +876,6 @@ Mapper.prototype = {
 
                 // Get the scrollbar width
                 var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-                console.warn(scrollbarWidth); // Mac:  15
 
                 // Delete the DIV 
                 document.body.removeChild(scrollDiv);
