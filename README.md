@@ -46,7 +46,7 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [] clicking should toggle route line path display on off
 - [] every route line path has two inner lines for inbound outbound directional pulse wave along the stops
 - [] offline detection
-- [] send google analytics event on route toggle
+- [x] send google analytics event on route toggle
 - [] add 'live' indicator to top of page
 
 # bugs

@@ -2,6 +2,7 @@ function Mapper() {
     this.setupDrawingSpace();
     this.setupControls();
     this.loadAllBaseMaps();
+    this.lazyLoadStreetsBaseMap();
 }
 
 Mapper.prototype = {
@@ -74,6 +75,61 @@ Mapper.prototype = {
         _t.baseMapNames.forEach(function(mapName) {
             _t.loadBaseMap(mapName);
         })
+    },
+
+    lazyLoadStreetsBaseMap:function(){
+            var _t = this;
+
+
+        // do a thing, possibly async, then…
+        d3.json("assets/sfmaps/streets.json", function(error, geojson) {
+            if (error) {
+                //Mapper.js:82 SyntaxError: Unexpected end of JSON input(…)
+                // happens when a basemap fails to load.  need promises!
+                console.error(error);
+                return
+            }
+            geojson.name = 'streets';
+            _t.baseMapGeoJSON.push(geojson);
+            _t.addStreetsBaseMapLayer(geojson);
+   
+        });    
+    },
+
+   addStreetsBaseMapLayer: function(geojson) {
+        var _t = this;
+        var svgGroup = _t.svg.append("g").attr('id', 'layer_streets')
+
+
+
+        var geoPath = d3.geoPath()
+            .projection(this.projection);
+
+        svgGroup.selectAll("path")
+            .data(geojson.features)
+            .enter()
+            .append("path")
+            .style("fill", getRandomHexColor())
+            .style("stroke", getRandomHexColor())
+            .attr("d", geoPath)
+            .transition()
+            .duration(1000)
+            .attr('opacity', 1)
+
+
+         var v = document.getElementById('layer_streets');
+        var z = document.getElementsByTagName('svg')[0];
+        console.log('z is ',z)
+        window.z =z ;
+
+        z.insertBefore(v,z.children[2])
+
+
+
+        console.log('end of basemap drawing', geojson.name)
+
+        this.baseMapGroups.push(svgGroup);
+
     },
 
     loadBaseMap: function(mapName) {
@@ -839,7 +895,9 @@ Mapper.prototype = {
         loader.style.display = "none";
         var showRouteSelectorButtonHolder = document.getElementsByClassName('show-route-selector-button-holder')[0];
         showRouteSelectorButtonHolder.style.display = 'inline-flex'
-    }
+    },
+
+
 
 }
 
