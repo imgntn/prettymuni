@@ -516,10 +516,10 @@ Mapper.prototype = {
         //create a heading drop
 
         var dropGroup = dotGroup.append('g')
-        .style('transform-origin','center center')
+            .style('transform-origin', 'center center')
 
         var drop = dropGroup.append('path')
-        .style('transform-origin','center center')
+            .style('transform-origin', 'center center')
             .attr('d', _t.dropPath)
             .attr('class', 'drop-group')
             .attr('fill', 'black')
@@ -583,7 +583,7 @@ Mapper.prototype = {
         var y = 9 * -Math.cos(radianHeading) + 0;
         var x = 9 * Math.sin(radianHeading) + 0;
         var tag = d['@attributes'].routeTag;
-      
+
         return "scale(0.65)rotate(" + heading + ")translate(" + -15 + "," + -25 + ")"
     },
 
@@ -599,19 +599,21 @@ Mapper.prototype = {
         var _t = this;
 
         document.addEventListener("DOMContentLoaded", function() {
-            // code…
-            _t.fetchRouteList()
-                .then(function(data) {
-                    _t.updateControlOptions();
-                    _t.generateColorsForAllRoutes();
-                    _t.makeRouteSelectorButtonsSticky();
-                    _t.refreshActiveRoutes();
-                })
-                .catch(function(err) {
-                    console.error('Error drawing all routes', err);
-                });
 
         });
+
+        // code…
+        _t.fetchRouteList()
+            .then(function(data) {
+                _t.updateControlOptions();
+                _t.generateColorsForAllRoutes();
+                _t.makeRouteSelectorButtonsSticky();
+                _t.refreshActiveRoutes();
+            })
+            .catch(function(err) {
+                console.error('Error drawing all routes', err);
+            });
+
     },
 
     createControlOption: function(text, value) {
@@ -813,7 +815,6 @@ Mapper.prototype = {
 }
 
 
-var liveMapper = new Mapper();
 
 function getRandomHexColor() {
     return '#' + ("000000" + Math.random().toString(16).slice(2, 8).toUpperCase()).slice(-6);
@@ -871,3 +872,7 @@ function savePNG() {
         // start loading the image.
     img.src = url;
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    var liveMapper = new Mapper();
+});
