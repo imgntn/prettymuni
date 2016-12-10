@@ -1,5 +1,4 @@
 # https://www.prettymuni.com
-# What this is
 
 https://medium.com/@jamesbpollack/pretty-muni-71773427e83d
 
