@@ -1,6 +1,6 @@
 # https://www.prettymuni.com
 
-https://medium.com/@jamesbpollack/pretty-muni-71773427e83d
+Read about the process at https://medium.com/@jamesbpollack/pretty-muni-71773427e83d
 
 I was asked to create a live map of San Francisco transportation recently when applying to a job, so I made this :)
 
