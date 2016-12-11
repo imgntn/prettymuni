@@ -669,7 +669,7 @@ Mapper.prototype = {
             .attr("transform", _t.translateHeadingDot)
             .duration(_t.refreshRate * 1000)
 
-        vehicles.forEach(function(vehicle) {
+        predictableVehicles.forEach(function(vehicle) {
             _t.vehicleStore[vehicle['@attributes'].id] = vehicle;
         })
 

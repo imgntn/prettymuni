@@ -36,7 +36,7 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [x] teardrop heading indicator
 - [x] load street map async 
 - [x] fade in the streets when they are loaded async so that it looks nice
-- [] show route name on hover in route selector tile + map
+- [x] show route name  in route selector tile at larger sizes
 - [] scale vehicle groups down as you zoom in so the fit the streets.
 - [] custom, thematic loader.  
 - [] clicking should toggle route line path display on off
