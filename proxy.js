@@ -15,7 +15,12 @@ app.use(function(err, req, res, next) {
 
 //so because nextbus is http only, we have to proxy this request to avoid mixed content warnings and still serve our app over https.
 app.use('/proxy', function(req, res) {
-    console.log('proxy req',req)
+
+    var origin = req.get('origin');
+    var host = req.get('host');
+
+    console.log('origin',JSON.stringify(origin));
+    console.log('host',JSON.stringify(host));
     if (req.url.indexOf('webservices.nextbus.com/service/publicXMLFeed') < 0) {
         // console.log('only proxying my queries')
         return;
