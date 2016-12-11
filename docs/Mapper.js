@@ -677,8 +677,8 @@ Mapper.prototype = {
     },
 
     dropPath: function(d) {
-        var dropPath = "M15 6 Q 15 6, 25 18 A 12.8 12.8 0 1 1 5 18 Q 15 6 15 6z"
-        return dropPath
+        var dropPath = "M15 6 Q 15 6, 25 18 A 12.8 12.8 0 1 1 5 18 Q 15 6 15 6z";
+        return dropPath;
     },
 
     placeHeadingDrop: function(d) {
@@ -689,7 +689,7 @@ Mapper.prototype = {
         var x = 9 * Math.sin(radianHeading) + 0;
         var tag = d['@attributes'].routeTag;
 
-        return "scale(0.6)rotate(" + heading + ")translate(" + -15 + "," + -28 + ")"
+        return "scale(0.6)rotate(" + heading + ")translate(" + -15 + "," + -28 + ")";
     },
 
     translateHeadingDot: function(d) {
@@ -726,14 +726,14 @@ Mapper.prototype = {
             return false;
         }
 
-        var routeTag = document.createElement('div')
+        var routeTag = document.createElement('div');
         routeTag.innerText = routeProps.tag;
-        routeTag.classList.add('route-selector-tile-tag')
+        routeTag.classList.add('route-selector-tile-tag');
         el.appendChild(routeTag);
 
-        var routeTitle = document.createElement('div')
-        routeTitle.innerText = routeProps.title
-        routeTitle.classList.add('route-selector-tile-title')
+        var routeTitle = document.createElement('div');
+        routeTitle.innerText = routeProps.title;
+        routeTitle.classList.add('route-selector-tile-title');
         el.appendChild(routeTitle);
 
 
@@ -763,32 +763,11 @@ Mapper.prototype = {
     createControlButtons: function() {
         var _t = this;
 
-        var clearButtonHolder = document.getElementsByClassName('clear-all-button-holder')[0]
+        var clearButtonHolder = document.getElementsByClassName('clear-all-button-holder')[0];
+        var closeRouteSelectorButtonHolder = document.getElementsByClassName('close-route-selector-button-holder')[0];
+        closeRouteSelectorButtonHolder.classList.add('close-route-selector-button-holder');
 
-        var clearButton = document.createElement('div')
-        clearButton.innerText = 'Clear All';
-        clearButton.classList.add('clear-all-button')
-
-        clearButtonHolder.appendChild(clearButton);
-
-
-        var closeRouteSelectorButtonHolder = document.getElementsByClassName('close-route-selector-button-holder')[0]
-        closeRouteSelectorButtonHolder.classList.add('close-route-selector-button-holder')
-
-        var closeRouteSelectorButton = document.createElement('div');
-        closeRouteSelectorButton.innerHTML = 'Close Route Selector &#9652;';
-        closeRouteSelectorButton.classList.add('close-route-selector-button');
-
-        closeRouteSelectorButtonHolder.appendChild(closeRouteSelectorButton);
-
-        var showRouteSelectorButtonHolder = document.getElementsByClassName('show-route-selector-button-holder')[0]
-
-        var showRouteSelectorButton = document.createElement('div');
-        showRouteSelectorButton.innerHTML = 'Choose Routes &#9662;';
-
-        showRouteSelectorButton.classList.add('show-route-selector-button')
-
-        showRouteSelectorButtonHolder.appendChild(showRouteSelectorButton);
+        var showRouteSelectorButtonHolder = document.getElementsByClassName('show-route-selector-button-holder')[0];
 
         var buttonOverlay = document.getElementsByClassName('button-overlay-container')[0];
 
