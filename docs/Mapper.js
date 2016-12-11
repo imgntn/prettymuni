@@ -478,6 +478,30 @@ Mapper.prototype = {
         }
     },
 
+    filterChangedHeadingVehicles: function(vehicles) {
+        var _t = this;
+        return vehicles.filter(function(obj) {
+            return _t.checkIfVehicleHasChangedHeading(obj);
+        });
+    },
+
+    checkIfVehicleHasChangedHeading: function(vehicle) {
+        var _t = this;
+
+        var hasLast = _t.vehicleStore[vehicle['@attributes'].id];
+        if (typeof(hasLast) === 'undefined' || hasLast == null) {
+            return false;
+        }
+        var lastHeading = _t.vehicleStore[vehicle['@attributes'].id]['@attributes'].heading;;
+        var currentHeading = vehicle['@attributes'].heading
+
+        if (lastHeading !== currentHeading) {
+            return true
+        } else {
+            return false
+        }
+    },
+
     drawVehicles: function(vehicles, tag) {
         var _t = this;
         if (!vehicles) {
@@ -514,6 +538,8 @@ Mapper.prototype = {
 
         var predictableVehicles = _t.filterPredictableVehicles(vehicles);
         var movedVehicles = _t.filterMovedVehicles(predictableVehicles);
+        var changedHeadingVehicles = _t.filterChangedHeadingVehicles(predictableVehicles);
+
         var dotGroups = svgGroup.selectAll(".dot-group").data(predictableVehicles, function(d) {
             return d['@attributes'].id;
         })
@@ -597,6 +623,9 @@ Mapper.prototype = {
             .attr("transform", _t.translateHeadingDot)
 
         headingDrops
+            .data(changedHeadingVehicles, function(d) {
+                return d['@attributes'].id;
+            })
             .transition()
             .attr("transform", _t.placeHeadingDrop)
 
