@@ -28,6 +28,17 @@ Mapper.prototype = {
     activeRoutes: [],
     proxyURL: 'https://jbpmunimap.herokuapp.com/proxy?url=',
     vehicleStore: {},
+
+    isSecure: function() {
+        var _t = this;
+        if (window.location.protocol.indexOf('https:') > -1) {
+            return _t.proxyURL
+        } else {
+            return ''
+        }
+
+    },
+
     setupDrawingSpace: function() {
         var _t = this;
         var width = window.innerWidth,
@@ -100,29 +111,27 @@ Mapper.prototype = {
         var svgGroup = _t.svg.append("g").attr('id', 'layer_streets')
 
         var geoPath = d3.geoPath()
-            .projection(this.projection);
+            .projection(_t.projection);
 
         svgGroup.selectAll("path")
             .data(geojson.features)
             .enter()
             .append("path")
-            .style("fill", getRandomHexColor())
             .style("stroke", getRandomHexColor())
             .attr("d", geoPath)
-            //.attr('opacity',0.5)
+            .attr('opacity', 0.5)
 
         var streetsLayer = document.getElementById('layer_streets');
         var svg = document.getElementsByTagName('svg')[0];
 
         svg.insertBefore(streetsLayer, svg.children[1])
 
-        this.baseMapGroups.push(svgGroup);
+        _t.baseMapGroups.push(svgGroup);
 
     },
 
     loadBaseMap: function(mapName) {
         var _t = this;
-
 
         d3.json("assets/sfmaps/" + mapName + ".json", function(error, geojson) {
             if (error) {
@@ -137,7 +146,6 @@ Mapper.prototype = {
         });
     },
 
-
     drawBaseMaps: function() {
         var _t = this;
         _t.baseMapNames.forEach(function(mapName) {
@@ -149,8 +157,6 @@ Mapper.prototype = {
         _t.hideLoader()
     },
 
-
-
     addBaseMapLayer: function(geojson, mapName) {
         if (!geojson || typeof geojson === 'undefined') {
             return
@@ -159,7 +165,7 @@ Mapper.prototype = {
         var svgGroup = _t.svg.append("g").attr('id', 'layer_' + mapName)
 
         var geoPath = d3.geoPath()
-            .projection(this.projection);
+            .projection(_t.projection);
 
         svgGroup.selectAll("path")
             .data(geojson.features)
@@ -168,59 +174,22 @@ Mapper.prototype = {
             .style("fill", getRandomHexColor())
             .style("stroke", getRandomHexColor())
             .attr("d", geoPath)
-            // .on('click', _t.clickGeoJSON)
             // .transition()
             // .duration(5500)
             // .attr('opacity', 1)
 
-        this.baseMapGroups.push(svgGroup);
+        _t.baseMapGroups.push(svgGroup);
 
     },
 
-        getBaseMapGeoJSONByName: function(mapName) {
-        return this.baseMapGeoJSON.filter(function(obj) {
+    getBaseMapGeoJSONByName: function(mapName) {
+        var _t = this;
+        return _t.baseMapGeoJSON.filter(function(obj) {
             return obj.name == mapName;
         })[0];
     },
 
 
-    drawAllRoutesAtInterval: function() {
-        var _t = this;
-        _t.drawAllRoutes();
-
-        _t.refreshInterval = setInterval(function() {
-            _t.drawAllRoutes();
-        }, _t.refreshRate * 1000)
-    },
-
-    clickGeoJSON: function(val) {
-        console.log('geoJSON clicked', val.properties)
-    },
-
-    mouseoverVehicle: function(val) {
-        console.log('vehicle mouseover', val['@attributes'])
-
-    },
-
-    mouseoutVehicle: function(val) {
-        console.log('vehicle mouseout', val['@attributes'])
-
-    },
-
-    clickVehicle: function(val) {
-        console.log('vehicle clicked', val['@attributes'])
-
-    },
-
-    isSecure: function() {
-        var _t = this;
-        if (window.location.protocol.indexOf('https:') > -1) {
-            return _t.proxyURL
-        } else {
-            return ''
-        }
-
-    },
 
     fetchRouteList: function() {
         var _t = this;
@@ -250,7 +219,7 @@ Mapper.prototype = {
             }
         });
 
-        return p
+        return p;
     },
 
     fetchRoute: function(tag) {
@@ -288,9 +257,10 @@ Mapper.prototype = {
             }
         });
 
-        return p
+        return p;
 
     },
+
 
     drawRoutePath: function(route) {
 
@@ -308,11 +278,11 @@ Mapper.prototype = {
         var _t = this;
         var allPaths = route.path;
 
-        var svgGroup = _t.svg.append("g").attr('id', "routePath_" + route['@attributes'].tag).attr('class', 'route-path')
+        var svgGroup = _t.svg.append("g").attr('id', "routePath_" + route['@attributes'].tag).attr('class', 'route-path');
 
         var routePathLayer = document.getElementById("routePath_" + route['@attributes'].tag);
         var svg = document.getElementsByTagName('svg')[0];
-        svg.insertBefore(routePathLayer, svg.children[4])
+        svg.insertBefore(routePathLayer, svg.children[4]);
 
 
         var pathsToDraw = [];
@@ -363,7 +333,23 @@ Mapper.prototype = {
             )
 
         }
-        return links
+
+        return links;
+
+    },
+
+    mouseoverVehicle: function(val) {
+        console.log('vehicle mouseover', val['@attributes']);
+
+    },
+
+    mouseoutVehicle: function(val) {
+        console.log('vehicle mouseout', val['@attributes']);
+
+    },
+
+    clickVehicle: function(val) {
+        console.log('vehicle clicked', val['@attributes']);
 
     },
 
@@ -401,20 +387,6 @@ Mapper.prototype = {
 
     },
 
-    drawAllRoutes: function() {
-        var _t = this;
-        _t.fetchRouteList()
-            .then(function(data) {
-                data.body.route.forEach(function(route) {
-                    var tag = route['@attributes'].tag;
-                    _t.drawVehiclesForRoute(tag);
-                })
-            })
-            .catch(function(err) {
-                console.error('Error drawing all routes', err);
-            });
-    },
-
     drawSetOfRoutes: function(routeSet) {
         var _t = this;
 
@@ -435,21 +407,8 @@ Mapper.prototype = {
                 _t.drawVehicles(locations.body.vehicle, tag)
             })
             .catch(function(err) {
-                console.error('Error drawing vehicles for route', err);
+                console.log('Error drawing vehicles for route', err);
             });
-    },
-
-    filterPredictableVehicles: function(vehicles) {
-        return vehicles.filter(function(obj) {
-            return obj['@attributes'].predictable === "true";
-        });
-    },
-
-    filterMovedVehicles: function(vehicles) {
-        var _t = this;
-        return vehicles.filter(function(obj) {
-            return _t.checkIfVehicleHasMoved(obj);
-        });
     },
 
     generateRouteColors: function() {
@@ -483,6 +442,19 @@ Mapper.prototype = {
             _t.routeColors[tag] = colors;
         })
 
+    },
+
+    filterPredictableVehicles: function(vehicles) {
+        return vehicles.filter(function(obj) {
+            return obj['@attributes'].predictable === "true";
+        });
+    },
+
+    filterMovedVehicles: function(vehicles) {
+        var _t = this;
+        return vehicles.filter(function(obj) {
+            return _t.checkIfVehicleHasMoved(obj);
+        });
     },
 
     checkIfVehicleHasMoved: function(vehicle) {
@@ -525,16 +497,13 @@ Mapper.prototype = {
                 .on("mouseover", function() {
                     var sel = d3.select(this);
                     sel.moveToFront();
-
                     var thisRoutePath = document.getElementById('routePath_' + tag);
                     var firstRouteGroup = document.getElementsByClassName('route-group')[0]
                     firstRouteGroup.insertAdjacentElement('beforebegin', thisRoutePath)
-
                 })
         }
 
         _t.vehicleGroups[tag] = svgGroup;
-
 
         if (Array.isArray(vehicles) === false) {
             //nextbus will return a single vehicle object instead of an array with one object if there is only one. so we make our own array
@@ -558,7 +527,6 @@ Mapper.prototype = {
         })
 
         var colors = _t.routeColors[tag];
-
         dotGroups.exit().remove();
 
         var dotGroup = dotGroups.enter()
@@ -593,9 +561,6 @@ Mapper.prototype = {
         dotGroup.append("circle")
             .call(_t.zoom.transform, _t.zoomTransform)
             .attr("r", "6")
-            // .attr('fill',function(d){
-            //     console.log('d',d); return d['@attributes'].routeColor
-            // })
             .attr("fill", colors.circle.fill)
             .attr("stroke", colors.circle.stroke)
             .style('stroke-width', '1px')
@@ -627,13 +592,15 @@ Mapper.prototype = {
         dotGroup.append("circle")
             .attr('class', 'heading-dot')
             .call(_t.zoom.transform, _t.zoomTransform)
-            .attr("r", "0.5")
             .attr("fill", colors.circle.fill)
+            .attr("r", "0.5")
             .attr("transform", _t.translateHeadingDot)
 
         headingDrops
             .transition()
             .attr("transform", _t.placeHeadingDrop)
+
+
 
         dotGroups
             .data(movedVehicles, function(d) {
@@ -647,7 +614,8 @@ Mapper.prototype = {
                 ]) + ")";
             })
             .duration(_t.refreshRate * 1000)
-            //the headings change fairly frequently so we update them as well. would be nicer if they went around the arc.
+
+        //the headings change fairly frequently so we update them as well. would be nicer if they went around the arc.
         headingDots
             .data(movedVehicles, function(d) {
                 return d['@attributes'].id;
@@ -656,6 +624,7 @@ Mapper.prototype = {
             .attr("transform", _t.translateHeadingDot)
             .duration(_t.refreshRate * 1000)
 
+        //we need to store the vehicles so we can see if they've moved in the future
         predictableVehicles.forEach(function(vehicle) {
             _t.vehicleStore[vehicle['@attributes'].id] = vehicle;
         })
@@ -723,7 +692,6 @@ Mapper.prototype = {
         routeTitle.classList.add('route-selector-tile-title');
         el.appendChild(routeTitle);
 
-
         return el
     },
 
@@ -732,7 +700,6 @@ Mapper.prototype = {
         while (_t.routeSelector.hasChildNodes()) {
             _t.routeSelector.removeChild(_t.routeSelector.lastChild);
         }
-
     },
 
     updateControlOptions: function() {
@@ -744,7 +711,6 @@ Mapper.prototype = {
             var control = _t.createControlOption(route['@attributes'].title, route['@attributes'])
             _t.routeSelector.appendChild(control);
         });
-
     },
 
     createControlButtons: function() {
@@ -822,7 +788,6 @@ Mapper.prototype = {
             });
 
         }
-
     },
 
     makeRouteActive: function(route, el) {
@@ -930,7 +895,28 @@ Mapper.prototype = {
         showRouteSelectorButtonHolder.style.display = 'inline-flex'
     },
 
+    offerCustomPrint: function() {
+        var _t = this;
+        if (localStorage.setItem('hasSeenPrettyMuniCustomPrint' !== null)) {
+            return
+        } else {
+            _t.setTimeout(function() {
+                _t.showCustomPrintPopover();
+            }, 200)
+        }
 
+    },
+
+    showCustomPrintPopover: function() {
+        var popover = document.getElementsByClassName('custom-print-popover')[0];
+        popover.style.display = "inline-block";
+        localStorage.setItem('hasSeenPrettyMuniCustomPrint', true)
+    },
+
+    hideCustomPrintPopover: function() {
+        var popover = document.getElementsByClassName('custom-print-popover')[0];
+        popover.style.display = "none";
+    },
 
 }
 

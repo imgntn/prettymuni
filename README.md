@@ -41,12 +41,13 @@ Read about the process at https://medium.com/@jamesbpollack/pretty-muni-71773427
 - [] scale vehicle groups down as you zoom in so the fit the streets.
 - [] custom, thematic loader.  
 - [] offline detection 
-- [] add gulp deploy task for copying a /public folder into docs to cleanup that naming mess and detach github pushes from production
+- [] add gulp deploy task for copying a /public folder into /docs to cleanup that naming mess and detach github pages pushes from production
 - [] favorite routes
 - [] favorite colors
 - [] manifest to install as home screen app
 - [] animate route paths
 - [] pre filter routes with no vehicles out of route selector
+- [] vehicle location transitions could be projected along the vehicle paths.
 
 # bugs
 - [x] when a new vehicle is added or removed from a route, the route is being shuffled. fixed by passing second parameter to .data() to keep track
@@ -83,3 +84,7 @@ Read about the process at https://medium.com/@jamesbpollack/pretty-muni-71773427
 - [] maybe use topoJSON (what are expected savings?)
 - [] maybe use vector tiles http://bl.ocks.org/mbostock/5616813 https://mapzen.com/projects/vector-tiles/
 - [] every route line path has two inner lines for inbound outbound directional pulse wave along the stops
+
+
+# physical objects
+- [] custom print a set of basemaps w/ selected routes at a specific date or time of day

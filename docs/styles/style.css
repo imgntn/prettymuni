@@ -170,8 +170,23 @@ left: 10px;
 position: fixed;
 
 }
+/*
+#layer_streets{
+    opacity:0.5;
+}
 
+#layer_arteries{
+    opacity:0.85;
+}
 
+#layer_freeways{
+    opacity:0.75;
+}
+*/
+
+.custom-print-popover{
+    display: none;
+}
 
 .spinner {
 width: 60px;
