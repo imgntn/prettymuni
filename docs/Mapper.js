@@ -27,7 +27,7 @@ Mapper.prototype = {
     routeTileBackgroundColor: 'rgba(0,0,0,0.40)',
     activeRoutes: [],
     proxyURL: 'https://jbpmunimap.herokuapp.com/proxy?url=',
-    headingStore: {},
+    vehicleStore: {},
     setupDrawingSpace: function() {
         var _t = this;
         var width = window.innerWidth,
@@ -130,8 +130,7 @@ Mapper.prototype = {
             _t.baseMapGeoJSON.push(geojson);
             if (_t.baseMapGeoJSON.length === _t.baseMapNames.length) {
                 _t.drawBaseMaps();
-            } else {
-            }
+            } else {}
         });
     },
 
@@ -155,7 +154,9 @@ Mapper.prototype = {
     },
 
     addBaseMapLayer: function(geojson, mapName) {
-        if(!geojson || typeof geojson==='undefined'){return};
+        if (!geojson || typeof geojson === 'undefined') {
+            return
+        };
         var _t = this;
         var svgGroup = _t.svg.append("g").attr('id', 'layer_' + mapName)
 
@@ -173,7 +174,6 @@ Mapper.prototype = {
             // .transition()
             // .duration(5500)
             // .attr('opacity', 1)
-
 
         this.baseMapGroups.push(svgGroup);
 
@@ -249,6 +249,9 @@ Mapper.prototype = {
     },
 
     fetchRoute: function(tag) {
+        if (typeof tag !== 'string' || tag === null) {
+            return
+        }
         var _t = this;
         var tag = tag || '';
         tag = tag.toUpperCase();
@@ -271,8 +274,8 @@ Mapper.prototype = {
                         if (parsedRoute.hasOwnProperty('body') && parsedRoute.body.hasOwnProperty('Error')) {
                             reject(parsedRoute.body.Error)
                         } else {
-                            console.log('parsedRoute',parsedRoute)
-                            //_t.drawRoutePath(parsedRoute.body.route)
+                            console.log('parsedRoute', parsedRoute)
+                            _t.drawRoutePath(parsedRoute.body.route)
                             resolve(parsedRoute);
                         }
                     }
@@ -295,19 +298,21 @@ Mapper.prototype = {
         var _t = this;
         var allPaths = route.path;
 
+        var svgGroup = _t.svg.append("g").attr('id', "route_path" + route['@attributes'].tag).attr('class', 'route-path')
+
         allPaths.forEach(function(path) {
-            _t.connectPoints(path, route);
+            _t.connectPoints(path, route, svgGroup);
         })
 
-
-        //given a route
-        //for every 'path'
-        //create a d3 path using all of the points in that 'path'
-        //(will have to project latlon to get xy)
+        window.routeGroup = svgGroup
+            //given a route
+            //for every 'path' segment
+            //create a d3 path using all of the points in that 'path'
+            //(will have to project latlon to get xy)
     },
 
 
-    connectPoints: function(path, routeData) {
+    connectPoints: function(path, routeData, svgGroup) {
         var _t = this;
 
         var projectLine = d3.line()
@@ -326,18 +331,37 @@ Mapper.prototype = {
             });
 
 
+        function generateLinks(data) {
+            var links;
+            for (var i = 0, len = data.length - 1; i < len; i++) {
+                links.push({
+                    type: "LineString",
+                    coordinates: [
+                        [data[i].lon, data[i].lat],
+                        [data[i + 1].lon, data[i + 1].lat]
+                    ]
+                });
+            }
+            return links
+        }
+
+        var links = generateLinks(path);
+
         console.log('path in connec', path)
         path.point.forEach(function(point) {
-            var myPath = _t.svg.append("path")
-                .data(path)
-                .enter()
-                .attr("d", projectLine(point))
+
+            svgGroup.append("path")
+                .attr("d", function(d) {
+                    console.log('wtf', d)
+                    projectLine(point)
+                })
                 .attr("data-tag", routeData['@attributes'].tag)
                 .attr("stroke", '#' + routeData['@attributes'].color)
                 .attr("stroke-width", 20)
                 .style("stroke-opacity", 0.5)
                 .attr("fill", "none")
-                .attr("class", "route-path_" + routeData['@attributes'].tag);
+                .attr("class", "route-path-line_" + routeData['@attributes'].tag);
+
             //.append("svg:title")
             // .text(function(d) { 
             //     return routeData['@attributes'].title;
@@ -430,6 +454,13 @@ Mapper.prototype = {
         });
     },
 
+    filterMovedVehicles: function(vehicles) {
+        var _t = this;
+        return vehicles.filter(function(obj) {
+            return _t.checkIfVehicleHasMoved(obj);
+        });
+    },
+
     generateRouteColors: function() {
         return {
             circle: {
@@ -461,7 +492,27 @@ Mapper.prototype = {
             _t.routeColors[tag] = colors;
         })
 
+    },
 
+    checkIfVehicleHasMoved: function(vehicle) {
+        var _t = this;
+
+        var hasLast = _t.vehicleStore[vehicle['@attributes'].id];
+        if (typeof(hasLast) === 'undefined' || hasLast == null) {
+            return false;
+        }
+        var lastLon = _t.vehicleStore[vehicle['@attributes'].id]['@attributes'].lon;;
+        var lastLat = _t.vehicleStore[vehicle['@attributes'].id]['@attributes'].lat;
+        var currentLon = vehicle['@attributes'].lon;
+        var currentLat = vehicle['@attributes'].lat
+        var lonChanged = currentLon !== lastLon;
+        var latChanged = currentLat !== lastLat;
+
+        if (lonChanged || latChanged) {
+            return true
+        } else {
+            return false
+        }
     },
 
     drawVehicles: function(vehicles, tag) {
@@ -488,6 +539,7 @@ Mapper.prototype = {
 
         _t.vehicleGroups[tag] = svgGroup;
 
+
         if (Array.isArray(vehicles) === false) {
             //nextbus will return a single vehicle object instead of an array with one object if there is only one. so we make our own array
             var temp = [];
@@ -496,6 +548,7 @@ Mapper.prototype = {
         }
 
         var predictableVehicles = _t.filterPredictableVehicles(vehicles);
+        var movedVehicles = _t.filterMovedVehicles(predictableVehicles);
         var dotGroups = svgGroup.selectAll(".dot-group").data(predictableVehicles, function(d) {
             return d['@attributes'].id;
         })
@@ -550,10 +603,10 @@ Mapper.prototype = {
             .transition().attr("r", "12").duration(1000)
             .transition().attr("r", "8").duration(1000)
 
+
         dotGroup.append("text")
             .attr('text-anchor', "middle")
-
-        .attr('dy', '0.35em')
+            .attr('dy', '0.35em')
             .style("font-size", "8")
             .style('stroke-width', '1px')
             .style('paint-order', 'stroke')
@@ -596,6 +649,9 @@ Mapper.prototype = {
         }
 
         dotGroups
+            .data(movedVehicles, function(d) {
+                return d['@attributes'].id;
+            })
             .transition()
             .attr("transform", function(d) {
                 return "translate(" + _t.projection([
@@ -604,12 +660,19 @@ Mapper.prototype = {
                 ]) + ")";
             })
             .duration(_t.refreshRate * 1000)
-
-        //the headings change fairly frequently so we update them as well. would be nicer if they went around the arc.
+            //the headings change fairly frequently so we update them as well. would be nicer if they went around the arc.
         headingDots
+            .data(movedVehicles, function(d) {
+                return d['@attributes'].id;
+            })
             .transition()
             .attr("transform", _t.translateHeadingDot)
             .duration(_t.refreshRate * 1000)
+
+        vehicles.forEach(function(vehicle) {
+            _t.vehicleStore[vehicle['@attributes'].id] = vehicle;
+        })
+
 
     },
 
@@ -667,16 +730,15 @@ Mapper.prototype = {
         routeTag.innerText = routeProps.tag;
         routeTag.classList.add('route-selector-tile-tag')
         el.appendChild(routeTag);
-            
-        var routeTitle= document.createElement('div')
-        routeTitle.innerText=routeProps.title
+
+        var routeTitle = document.createElement('div')
+        routeTitle.innerText = routeProps.title
         routeTitle.classList.add('route-selector-tile-title')
         el.appendChild(routeTitle);
 
 
         return el
     },
-
 
     clearControlOptions: function() {
         var _t = this;
@@ -697,8 +759,6 @@ Mapper.prototype = {
         });
 
     },
-
-
 
     createControlButtons: function() {
         var _t = this;
@@ -827,6 +887,12 @@ Mapper.prototype = {
             if (_t.activeRoutes.length === 0) {
                 return
             } else {
+                ga('send', {
+                    hitType: 'event',
+                    eventCategory: 'Active Route Refresh',
+                    eventAction: 'Refresh',
+                    eventLabel: _t.activeRoutes.toString()
+                });
                 _t.drawSetOfRoutes(_t.activeRoutes)
             }
         }, _t.refreshRate * 1000)
@@ -899,8 +965,6 @@ Mapper.prototype = {
 
 }
 
-
-
 function getRandomHexColor() {
     return '#' + ("000000" + Math.random().toString(16).slice(2, 8).toUpperCase()).slice(-6);
 }
@@ -960,5 +1024,7 @@ function savePNG() {
 
 document.addEventListener("DOMContentLoaded", function() {
     var liveMapper = new Mapper();
-    window.liveMapper=liveMapper;
-},{passive:true});
+    window.liveMapper = liveMapper;
+}, {
+    passive: true
+});

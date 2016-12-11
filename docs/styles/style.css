@@ -1,5 +1,5 @@
 html{
-  touch-action: manipulation;
+touch-action: manipulation;
 }
 
 body {
@@ -124,43 +124,43 @@ left:0;
 }
 
 .loader-container{
-    width:100%;
-    height: 100%;
-    position: absolute;
-    top:0;
-    left:0;
-    display: inline-flex;
+width:100%;
+height: 100%;
+position: absolute;
+top:0;
+left:0;
+display: inline-flex;
 }
 
-@media screen and (max-width: 600px) {
-  #github-banner{
-       display:none;
-    }
-    .route-selector-tile {
-      font-size:1.1em;
-    }
-    .close-route-selector-button-holder ,.clear-all-button-holder {
-      height:15%;
-    }
-    .route-selector-tile-tag {
-      display:block;
-    }
-    .route-selector-tile-title{
-      display:none;
-    }
+@media screen and (max-width: 900px) {
+#github-banner{
+display:none;
+}
+.route-selector-tile {
+font-size:1.1em;
+}
+.close-route-selector-button-holder ,.clear-all-button-holder {
+height:15%;
+}
+.route-selector-tile-tag {
+display:block;
+}
+.route-selector-tile-title{
+display:none;
+}
 }
 
 .scrollbar-measure {
-  width: 100px;
-  height: 100px;
-  overflow: scroll;
-  position: absolute;
-  top: -9999px;
+width: 100px;
+height: 100px;
+overflow: scroll;
+position: absolute;
+top: -9999px;
 }
 
 .background-color-selector{
-  position: fixed;
-  top: 100px;
+position: fixed;
+top: 100px;
 }
 
 .share-button-holder{
@@ -169,36 +169,36 @@ left: 10px;
 position: fixed;
 
 }
-  
+
 
 
 .spinner {
-  width: 60px;
-  height: 60px;
-  margin: auto;
-  animation: rotate 1.4s infinite ease-in-out, background 1.4s infinite ease-in-out alternate;
+width: 60px;
+height: 60px;
+margin: auto;
+animation: rotate 1.4s infinite ease-in-out, background 1.4s infinite ease-in-out alternate;
 }
 
 @keyframes rotate {
-  0% {
-    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-  }
-  50% {
-    transform: perspective(120px) rotateX(-180deg) rotateY(0deg);
-  }
-  100% {
-    transform: perspective(120px) rotateX(-180deg) rotateY(-180deg);
-  }
+0% {
+transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+}
+50% {
+transform: perspective(120px) rotateX(-180deg) rotateY(0deg);
+}
+100% {
+transform: perspective(120px) rotateX(-180deg) rotateY(-180deg);
+}
 }
 @keyframes background {
-  0% {
-  background-color: #27ae60;
-  }
-  50% {
-    background-color: #9b59b6;
-  }
-  100% {
-    background-color: #c0392b;
-  }
+0% {
+background-color: #27ae60;
+}
+50% {
+background-color: #9b59b6;
+}
+100% {
+background-color: #c0392b;
+}
 }
 

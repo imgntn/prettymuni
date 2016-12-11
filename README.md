@@ -47,6 +47,7 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 - [] favorite routes
 - [] favorite colors
 - [] manifest to install as home screen app
+- [] arctween https://bl.ocks.org/mbostock/5100636
 
 # bugs
 - [x] when a new vehicle is added or removed from a route, the route is being shuffled. fixed by passing second parameter to .data() to keep track
