@@ -66,6 +66,8 @@ Mapper.prototype = {
             }
         }
 
+        var routePaths = _t.svg.selectAll('.route-path').attr('transform', d3.event.transform)
+
         _t.zoomTransform = d3.event.transform;
 
     },
@@ -274,8 +276,8 @@ Mapper.prototype = {
                         if (parsedRoute.hasOwnProperty('body') && parsedRoute.body.hasOwnProperty('Error')) {
                             reject(parsedRoute.body.Error)
                         } else {
-                            console.log('parsedRoute', parsedRoute)
                             _t.drawRoutePath(parsedRoute.body.route)
+
                             resolve(parsedRoute);
                         }
                     }
@@ -287,88 +289,84 @@ Mapper.prototype = {
 
     },
 
-    drawRoutePath: function(route) {
+     drawRoutePath: function(route) {
 
         // Due to the nature of the configuration there can be many separate paths, some of them
         // overlapping. A map client should simply draw all of the paths. The paths are not necessarily in
         // any kind of order so you should only connect the points within a path. You should not connect the
         // points between two separate paths though.
 
-        console.log('route to draw', route)
-        var _t = this;
-        var allPaths = route.path;
 
-        var svgGroup = _t.svg.append("g").attr('id', "route_path" + route['@attributes'].tag).attr('class', 'route-path')
-
-        allPaths.forEach(function(path) {
-            _t.connectPoints(path, route, svgGroup);
-        })
-
-        window.routeGroup = svgGroup
             //given a route
             //for every 'path' segment
             //create a d3 path using all of the points in that 'path'
             //(will have to project latlon to get xy)
+
+        var _t = this;
+        var allPaths = route.path;
+
+        var svgGroup = _t.svg.append("g").attr('id', "routePath_" + route['@attributes'].tag).attr('class', 'route-path')
+
+    var routePathLayer = document.getElementById("routePath_" + route['@attributes'].tag);
+        var svg = document.getElementsByTagName('svg')[0];
+        svg.insertBefore(routePathLayer, svg.children[4])
+
+
+        var pathsToDraw = [];
+        allPaths.forEach(function(path) {
+            var links = _t.connectPoints(path);
+            pathsToDraw.push(links);
+        });
+
+        pathsToDraw.forEach(function(pathData, index) {
+            var linePath = svgGroup.selectAll(".lineConnect_" + route['@attributes'].tag + "_" + index)
+                .data(pathData)
+                .enter()
+                .append("line")
+                .attr("class", "lineConnect_" + route['@attributes'].tag + "_" + index)
+                .attr('stroke', _t.routeColors[route['@attributes'].tag].circle.fill)
+                .attr('stroke-width', 1.5)
+                .attr("x1", function(d) {
+                    console.log('d', d)
+                    return d[0][0];
+                })
+                .attr("y1", function(d) {
+                    return d[0][1];
+                })
+                .attr("x2", function(d) {
+                    return d[1][0];
+                })
+                .attr("y2", function(d) {
+                    return d[1][1];
+                })
+                .call(_t.zoom.transform, _t.zoomTransform)
+
+
+        })
+
     },
 
-
-    connectPoints: function(path, routeData, svgGroup) {
+    connectPoints: function(path) {
         var _t = this;
 
-        var projectLine = d3.line()
-            .x(function(d) {
-                console.log('in line x', d)
-                return _t.projection([
-                    d['@attributes'].lon,
-                    d['@attributes'].lat
-                ])[0];
-            })
-            .y(function(d) {
-                return _t.projection([
-                    d['@attributes'].lon,
-                    d['@attributes'].lat
-                ])[1];
-            });
+        var links = [];
+        var data = path.point;
+        var i;
+        for (i = 0, len = data.length - 1; i < len; i++) {
+            links.push(
+                [
+                    _t.projection([data[i]['@attributes'].lon, data[i]['@attributes'].lat]),
+                    _t.projection([data[i + 1]['@attributes'].lon, data[i + 1]['@attributes'].lat]),
+                ]
+            )
 
-
-        function generateLinks(data) {
-            var links;
-            for (var i = 0, len = data.length - 1; i < len; i++) {
-                links.push({
-                    type: "LineString",
-                    coordinates: [
-                        [data[i].lon, data[i].lat],
-                        [data[i + 1].lon, data[i + 1].lat]
-                    ]
-                });
-            }
-            return links
         }
+        return links
 
-        var links = generateLinks(path);
 
-        console.log('path in connec', path)
-        path.point.forEach(function(point) {
+        console.log('links', links)
+        return links
 
-            svgGroup.append("path")
-                .attr("d", function(d) {
-                    console.log('wtf', d)
-                    projectLine(point)
-                })
-                .attr("data-tag", routeData['@attributes'].tag)
-                .attr("stroke", '#' + routeData['@attributes'].color)
-                .attr("stroke-width", 20)
-                .style("stroke-opacity", 0.5)
-                .attr("fill", "none")
-                .attr("class", "route-path-line_" + routeData['@attributes'].tag);
-
-            //.append("svg:title")
-            // .text(function(d) { 
-            //     return routeData['@attributes'].title;
-            // })
-
-            //console.log('should have made a path ', myPath)
-        })
 
 
     },
@@ -438,7 +436,6 @@ Mapper.prototype = {
         _t.fetchVehicleLocations(tag)
             .then(function(locations) {
                 if (!locations.body.hasOwnProperty('vehicle')) {
-                    //console.log('no vehicles for route')
                     return;
                 }
                 _t.drawVehicles(locations.body.vehicle, tag)
@@ -534,6 +531,11 @@ Mapper.prototype = {
                 .on("mouseover", function() {
                     var sel = d3.select(this);
                     sel.moveToFront();
+
+                    var thisRoutePath =document.getElementById('routePath_'+tag);
+                    var firstRouteGroup = document.getElementsByClassName('route-group')[0]
+                    firstRouteGroup.insertAdjacentElement('beforebegin',thisRoutePath)
+
                 })
         }
 
@@ -841,7 +843,10 @@ Mapper.prototype = {
     makeRouteActive: function(route, el) {
         var _t = this;
         _t.activeRoutes.push(route);
+        _t.fetchRoute(route).then(function(){
         _t.drawVehiclesForRoute(route);
+        });
+        console.log('route at active',route)
         window.el = el;
         el.style.backgroundColor = _t.routeColors[route].circle.fill;
     },
@@ -849,7 +854,8 @@ Mapper.prototype = {
     makeRouteInactive: function(route, el) {
         var _t = this;
         el.style.backgroundColor = _t.routeTileBackgroundColor;
-        svgGroup = d3.select('#route_' + route).data([]).exit().remove();
+        d3.select('#route_' + route).data([]).exit().remove();
+        d3.select('#routePath_' + route).data([]).exit().remove();
         delete _t.vehicleGroups[route];
         var index = _t.activeRoutes.indexOf(route);
         if (index !== -1) {
@@ -882,6 +888,7 @@ Mapper.prototype = {
         var _t = this;
         console.log('clearAll', e)
         d3.selectAll(".route-group").data([]).exit().remove();
+        d3.selectAll('.route-path').data([]).exit().remove();
         _t.activeRoutes = [];
         _t.vehicleGroups = {};
         _t.routeColors = {};

@@ -36,17 +36,16 @@ Read about the process at https://medium.com/@jamesbpollack/pretty-muni-71773427
 - [x] load street map async 
 - [x] fade in the streets when they are loaded async so that it looks nice
 - [x] show route name  in route selector tile at larger sizes
+- [x] draw route paths
+- [x] send google analytics event on route toggle
 - [] scale vehicle groups down as you zoom in so the fit the streets.
 - [] custom, thematic loader.  
-- [] clicking should toggle route line path display on off
 - [] offline detection 
-- [x] send google analytics event on route toggle
 - [] add gulp deploy task for copying a /public folder into docs to cleanup that naming mess and detach github pushes from production
-- [] ^^ or stop working on master ;P
 - [] favorite routes
 - [] favorite colors
 - [] manifest to install as home screen app
-- [] arctween https://bl.ocks.org/mbostock/5100636
+- [] animate route paths
 
 # bugs
 - [x] when a new vehicle is added or removed from a route, the route is being shuffled. fixed by passing second parameter to .data() to keep track
