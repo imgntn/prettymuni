@@ -653,24 +653,52 @@ Mapper.prototype = {
 
     },
 
-    createControlOption: function(text, value) {
+    createControlOption: function(text, routeProps) {
         var _t = this;
         var el = document.createElement('div');
         el.classList.add('route-selector-tile')
-        el.setAttribute('value', value);
+        el.setAttribute('value', routeProps.tag);
         el.onclick = function(e) {
-
-            _t.toggleRoute(value, el);
+            _t.toggleRoute(routeProps.tag, el);
             return false;
         }
 
         var routeTag = document.createElement('div')
-        routeTag.innerText = value;
+        routeTag.innerText = routeProps.tag;
         routeTag.classList.add('route-selector-tile-tag')
         el.appendChild(routeTag);
+            
+        var routeTitle= document.createElement('div')
+        routeTitle.innerText=routeProps.title
+        routeTitle.classList.add('route-selector-tile-title')
+        el.appendChild(routeTitle);
+
 
         return el
     },
+
+
+    clearControlOptions: function() {
+        var _t = this;
+        while (_t.routeSelector.hasChildNodes()) {
+            _t.routeSelector.removeChild(_t.routeSelector.lastChild);
+        }
+
+    },
+
+    updateControlOptions: function() {
+        var _t = this;
+        _t.routeSelector = document.getElementsByClassName('route-selector')[0];
+
+        _t.createControlButtons();
+        _t.routes.forEach(function(route) {
+            var control = _t.createControlOption(route['@attributes'].title, route['@attributes'])
+            _t.routeSelector.appendChild(control);
+        });
+
+    },
+
+
 
     createControlButtons: function() {
         var _t = this;
@@ -789,27 +817,6 @@ Mapper.prototype = {
             _t.activeRoutes.splice(index, 1);
         }
     },
-
-    clearControlOptions: function() {
-        var _t = this;
-        while (_t.routeSelector.hasChildNodes()) {
-            _t.routeSelector.removeChild(_t.routeSelector.lastChild);
-        }
-
-    },
-
-    updateControlOptions: function() {
-        var _t = this;
-        _t.routeSelector = document.getElementsByClassName('route-selector')[0];
-
-        _t.createControlButtons();
-        _t.routes.forEach(function(route) {
-            var control = _t.createControlOption(route['@attributes'].title, route['@attributes'].tag)
-            _t.routeSelector.appendChild(control);
-        });
-
-    },
-
 
     refreshActiveRoutes: function() {
         var _t = this;

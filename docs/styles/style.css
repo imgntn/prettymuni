@@ -3,9 +3,9 @@ html{
 }
 
 body {
-       overflow: hidden;
-        overflow-y: auto;
-        overflow-x: auto;
+overflow: hidden;
+overflow-y: auto;
+overflow-x: auto;
 font-family: 'Fira Sans', sans-serif;
 margin:0!important;
 }
@@ -27,6 +27,7 @@ overflow-x:hidden;
 }
 
 .route-selector-tile {
+
 cursor:pointer;
 margin-top:1%;
 text-align:center;
@@ -47,8 +48,16 @@ padding:0;
 .route-selector-tile-tag {
 width:50%;
 margin:auto;
-
+display:none;
 }
+
+
+.route-selector-tile-title {
+width:50%;
+margin:auto;
+font-size:0.7em;
+}
+
 
 .show-route-selector-button-holder {
 min-height: 100px;
@@ -123,7 +132,7 @@ left:0;
     display: inline-flex;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   #github-banner{
        display:none;
     }
@@ -132,6 +141,12 @@ left:0;
     }
     .close-route-selector-button-holder ,.clear-all-button-holder {
       height:15%;
+    }
+    .route-selector-tile-tag {
+      display:block;
+    }
+    .route-selector-tile-title{
+      display:none;
     }
 }
 
