@@ -109,6 +109,7 @@ Mapper.prototype = {
             .style("fill", getRandomHexColor())
             .style("stroke", getRandomHexColor())
             .attr("d", geoPath)
+            .attr('opacity',0.35)
 
         var streetsLayer = document.getElementById('layer_streets');
         var svg = document.getElementsByTagName('svg')[0];
@@ -289,7 +290,7 @@ Mapper.prototype = {
 
     },
 
-     drawRoutePath: function(route) {
+    drawRoutePath: function(route) {
 
         // Due to the nature of the configuration there can be many separate paths, some of them
         // overlapping. A map client should simply draw all of the paths. The paths are not necessarily in
@@ -297,17 +298,17 @@ Mapper.prototype = {
         // points between two separate paths though.
 
 
-            //given a route
-            //for every 'path' segment
-            //create a d3 path using all of the points in that 'path'
-            //(will have to project latlon to get xy)
+        //given a route
+        //for every 'path' segment
+        //create a d3 path using all of the points in that 'path'
+        //(will have to project latlon to get xy)
 
         var _t = this;
         var allPaths = route.path;
 
         var svgGroup = _t.svg.append("g").attr('id', "routePath_" + route['@attributes'].tag).attr('class', 'route-path')
 
-    var routePathLayer = document.getElementById("routePath_" + route['@attributes'].tag);
+        var routePathLayer = document.getElementById("routePath_" + route['@attributes'].tag);
         var svg = document.getElementsByTagName('svg')[0];
         svg.insertBefore(routePathLayer, svg.children[4])
 
@@ -327,7 +328,6 @@ Mapper.prototype = {
                 .attr('stroke', _t.routeColors[route['@attributes'].tag].circle.fill)
                 .attr('stroke-width', 1.5)
                 .attr("x1", function(d) {
-                    console.log('d', d)
                     return d[0][0];
                 })
                 .attr("y1", function(d) {
@@ -363,12 +363,6 @@ Mapper.prototype = {
         }
         return links
 
-
-        console.log('links', links)
-        return links
-
-
-
     },
 
     fetchVehicleLocations: function(tag, epochTime) {
@@ -392,8 +386,6 @@ Mapper.prototype = {
                     if (xhr.status === OK) {
                         var parsedVehicleLocations = xmlToJson(xhr.responseXML);
                         if (parsedVehicleLocations.hasOwnProperty('body') && parsedVehicleLocations.body.hasOwnProperty('Error')) {
-                            console.log('error in fetch vehicles')
-
                             reject(parsedVehicleLocations.body.Error)
                         } else {
                             resolve(parsedVehicleLocations);
@@ -532,9 +524,9 @@ Mapper.prototype = {
                     var sel = d3.select(this);
                     sel.moveToFront();
 
-                    var thisRoutePath =document.getElementById('routePath_'+tag);
+                    var thisRoutePath = document.getElementById('routePath_' + tag);
                     var firstRouteGroup = document.getElementsByClassName('route-group')[0]
-                    firstRouteGroup.insertAdjacentElement('beforebegin',thisRoutePath)
+                    firstRouteGroup.insertAdjacentElement('beforebegin', thisRoutePath)
 
                 })
         }
@@ -599,6 +591,9 @@ Mapper.prototype = {
         dotGroup.append("circle")
             .call(_t.zoom.transform, _t.zoomTransform)
             .attr("r", "6")
+            // .attr('fill',function(d){
+            //     console.log('d',d); return d['@attributes'].routeColor
+            // })
             .attr("fill", colors.circle.fill)
             .attr("stroke", colors.circle.stroke)
             .style('stroke-width', '1px')
@@ -632,23 +627,11 @@ Mapper.prototype = {
             .call(_t.zoom.transform, _t.zoomTransform)
             .attr("r", "0.5")
             .attr("fill", colors.circle.fill)
-            //.attr("stroke", getRandomHexColor())
             .attr("transform", _t.translateHeadingDot)
-            // .transition().attr("r", "1.5").duration(1000)
-            // .transition().attr("r", "0.45").duration(1000)
 
         headingDrops
             .transition()
             .attr("transform", _t.placeHeadingDrop)
-            // .attrTween("transform", tween)
-            // .duration(_t.refreshRate * 1000)
-
-
-        function tween(d, i, a) {
-            console.log('d here', d)
-
-            return d3.interpolateString("rotate(0, 0, 0)", "rotate(" + d['@attributes'].heading + ",0,0)");
-        }
 
         dotGroups
             .data(movedVehicles, function(d) {
@@ -843,10 +826,9 @@ Mapper.prototype = {
     makeRouteActive: function(route, el) {
         var _t = this;
         _t.activeRoutes.push(route);
-        _t.fetchRoute(route).then(function(){
-        _t.drawVehiclesForRoute(route);
+        _t.fetchRoute(route).then(function() {
+            _t.drawVehiclesForRoute(route);
         });
-        console.log('route at active',route)
         window.el = el;
         el.style.backgroundColor = _t.routeColors[route].circle.fill;
     },
@@ -886,7 +868,6 @@ Mapper.prototype = {
 
     clearAll: function(e) {
         var _t = this;
-        console.log('clearAll', e)
         d3.selectAll(".route-group").data([]).exit().remove();
         d3.selectAll('.route-path').data([]).exit().remove();
         _t.activeRoutes = [];
