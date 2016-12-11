@@ -46,6 +46,7 @@ Read about the process at https://medium.com/@jamesbpollack/pretty-muni-71773427
 - [] favorite colors
 - [] manifest to install as home screen app
 - [] animate route paths
+- [] pre filter routes with no vehicles out of route selector
 
 # bugs
 - [x] when a new vehicle is added or removed from a route, the route is being shuffled. fixed by passing second parameter to .data() to keep track

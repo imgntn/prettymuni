@@ -109,7 +109,7 @@ Mapper.prototype = {
             .style("fill", getRandomHexColor())
             .style("stroke", getRandomHexColor())
             .attr("d", geoPath)
-            .attr('opacity',0.35)
+            //.attr('opacity',0.5)
 
         var streetsLayer = document.getElementById('layer_streets');
         var svg = document.getElementsByTagName('svg')[0];
@@ -150,11 +150,6 @@ Mapper.prototype = {
     },
 
 
-    getBaseMapGeoJSONByName: function(mapName) {
-        return this.baseMapGeoJSON.filter(function(obj) {
-            return obj.name == mapName;
-        })[0];
-    },
 
     addBaseMapLayer: function(geojson, mapName) {
         if (!geojson || typeof geojson === 'undefined') {
@@ -181,6 +176,13 @@ Mapper.prototype = {
         this.baseMapGroups.push(svgGroup);
 
     },
+
+        getBaseMapGeoJSONByName: function(mapName) {
+        return this.baseMapGeoJSON.filter(function(obj) {
+            return obj.name == mapName;
+        })[0];
+    },
+
 
     drawAllRoutesAtInterval: function() {
         var _t = this;
