@@ -15,7 +15,6 @@ Mapper.prototype = {
         //'streets',
         //'streets_minified',
         //'streets_reduced_precision',
-
         'arteries',
         'freeways',
     ],
@@ -82,12 +81,8 @@ Mapper.prototype = {
     lazyLoadStreetsBaseMap: function() {
         var _t = this;
 
-
-        // do a thing, possibly async, then…
         d3.json("assets/sfmaps/streets.json", function(error, geojson) {
             if (error) {
-                //Mapper.js:82 SyntaxError: Unexpected end of JSON input(…)
-                // happens when a basemap fails to load.  need promises!
                 console.error(error);
                 return
             }
@@ -101,8 +96,6 @@ Mapper.prototype = {
     addStreetsBaseMapLayer: function(geojson) {
         var _t = this;
         var svgGroup = _t.svg.append("g").attr('id', 'layer_streets')
-
-
 
         var geoPath = d3.geoPath()
             .projection(this.projection);
@@ -128,11 +121,8 @@ Mapper.prototype = {
         var _t = this;
 
 
-        // do a thing, possibly async, then…
         d3.json("assets/sfmaps/" + mapName + ".json", function(error, geojson) {
             if (error) {
-                //Mapper.js:82 SyntaxError: Unexpected end of JSON input(…)
-                // happens when a basemap fails to load.  need promises!
                 console.error(error);
                 return
             }
@@ -141,7 +131,6 @@ Mapper.prototype = {
             if (_t.baseMapGeoJSON.length === _t.baseMapNames.length) {
                 _t.drawBaseMaps();
             } else {
-                //console.log('Waiting for basemaps to finish loading')
             }
         });
     },
@@ -191,7 +180,6 @@ Mapper.prototype = {
     },
 
     drawAllRoutesAtInterval: function() {
-        console.log('should draw all routes')
         var _t = this;
         _t.drawAllRoutes();
 
@@ -218,6 +206,7 @@ Mapper.prototype = {
         console.log('vehicle clicked', val['@attributes'])
 
     },
+
     isSecure: function() {
         var _t = this;
         if (window.location.protocol.indexOf('https:') > -1) {
@@ -227,6 +216,7 @@ Mapper.prototype = {
         }
 
     },
+
     fetchRouteList: function() {
         var _t = this;
 
@@ -698,7 +688,7 @@ Mapper.prototype = {
         closeRouteSelectorButtonHolder.classList.add('close-route-selector-button-holder')
 
         var closeRouteSelectorButton = document.createElement('div');
-        closeRouteSelectorButton.innerText = 'Close Route Selector';
+        closeRouteSelectorButton.innerHTML = 'Close Route Selector &#9652;';
         closeRouteSelectorButton.classList.add('close-route-selector-button');
 
         closeRouteSelectorButtonHolder.appendChild(closeRouteSelectorButton);
@@ -706,7 +696,7 @@ Mapper.prototype = {
         var showRouteSelectorButtonHolder = document.getElementsByClassName('show-route-selector-button-holder')[0]
 
         var showRouteSelectorButton = document.createElement('div');
-        showRouteSelectorButton.innerText = 'Choose Routes';
+        showRouteSelectorButton.innerHTML = 'Choose Routes &#9662;';
 
         showRouteSelectorButton.classList.add('show-route-selector-button')
 
