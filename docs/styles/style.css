@@ -90,6 +90,7 @@ color:#FFF;
 }
 
 .close-route-selector-button-holder {
+min-height: 50px;
 display:inline-flex;
 cursor:pointer;
 width:100%;
