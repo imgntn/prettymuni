@@ -19,12 +19,16 @@ app.use('/proxy', function(req, res) {
     var origin = req.get('origin');
     var host = req.get('host');
 
-    console.log('origin',JSON.stringify(origin));
-    console.log('host',JSON.stringify(host));
-    if (req.url.indexOf('webservices.nextbus.com/service/publicXMLFeed') < 0) {
-        // console.log('only proxying my queries')
+    if(host!=="jbpmunimap.herokuapp.com"){
         return;
+    }
+    if(origin!=="https://prettymuni.com"){
         res.send(null)
+         return;
+    }
+    if (req.url.indexOf('webservices.nextbus.com/service/publicXMLFeed') < 0) {
+        res.send(null)
+        return;
     } else {
         var url = req.url.replace('/?url=', '');
         req.pipe(request(url)).pipe(res);
