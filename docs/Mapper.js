@@ -944,17 +944,6 @@ Mapper.prototype = {
 
     },
 
-    showCustomPrintPopover: function() {
-        var popover = document.getElementsByClassName('custom-print-popover')[0];
-        popover.style.display = "inline-block";
-        localStorage.setItem('hasSeenPrettyMuniCustomPrint', true)
-    },
-
-    hideCustomPrintPopover: function() {
-        var popover = document.getElementsByClassName('custom-print-popover')[0];
-        popover.style.display = "none";
-    },
-
     showGeoLocation: function() {
         var _t = this;
 

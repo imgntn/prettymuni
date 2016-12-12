@@ -169,7 +169,9 @@ position: fixed;
 }
 
 .custom-print-popover{
-    display: none;
+    position:fixed;
+    top:100px;
+    left:10px;
 }
 
 .spinner {
