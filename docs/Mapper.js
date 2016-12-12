@@ -12,9 +12,6 @@ Mapper.prototype = {
     baseMapCenter: [-122.433701, 37.767683],
     baseMapNames: [
         'neighborhoods',
-        //'streets',
-        //'streets_minified',
-        //'streets_reduced_precision',
         'arteries',
         'freeways',
     ],
@@ -27,20 +24,19 @@ Mapper.prototype = {
     routeTileBackgroundColor: 'rgba(0,0,0,0.40)',
     activeRoutes: [],
     vehicleStore: {},
-    getProxyURL: function(){
-        if(window.location.hostname==='localhost'){
+    getProxyURL: function() {
+        if (window.location.hostname === 'localhost') {
             return 'proxy?url='
-        }
-        else{
+        } else {
             return 'https://jbpmunimap.herokuapp.com/proxy?url='
         }
-       
+
     },
 
     isSecure: function() {
         var _t = this;
         if (window.location.protocol.indexOf('https:') > -1) {
-            return  _t.getProxyURL()
+            return _t.getProxyURL()
         } else {
             return ''
         }
@@ -127,8 +123,7 @@ Mapper.prototype = {
             .append("path")
             .style("stroke", getRandomHexColor())
             .attr("d", geoPath)
-            .attr('opacity', 0.5)
-
+            
         var streetsLayer = document.getElementById('layer_streets');
         var svg = document.getElementsByTagName('svg')[0];
 
@@ -510,16 +505,15 @@ Mapper.prototype = {
         }
     },
 
+
     drawVehicles: function(vehicles, tag) {
         var _t = this;
         if (!vehicles) {
-            //console.log('no vehicles to draw')
+            //no vehicles to draw
             return;
         }
-        var _t = this;
 
         var svgGroup;
-        var colors;
 
         //resuse existing vehicle groups 
         if (_t.vehicleGroups.hasOwnProperty(tag)) {
@@ -548,6 +542,13 @@ Mapper.prototype = {
         var movedVehicles = _t.filterMovedVehicles(predictableVehicles);
         var changedHeadingVehicles = _t.filterChangedHeadingVehicles(predictableVehicles);
 
+        //we need to store the vehicles so we can see if they've moved in the future
+        predictableVehicles.forEach(function(vehicle) {
+            _t.vehicleStore[vehicle['@attributes'].id] = vehicle;
+        })
+
+        var colors = _t.routeColors[tag];
+
         var dotGroups = svgGroup.selectAll(".dot-group").data(predictableVehicles, function(d) {
             return d['@attributes'].id;
         })
@@ -560,8 +561,7 @@ Mapper.prototype = {
             return d['@attributes'].id;
         })
 
-        var colors = _t.routeColors[tag];
-        dotGroups.exit().remove();
+       
 
         var dotGroup = dotGroups.enter()
             .append("g")
@@ -570,9 +570,9 @@ Mapper.prototype = {
                 var sel = d3.select(this);
                 sel.moveToFront();
             })
-            .on('click', function(e) {
-                _t.clickVehicle(e)
-            })
+            // .on('click', function(e) {
+            //     _t.clickVehicle(e)
+            // })
             .attr("transform", function(d) {
                 return "translate(" + _t.projection([
                     d['@attributes'].lon,
@@ -601,7 +601,14 @@ Mapper.prototype = {
             .transition().attr("r", "12").duration(1000)
             .transition().attr("r", "8").duration(1000)
 
-
+        //create a heading dot
+        dotGroup.append("circle")
+            .attr('class', 'heading-dot')
+            .call(_t.zoom.transform, _t.zoomTransform)
+            .attr("fill", colors.circle.fill)
+            .attr("r", "0.5")
+            .attr("transform", _t.translateHeadingDot)
+            
         dotGroup.append("text")
             .attr('text-anchor', "middle")
             .attr('dy', '0.35em')
@@ -618,17 +625,8 @@ Mapper.prototype = {
             .transition().style("font-size", "8").duration(1000)
 
 
-        var dropGroups = svgGroup.selectAll(".drop-group").data(predictableVehicles, function(d) {
-            return d['@attributes'].id;
-        })
 
-        //create a heading dot
-        dotGroup.append("circle")
-            .attr('class', 'heading-dot')
-            .call(_t.zoom.transform, _t.zoomTransform)
-            .attr("fill", colors.circle.fill)
-            .attr("r", "0.5")
-            .attr("transform", _t.translateHeadingDot)
+        dotGroups.exit().remove();
 
         headingDrops
             .data(changedHeadingVehicles, function(d) {
@@ -636,8 +634,6 @@ Mapper.prototype = {
             })
             .transition()
             .attr("transform", _t.placeHeadingDrop)
-
-
 
         dotGroups
             .data(movedVehicles, function(d) {
@@ -661,10 +657,6 @@ Mapper.prototype = {
             .attr("transform", _t.translateHeadingDot)
             .duration(_t.refreshRate * 1000)
 
-        //we need to store the vehicles so we can see if they've moved in the future
-        predictableVehicles.forEach(function(vehicle) {
-            _t.vehicleStore[vehicle['@attributes'].id] = vehicle;
-        })
 
 
     },

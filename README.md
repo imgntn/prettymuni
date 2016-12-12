@@ -64,9 +64,8 @@ Read about the process at https://medium.com/@jamesbpollack/pretty-muni-71773427
 # bandwidth and performance observations
 - 1.1kb per route from nextBus
 - ~80kb to get all routes at once
-- streets geoJSON is 9mb and probably needs to be simplified
-- gzipping on server reduces this to 1.2mb delivered, but should still try to do it async
-- 132kb .js
+- still 1.9mb to fetch all maps
+- 107 kb javascript files
 - 2kb css
 - 11kb fonts
 - perf rankings:  chrome, firefox, edge.
