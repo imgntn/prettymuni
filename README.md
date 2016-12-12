@@ -6,9 +6,10 @@ It uses d3.js and vanilla javascript to show and update current positions of rea
 
 Read about the process at https://medium.com/@jamesbpollack/pretty-muni-71773427e83d
 
+Buy a print at https://gum.co/prettymuniposter
+
 ![Alt text](https://github.com/imgntn/prettymuni/raw/master/screenshot.PNG?raw=true "Optional Title")
 
-Print at https://gum.co/prettymuniposter
 
 # To-Do
 
@@ -50,6 +51,7 @@ Print at https://gum.co/prettymuniposter
 - [] animate route paths
 - [] pre filter routes with no vehicles out of route selector
 - [] vehicle location transitions could be projected along the vehicle paths.
+- [] button down states
 
 # bugs
 - [x] when a new vehicle is added or removed from a route, the route is being shuffled. fixed by passing second parameter to .data() to keep track
