@@ -24,6 +24,7 @@ Mapper.prototype = {
     routeTileBackgroundColor: 'rgba(0,0,0,0.40)',
     activeRoutes: [],
     vehicleStore: {},
+    myPositionGroup: null,
     getProxyURL: function() {
         if (window.location.hostname === 'localhost') {
             return 'proxy?url='
@@ -81,8 +82,10 @@ Mapper.prototype = {
             }
         }
 
-        var routePaths = _t.svg.selectAll('.route-path').attr('transform', d3.event.transform)
-
+        _t.svg.selectAll('.route-path').attr('transform', d3.event.transform)
+        if (_t.myPositionGroup !== null) {
+            _t.myPositionGroup.attr('transform', d3.event.transform)
+        }
         _t.zoomTransform = d3.event.transform;
 
     },
@@ -123,7 +126,7 @@ Mapper.prototype = {
             .append("path")
             .style("stroke", getRandomHexColor())
             .attr("d", geoPath)
-            
+
         var streetsLayer = document.getElementById('layer_streets');
         var svg = document.getElementsByTagName('svg')[0];
 
@@ -561,7 +564,7 @@ Mapper.prototype = {
             return d['@attributes'].id;
         })
 
-       
+
 
         var dotGroup = dotGroups.enter()
             .append("g")
@@ -598,7 +601,9 @@ Mapper.prototype = {
             .attr("fill", colors.circle.fill)
             .attr("stroke", colors.circle.stroke)
             .style('stroke-width', '1px')
-            .transition().attr("r", "12").duration(1000).delay(function(d, i) { return i * 40; })
+            .transition().attr("r", "12").duration(1000).delay(function(d, i) {
+                return i * 40;
+            })
             .transition().attr("r", "8").duration(1000)
 
         dotGroup.append("text")
@@ -612,7 +617,9 @@ Mapper.prototype = {
             .text(function(d) {
                 return d['@attributes'].routeTag
             })
-            .transition().style("font-size", "12").duration(1000).delay(function(d, i) { return i * 50; })
+            .transition().style("font-size", "12").duration(1000).delay(function(d, i) {
+                return i * 50;
+            })
             .transition().style("font-size", "8").duration(1000)
 
         //create a heading dot
@@ -622,8 +629,6 @@ Mapper.prototype = {
             .attr("fill", colors.circle.fill)
             .attr("r", "0.5")
             .attr("transform", _t.translateHeadingDot)
-
-
 
         dotGroups.exit().remove();
 
@@ -645,7 +650,11 @@ Mapper.prototype = {
                     d['@attributes'].lat
                 ]) + ")";
             })
-            .duration(_t.refreshRate * 1000)
+            .duration(_t.refreshRate * 1000).delay(function(d, i) {
+                return i * 1;
+            })
+
+
 
         //the headings change fairly frequently so we update them as well. would be nicer if they went around the arc.
         headingDots
@@ -945,6 +954,70 @@ Mapper.prototype = {
         var popover = document.getElementsByClassName('custom-print-popover')[0];
         popover.style.display = "none";
     },
+
+    showGeoLocation: function() {
+        var _t = this;
+
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                    var svgGroup;
+                    if (_t.myPositionGroup !== null) {
+                        svgGroup = d3.select('#myLocation')
+                    } else {
+                        svgGroup = _t.svg.append("g").attr('id', 'myLocation')
+                    }
+
+                    _t.myPositionGroup = svgGroup;
+
+                    _t.myPosition = svgGroup.selectAll(".my-position").data([position])
+
+                    _t.myPosition.enter()
+                        .append("circle")
+                        .attr("r", "15")
+                        .attr('stroke', 'red')
+                        .attr('stroke-width', 1)
+                        .attr('fill', 'transparent')
+                        .attr("transform", function(d) {
+                            return "translate(" + _t.projection([
+                                d.coords.longitude,
+                                d.coords.latitude
+                            ]) + ")";
+                        })
+                        .attr('class', 'my-position')
+                        .transition().attr('r', 30).duration(3000)
+                        .transition().attr('r', 2).duration(1000)
+                        .transition().attr('stroke-width', 0).duration(1000)
+                        .remove()
+                  
+
+                },
+
+                _t.handleGeolocationError, {
+                    enableHighAccuracy: true
+                }
+            );
+        } else {
+            alert('Geolocation must be available to use this feature')
+        }
+    },
+    handleGeolocationError: function(error) {
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    console.log("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    console.log("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    console.log("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    console.log("An unknown error occurred.");
+                    break;
+            }
+        }
+    }
 
 }
 

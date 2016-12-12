@@ -8,6 +8,8 @@ Read about the process at https://medium.com/@jamesbpollack/pretty-muni-71773427
 
 ![Alt text](https://github.com/imgntn/prettymuni/raw/master/screenshot.PNG?raw=true "Optional Title")
 
+Print at https://gum.co/prettymuniposter
+
 # To-Do
 
 # essentials
