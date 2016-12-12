@@ -26,13 +26,21 @@ Mapper.prototype = {
     routeColors: {},
     routeTileBackgroundColor: 'rgba(0,0,0,0.40)',
     activeRoutes: [],
-    proxyURL: 'https://jbpmunimap.herokuapp.com/proxy?url=',
     vehicleStore: {},
+    getProxyURL: function(){
+        if(window.location.hostname==='localhost'){
+            return 'proxy?url='
+        }
+        else{
+            return 'https://jbpmunimap.herokuapp.com/proxy?url='
+        }
+       
+    },
 
     isSecure: function() {
         var _t = this;
         if (window.location.protocol.indexOf('https:') > -1) {
-            return _t.proxyURL
+            return  _t.getProxyURL()
         } else {
             return ''
         }
@@ -358,7 +366,7 @@ Mapper.prototype = {
         var tag = tag;
         tag = tag.toUpperCase();
         var epochTime = epochTime || 0;
-        var vehicleLocationsURL = _t.proxyURL + 'http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni&r=' + tag + '&t=' + epochTime;;
+        var vehicleLocationsURL = _t.isSecure() + 'http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni&r=' + tag + '&t=' + epochTime;;
 
         var p = new Promise(function(resolve, reject) {
 
