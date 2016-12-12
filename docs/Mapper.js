@@ -598,17 +598,9 @@ Mapper.prototype = {
             .attr("fill", colors.circle.fill)
             .attr("stroke", colors.circle.stroke)
             .style('stroke-width', '1px')
-            .transition().attr("r", "12").duration(1000)
+            .transition().attr("r", "12").duration(1000).delay(function(d, i) { return i * 40; })
             .transition().attr("r", "8").duration(1000)
 
-        //create a heading dot
-        dotGroup.append("circle")
-            .attr('class', 'heading-dot')
-            .call(_t.zoom.transform, _t.zoomTransform)
-            .attr("fill", colors.circle.fill)
-            .attr("r", "0.5")
-            .attr("transform", _t.translateHeadingDot)
-            
         dotGroup.append("text")
             .attr('text-anchor', "middle")
             .attr('dy', '0.35em')
@@ -617,12 +609,19 @@ Mapper.prototype = {
             .style('paint-order', 'stroke')
             .attr("fill", colors.text.fill)
             .attr("stroke", colors.text.stroke)
-            .attr("dx", 0)
             .text(function(d) {
                 return d['@attributes'].routeTag
             })
-            .transition().style("font-size", "12").duration(1000)
+            .transition().style("font-size", "12").duration(1000).delay(function(d, i) { return i * 50; })
             .transition().style("font-size", "8").duration(1000)
+
+        //create a heading dot
+        dotGroup.append("circle")
+            .attr('class', 'heading-dot')
+            .call(_t.zoom.transform, _t.zoomTransform)
+            .attr("fill", colors.circle.fill)
+            .attr("r", "0.5")
+            .attr("transform", _t.translateHeadingDot)
 
 
 
@@ -632,8 +631,8 @@ Mapper.prototype = {
             .data(changedHeadingVehicles, function(d) {
                 return d['@attributes'].id;
             })
-            .transition()
             .attr("transform", _t.placeHeadingDrop)
+
 
         dotGroups
             .data(movedVehicles, function(d) {
