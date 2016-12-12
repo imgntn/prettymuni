@@ -1,6 +1,5 @@
 var express = require('express');
 var request = require('request');
-var compression = require('compression');
 
 var app = express();
 
@@ -20,6 +19,7 @@ app.use('/proxy', function(req, res) {
     var host = req.get('host');
 
     if(host!=="jbpmunimap.herokuapp.com"){
+        res.send(null)
         return;
     }
     if(origin!=="https://prettymuni.com"){
