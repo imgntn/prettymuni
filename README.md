@@ -10,7 +10,7 @@ Read about the process at https://medium.com/@jamesbpollack/pretty-muni-71773427
 
 # To-Do
 
-# essentials + level one
+# essentials
 - [x] base maps
 - [x] get and parse muni data
 - [x] draw muni vehicles for a given route
@@ -77,13 +77,14 @@ Read about the process at https://medium.com/@jamesbpollack/pretty-muni-71773427
 - i could add passive event listeners to d3.js -- scrolling messes with the main thread
 - doing the drop and dot as a group and then rotating that group around the other group containing the text and circle would reduce listeners.
 
-# wow-zone someday
+#  someday
 - [] use an elevation service to do a sweet altitude vis 
     https://developers.google.com/maps/documentation/elevation/start
 - [] html5 geolocation + 'show nearest'
 - [] maybe use topoJSON (what are expected savings?)
 - [] maybe use vector tiles http://bl.ocks.org/mbostock/5616813 https://mapzen.com/projects/vector-tiles/
 - [] every route line path has two inner lines for inbound outbound directional pulse wave along the stops
+- [] generative audio
 
 
 # physical objects
