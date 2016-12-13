@@ -10,6 +10,8 @@ Buy a print at https://gum.co/prettymuniposter
 
 ![Alt text](https://github.com/imgntn/prettymuni/raw/master/screenshot.PNG?raw=true "Optional Title")
 
+# Structure
+Everything is in the /docs folder so that Github Pages will serve it.  
 
 # To-Do
 
@@ -91,4 +93,4 @@ Buy a print at https://gum.co/prettymuniposter
 
 
 # physical objects
-- [] custom print a set of basemaps w/ selected routes at a specific date or time of day
+- [x] custom print a set of basemaps w/ selected routes at a specific date or time of day
