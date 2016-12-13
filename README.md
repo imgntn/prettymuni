@@ -10,8 +10,12 @@ Buy a print at https://gum.co/prettymuniposter
 
 ![Alt text](https://github.com/imgntn/prettymuni/raw/master/screenshot.PNG?raw=true "Optional Title")
 
-# Structure
-Everything is in the /docs folder so that Github Pages will serve it.  
+# Running the project
+Everything is in the /docs folder so that Github Pages will serve it.   
+```npm install```
+```node devServer.js```
+
+Then visit http://localhost:3000
 
 # To-Do
 
