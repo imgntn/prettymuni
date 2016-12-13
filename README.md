@@ -12,8 +12,10 @@ Buy a print at https://gum.co/prettymuniposter
 
 # Running the project
 Everything is in the /docs folder so that Github Pages will serve it.   
-```npm install```
-```node devServer.js```
+
+`npm install`
+
+`node devServer.js`
 
 Then visit http://localhost:3000
 
