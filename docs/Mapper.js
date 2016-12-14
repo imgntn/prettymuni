@@ -124,6 +124,7 @@ Mapper.prototype = {
             .data(geojson.features)
             .enter()
             .append("path")
+            .style("fill", getRandomHexColor())
             .style("stroke", getRandomHexColor())
             .attr("d", geoPath)
 
