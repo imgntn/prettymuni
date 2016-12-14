@@ -19,6 +19,8 @@ Everything is in the /docs folder so that Github Pages will serve it.
 
 Then visit http://localhost:3000
 
+You'll want to swap out the https proxy url link in the Mapper.js and the Github pages links in index.html for your own, once you're ready to deploy.
+
 # To-Do
 
 # essentials
@@ -49,6 +51,7 @@ Then visit http://localhost:3000
 - [x] show route name  in route selector tile at larger sizes
 - [x] draw route paths
 - [x] send google analytics event on route toggle
+- [] add button press down states
 - [] scale vehicle groups down as you zoom in so the fit the streets.
 - [] custom, thematic loader.  
 - [] offline detection 
