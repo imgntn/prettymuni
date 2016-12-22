@@ -1,8 +1,6 @@
 # https://www.prettymuni.com
-
-I was asked to create a live map of San Francisco transportation recently when applying to a job, so I made this :)
-
-It uses d3.js and vanilla javascript to show and update current positions of realtime buses in the San Francisco Muni system.
+ 
+Uses D3.js and vanilla javascript to show and update current positions of realtime buses in the San Francisco Muni system.
 
 Read about the process at https://medium.com/@jamesbpollack/pretty-muni-71773427e83d
 
@@ -20,6 +18,10 @@ Everything is in the /docs folder so that Github Pages will serve it.
 Then visit http://localhost:3000
 
 You'll want to swap out the https proxy url link in the Mapper.js and the Github pages links in index.html for your own, once you're ready to deploy.
+
+One big singleton in Mapper.js so things are easy to read.
+
+No frameworks because that's a lot of extra javascript to deliver and parse before we even start with our app, and we're already facing large sizes with the map JSON.
 
 # To-Do
 
