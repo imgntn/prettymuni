@@ -19,7 +19,7 @@ Then visit http://localhost:3000
 
 You'll want to swap out the https proxy url link in the Mapper.js and the Github pages links in index.html for your own, once you're ready to deploy.
 
-One big singleton in Mapper.js so things are easy to read.
+One big object literal in Mapper.js so things are easy to read.
 
 No frameworks because that's a lot of extra javascript to deliver and parse before we even start with our app, and we're already facing large sizes with the map JSON.
 
