@@ -4,8 +4,6 @@ Uses D3.js and vanilla javascript to show and update current positions of realti
 
 Read about the process at https://medium.com/@jamesbpollack/pretty-muni-71773427e83d
 
-Buy a print at https://gum.co/prettymuniposter
-
 ![Alt text](https://github.com/imgntn/prettymuni/raw/master/screenshot.PNG?raw=true "Optional Title")
 
 # Running the project
