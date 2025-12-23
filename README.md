@@ -1,5 +1,3 @@
-# https://www.prettymuni.com
- 
 Uses D3.js and vanilla javascript to show and update current positions of realtime buses in the San Francisco Muni system.
 
 Read about the process at https://medium.com/@jamesbpollack/pretty-muni-71773427e83d
