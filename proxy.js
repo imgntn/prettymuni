@@ -1,4 +1,5 @@
 var express = require('express');
+var compression = require('compression');
 
 var app = express();
 
@@ -30,6 +31,9 @@ app.get(['/health', '/healthz'], function(req, res) {
     });
 });
 
+app.use(compression());
+app.use(express.static('docs'));
+
 app.use(function(err, req, res, next) {
     console.error(err.stack)
     res.status(500)
@@ -43,12 +47,23 @@ app.use('/proxy', function(req, res) {
 
     var origin = req.get('origin');
     var host = req.get('host');
+    var allowedHosts = [
+        'jbpmunimap.herokuapp.com',
+        'prettymuni.com',
+        'www.prettymuni.com',
+        'prettymuni.luckymachines.io'
+    ];
+    var allowedOrigins = [
+        'https://prettymuni.com',
+        'https://www.prettymuni.com',
+        'https://prettymuni.luckymachines.io'
+    ];
 
-    if(host!=="jbpmunimap.herokuapp.com"){
+    if(allowedHosts.indexOf(host) < 0){
         res.send(null)
         return;
     }
-    if(origin!=="https://prettymuni.com"){
+    if(origin && allowedOrigins.indexOf(origin) < 0){
         res.send(null)
          return;
     }
