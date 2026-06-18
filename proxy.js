@@ -51,12 +51,12 @@ app.use('/proxy', function(req, res) {
         'jbpmunimap.herokuapp.com',
         'prettymuni.com',
         'www.prettymuni.com',
-        'prettymuni.luckymachines.io'
+        'prettymuni.playablefuture.com'
     ];
     var allowedOrigins = [
         'https://prettymuni.com',
         'https://www.prettymuni.com',
-        'https://prettymuni.luckymachines.io'
+        'https://prettymuni.playablefuture.com'
     ];
 
     if(allowedHosts.indexOf(host) < 0){
