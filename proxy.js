@@ -1,8 +1,34 @@
 var express = require('express');
-var request = require('request');
 
 var app = express();
 
+function proxyNextbusRequest(req, res, url) {
+    fetch(url, {
+        headers: {
+            'Accept': req.get('accept') || '*/*',
+            'User-Agent': 'prettymuni-proxy'
+        }
+    }).then(function(upstreamResponse) {
+        var contentType = upstreamResponse.headers.get('content-type');
+        if (contentType) {
+            res.set('Content-Type', contentType);
+        }
+        res.status(upstreamResponse.status);
+        return upstreamResponse.arrayBuffer();
+    }).then(function(body) {
+        res.send(Buffer.from(body));
+    }).catch(function(error) {
+        console.error(error);
+        res.status(502).json({ error: 'Proxy error' });
+    });
+}
+
+app.get(['/health', '/healthz'], function(req, res) {
+    res.status(200).json({
+        ok: true,
+        service: 'prettymuni'
+    });
+});
 
 app.use(function(err, req, res, next) {
     console.error(err.stack)
@@ -31,7 +57,7 @@ app.use('/proxy', function(req, res) {
         return;
     } else {
         var url = req.url.replace('/?url=', '');
-        req.pipe(request(url)).pipe(res);
+        proxyNextbusRequest(req, res, url);
     }
 
 });
